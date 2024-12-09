@@ -46,13 +46,14 @@ section { text-align: justify; }
 
 ## 💡 Chi Sono
 
-I miei principali ambiti di interesse includono il machine learning, la programmazione e l'ottimizzazione delle implementazioni. Attualmente, collaboro con il mio team di ricerca allo sviluppo di Sole.jl, un framework di apprendimento automatico interpretabile (IML) scritto nel linguaggio di programmazione Julia. Inoltre, sono fortemente interessato agli aspetti matematici e teorici che sottendono queste discipline.
+Nato a Pozzuoli e cresciuto a Ferrara, ho sviluppato fin da giovane una profonda passione per l'informatica e la tecnologia. La mia curiosità per i computer, sbocciata durante l'adolescenza, si è evoluta nel tempo in un interesse professionale per gli aspetti più avanzati dell'intelligenza artificiale e della programmazione.
+I miei principali ambiti di interesse includono il machine learning, la programmazione e l'ottimizzazione delle implementazioni. Attualmente, collaboro con il mio team di ricerca allo sviluppo di Sole.jl, un framework di apprendimento automatico interpretabile (IML) scritto nel linguaggio di programmazione Julia. Inoltre, sono fortemente interessato agli aspetti matematici e teorici che sottendono queste discipline. Questo percorso mi ha portato a specializzarmi nell'ambito del machine learning, dove posso combinare il mio amore per la matematica con le sfide dell'implementazione pratica.
 
 ## 🚀 Progetti in Evidenza
 
 <div class="project-grid">
     <div class="project-card">
-        <h3>💡 Progetto: Lumen</h3>
+        <h3>🕯️ Progetto: Lumen</h3>
         <p>Logic-driven Unified Minimal Extractor of Notions</p>
         <div class="skill-tags">
             <span class="skill-tag">Julia</span>
@@ -61,7 +62,7 @@ I miei principali ambiti di interesse includono il machine learning, la programm
     </div>
     
     <div class="project-card">
-        <h3>☀️ Progetto Sole</h3>
+        <h3>☀️ Progetto: Sole</h3>
         <p>A framework for symbolic, transparent, and interpretable machine learning</p>
         <div class="skill-tags">
             <span class="skill-tag">Julia</span>
