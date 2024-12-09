@@ -53,7 +53,7 @@ I miei principali ambiti di interesse includono il machine learning, la programm
 <div class="project-grid">
     <div class="project-card">
         <h3>💡 Progetto: Lumen</h3>
-        <p>L: Logic-driven Unified Minimal Extractor of Notions</p>
+        <p>Logic-driven Unified Minimal Extractor of Notions</p>
         <div class="skill-tags">
             <span class="skill-tag">Julia</span>
         </div>
