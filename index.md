@@ -72,6 +72,7 @@ I miei principali ambiti di interesse includono il machine learning, la programm
     
 </div>
 
+
 ## 🛠 Competenze Tecniche
 
 <div class="skill-tags">
@@ -81,7 +82,7 @@ I miei principali ambiti di interesse includono il machine learning, la programm
     <span class="skill-tag">Haskell</span>
     <span class="skill-tag">Unix-like Os</span>
     <span class="skill-tag">Git</span>
-    <span class="skill-tag">AWS</span>
+    <span class="skill-tag">MySQL</span>
     <span class="skill-tag">Laravel</span>
 </div>
 
