@@ -72,6 +72,7 @@ I miei principali ambiti di interesse includono il machine learning, la programm
     
 </div>
 
+<br>
 
 ## 🛠 Competenze Tecniche
 
