@@ -87,10 +87,18 @@ I miei principali ambiti di interesse includono il machine learning, la programm
     <span class="skill-tag">Laravel</span>
 </div>
 
-## 📚 Formazione
+## Formazione 📚
 
-- Studente presso **l'Università degli Studi di Ferrara**, Laurea triennale Informatica 
-- **Diploma Istituto Tecnico e Professionale, Scienze informatiche**, IIS N.Copernico A.CarpeggianiIIS N.Copernico A.Carpeggiani,  set 2017 - giu 2022, Votazione: 100 cum laude
+### Università degli Studi di Ferrara
+*Laurea Triennale in Informatica*  
+`In corso`
+
+### IIS N.Copernico A.Carpeggiani
+*Diploma in Scienze Informatiche*  
+`2017 - 2022`  
+🎓 **Votazione: 100/100 cum laude**
+
+---
 
 ## 📝 Pubblicazioni Recenti
 
