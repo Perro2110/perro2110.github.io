@@ -1,0 +1,15 @@
+remote_theme: pages-themes/minimal@v0.2.0
+plugins:
+- jekyll-remote-theme
+- jekyll-seo-tag
+
+title: Portfolio Personale
+description: Developer & Tech Enthusiast
+logo: /assets/img/profile.jpg
+show_downloads: false
+
+# Personalizzazione colori e stile
+colors:
+  header: "#000"
+  link: "#2879d0"
+  section: "#1e6bb8"
