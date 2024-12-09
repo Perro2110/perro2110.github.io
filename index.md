@@ -39,9 +39,9 @@ section { text-align: justify; }
 </div>
 
 <div class="social-links">
-    <a href="mailto:tua@email.com">📧 Email</a>
-    <a href="https://github.com/tuousername">🐙 GitHub</a>
-    <a href="https://linkedin.com/in/tuousername">💼 LinkedIn</a>
+    <a href="mailto:perrottamarco2011@gmail.com">📧 Email</a>
+    <a href="https://github.com/Perro2110">🐙 GitHub</a>
+    <a href="https://linkedin.com/in/marco-perrotta-b159b6244">💼 LinkedIn</a>
 </div>
 
 ## 💡 Chi Sono
@@ -57,7 +57,7 @@ I miei principali ambiti di interesse includono il machine learning, la programm
         <div class="skill-tags">
             <span class="skill-tag">Julia</span>
         </div>
-        <a href="#">Vedi Progetto →</a>
+        <a href="https://github.com/aclai-lab/SolePostHoc.jl">Vedi Progetto →</a>
     </div>
     
     <div class="project-card">
@@ -66,7 +66,7 @@ I miei principali ambiti di interesse includono il machine learning, la programm
         <div class="skill-tags">
             <span class="skill-tag">Julia</span>
         </div>
-        <a href="#">Vedi Progetto →</a>
+        <a href="https://github.com/aclai-lab/Sole.jl">Vedi Progetto →</a>
     </div>
     
 </div>
