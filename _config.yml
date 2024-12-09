@@ -4,8 +4,7 @@ plugins:
 - jekyll-seo-tag
 
 title: Portfolio Personale
-description: Developer & Tech Enthusiast
-logo: /assets/img/profile.jpg
+description: Research engineers & Tech Enthusiast
 show_downloads: false
 
 # Personalizzazione colori e stile
