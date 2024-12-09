@@ -32,7 +32,7 @@ section { text-align: justify; }
 }
 </style>
 
-# 👋 Ciao, sono [Il Tuo Nome]
+# 👋 Ciao, sono Marco Perrotta
 
 <div class="lead">
     Software Developer appassionato di tecnologia e innovazione. Mi piace creare soluzioni eleganti per problemi complessi.
@@ -46,63 +46,53 @@ section { text-align: justify; }
 
 ## 💡 Chi Sono
 
-Con oltre [X] anni di esperienza nello sviluppo software, mi specializzo in [tue tecnologie principali]. Mi appassiona particolarmente [area di interesse], e sono sempre alla ricerca di nuove sfide tecnologiche da affrontare.
+I miei principali ambiti di interesse includono il machine learning, la programmazione e l'ottimizzazione delle implementazioni. Attualmente, collaboro con il mio team di ricerca allo sviluppo di Sole.jl, un framework di apprendimento automatico interpretabile (IML) scritto nel linguaggio di programmazione Julia. Inoltre, sono fortemente interessato agli aspetti matematici e teorici che sottendono queste discipline.
 
 ## 🚀 Progetti in Evidenza
 
 <div class="project-grid">
     <div class="project-card">
-        <h3>🌟 Progetto Alpha</h3>
-        <p>Un'applicazione innovativa che [breve descrizione].</p>
+        <h3>💡 Progetto: Lumen</h3>
+        <p>L: Logic-driven Unified Minimal Extractor of Notions</p>
         <div class="skill-tags">
-            <span class="skill-tag">React</span>
-            <span class="skill-tag">Node.js</span>
-            <span class="skill-tag">MongoDB</span>
+            <span class="skill-tag">Julia</span>
         </div>
         <a href="#">Vedi Progetto →</a>
     </div>
     
     <div class="project-card">
-        <h3>🚀 Progetto Beta</h3>
-        <p>Sistema scalabile per [breve descrizione].</p>
+        <h3>☀️ Progetto Sole</h3>
+        <p>A framework for symbolic, transparent, and interpretable machine learning</p>
         <div class="skill-tags">
-            <span class="skill-tag">Python</span>
-            <span class="skill-tag">Docker</span>
-            <span class="skill-tag">AWS</span>
+            <span class="skill-tag">Julia</span>
         </div>
         <a href="#">Vedi Progetto →</a>
     </div>
+    
 </div>
 
 ## 🛠 Competenze Tecniche
 
 <div class="skill-tags">
-    <span class="skill-tag">JavaScript</span>
-    <span class="skill-tag">Python</span>
-    <span class="skill-tag">React</span>
-    <span class="skill-tag">Node.js</span>
-    <span class="skill-tag">Docker</span>
+    <span class="skill-tag">C</span>
+    <span class="skill-tag">Java</span>
+    <span class="skill-tag">Julia</span>
+    <span class="skill-tag">Haskell</span>
+    <span class="skill-tag">Unix-like Os</span>
     <span class="skill-tag">Git</span>
     <span class="skill-tag">AWS</span>
-    <span class="skill-tag">MongoDB</span>
+    <span class="skill-tag">Laravel</span>
 </div>
 
 ## 📚 Formazione
 
-- **Master in [Campo]** - Università di [Nome], 202X
-- **Laurea in [Campo]** - Università di [Nome], 202X
+- Studente presso **l'Università degli Studi di Ferrara**, Laurea triennale Informatica 
+- **Diploma Istituto Tecnico e Professionale, Scienze informatiche**, IIS N.Copernico A.CarpeggianiIIS N.Copernico A.Carpeggiani,  set 2017 - giu 2022, Votazione: 100 cum laude
 
-## 📝 Blog Recenti
+## 📝 Pubblicazioni Recenti
 
-### [Come ho costruito un'app scalabile con React e Node.js](/blog/post-1)
-Una deep dive nella mia esperienza di sviluppo di un'applicazione web moderna...
+### [Minimal Rules from Decision Forests: a Systematic Approach](https://overlay.uniud.it/workshop/2024/papers/paper14.pdf)
+Analisi, formalizzazione e approccio iniziale alla risoluzione del problema dell'estrazione di regole minime da foreste decisionali.
 
-### [Best Practices per il Deploy su AWS](/blog/post-2)
-Condivido le lezioni imparate durante il deploy di applicazioni su AWS...
 
 ---
-
-<footer style="text-align: center; margin-top: 50px; padding: 20px;">
-    <p>Made with ❤️ using GitHub Pages</p>
-    <p>© 2024 [Il Tuo Nome]. All rights reserved.</p>
-</footer>
