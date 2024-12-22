@@ -12,3 +12,15 @@ colors:
   header: "#000"
   link: "#2879d0"
   section: "#1e6bb8"
+
+# Add these configurations
+google_analytics: [Your GA ID]
+lang: it
+author:
+  name: Marco Perrotta
+  email: perrottamarco2011@gmail.com
+
+# Additional social links
+social:
+  github: Perro2110
+  linkedin: marco-perrotta-b159b6244
