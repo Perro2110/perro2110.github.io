@@ -53,7 +53,7 @@ I miei principali ambiti di interesse includono il machine learning, la programm
 
 <div class="project-grid">
     <div class="project-card">
-        <h3>🕯️ Progetto: Lumen</h3>
+        <h3>🕯️ Algorithm: Lumen</h3>
         <p>Logic-driven Unified Minimal Extractor of Notions</p>
         <div class="skill-tags">
             <span class="skill-tag">Julia</span>
@@ -62,12 +62,23 @@ I miei principali ambiti di interesse includono il machine learning, la programm
     </div>
     
     <div class="project-card">
-        <h3>☀️ Progetto: Sole</h3>
+        <h3>☀️ Framework: Sole</h3>
         <p>A framework for symbolic, transparent, and interpretable machine learning</p>
         <div class="skill-tags">
             <span class="skill-tag">Julia</span>
         </div>
         <a href="https://github.com/aclai-lab/Sole.jl">Vedi Progetto →</a>
+    </div>
+
+
+<div class="project-grid">
+    <div class="project-card">
+        <h3> 📚 Library: SolePostHoc</h3>
+        <p>Library part of SOLE specialized on all major posthoc algorithms, with a particular focus on the minimizers</p>
+        <div class="skill-tags">
+            <span class="skill-tag">Julia</span>
+        </div>
+        <a href="https://github.com/aclai-lab/SolePostHoc.jl">Vedi Progetto →</a>
     </div>
     
 </div>
