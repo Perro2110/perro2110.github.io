@@ -70,8 +70,6 @@ I miei principali ambiti di interesse includono il machine learning, la programm
         <a href="https://github.com/aclai-lab/Sole.jl">Vedi Progetto →</a>
     </div>
 
-
-<div class="project-grid">
     <div class="project-card">
         <h3> 📚 Library: SolePostHoc</h3>
         <p>Library part of SOLE specialized on all major posthoc algorithms, with a particular focus on the minimizers</p>
@@ -80,7 +78,6 @@ I miei principali ambiti di interesse includono il machine learning, la programm
         </div>
         <a href="https://github.com/aclai-lab/SolePostHoc.jl">Vedi Progetto →</a>
     </div>
-    
 </div>
 
 <br>
