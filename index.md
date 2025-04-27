@@ -53,8 +53,17 @@ I miei principali ambiti di interesse includono il machine learning, la programm
 
 <div class="project-grid">
     <div class="project-card">
-        <h3>🕯️ Algorithm: Lumen</h3>
+        <h3>🕯️ Algoritmo: Lumen</h3>
         <p>Logic-driven Unified Minimal Extractor of Notions è un algoritmo esatto e altamente parallelizzabile che, grazie alla sua elevata parametrizzazione, consente, qualora richiesto, di individuare un equilibrio ottimale tra la precisione dei risultati e la complessità computazionale</p>
+        <div class="skill-tags">
+            <span class="skill-tag">Julia</span>
+        </div>
+        <a href="https://github.com/aclai-lab/SolePostHoc.jl">Vedi Progetto →</a>
+    </div>
+
+    <div class="project-card">
+        <h3> 📚 Libreria: SolePostHoc</h3>
+        <p>Libreria integrata nell'ecosistema SOLE dedicata all'implementazione di algoritmi post-hoc avanzati, con particolare enfasi sul unificazione di meccanismi di estrazione concettuale</p>
         <div class="skill-tags">
             <span class="skill-tag">Julia</span>
         </div>
@@ -68,15 +77,6 @@ I miei principali ambiti di interesse includono il machine learning, la programm
             <span class="skill-tag">Julia</span>
         </div>
         <a href="https://github.com/aclai-lab/Sole.jl">Vedi Progetto →</a>
-    </div>
-
-    <div class="project-card">
-        <h3> 📚 Libreria: SolePostHoc</h3>
-        <p>Libreria integrata nell'ecosistema SOLE dedicata all'implementazione di algoritmi post-hoc avanzati, con particolare enfasi sul unificazione di meccanismi di estrazione concettuale</p>
-        <div class="skill-tags">
-            <span class="skill-tag">Julia</span>
-        </div>
-        <a href="https://github.com/aclai-lab/SolePostHoc.jl">Vedi Progetto →</a>
     </div>
 </div>
 
