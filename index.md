@@ -54,7 +54,7 @@ I miei principali ambiti di interesse includono il machine learning, la programm
 <div class="project-grid">
     <div class="project-card">
         <h3>🕯️ Algorithm: Lumen</h3>
-        <p>Logic-driven Unified Minimal Extractor of Notions è un algoritmo esatto e altamente parallelizzabile che, grazie alla sua elevata parametrizzazione, consente, qualora richiesto, di individuare un equilibrio ottimale tra la precisione dei risultati e la complessità computazionale.</p>
+        <p>Logic-driven Unified Minimal Extractor of Notions è un algoritmo esatto e altamente parallelizzabile che, grazie alla sua elevata parametrizzazione, consente, qualora richiesto, di individuare un equilibrio ottimale tra la precisione dei risultati e la complessità computazionale</p>
         <div class="skill-tags">
             <span class="skill-tag">Julia</span>
         </div>
