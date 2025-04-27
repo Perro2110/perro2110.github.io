@@ -54,7 +54,7 @@ I miei principali ambiti di interesse includono il machine learning, la programm
 <div class="project-grid">
     <div class="project-card">
         <h3>🕯️ Algorithm: Lumen</h3>
-        <p>Logic-driven Unified Minimal Extractor of Notions</p>
+        <p>Logic-driven Unified Minimal Extractor of Notions è un algoritmo esatto e altamente parallelizzabile che, grazie alla sua elevata parametrizzazione, consente, qualora richiesto, di individuare un equilibrio ottimale tra la precisione dei risultati e la complessità computazionale.</p>
         <div class="skill-tags">
             <span class="skill-tag">Julia</span>
         </div>
@@ -93,6 +93,7 @@ I miei principali ambiti di interesse includono il machine learning, la programm
     <span class="skill-tag">Unix-like Os</span>
     <span class="skill-tag">Git</span>
     <span class="skill-tag">MySQL</span>
+     <span class="skill-tag">PHP</span>
     <span class="skill-tag">Laravel</span>
 </div>
 
