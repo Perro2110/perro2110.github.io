@@ -127,7 +127,7 @@ I miei principali ambiti di interesse includono il machine learning, la programm
 ## 📝 Pubblicazioni e Tesi
 
 <div class="publication-item">
-    <h3><a href="./tesi.pdf" target="_blank">📗 Un framework sistematico logic-based per spiegare modelli simbolici di ensemble</a></h3>
+    <h3><a href="https://github.com/Perro2110/perro2110.github.io/raw/main/Tesi.pdf" target="_blank">📗 Un framework sistematico logic-based per spiegare modelli simbolici di ensemble</a></h3>
     <div class="publication-meta">
         Tesi di Laurea Triennale • Università degli Studi di Ferrara • Informatica • 2024
     </div>
