@@ -30,6 +30,20 @@ section { text-align: justify; }
     padding: 4px 12px;
     font-size: 0.9em;
 }
+.publication-item {
+    border-left: 4px solid #0366d6;
+    padding-left: 16px;
+    margin: 20px 0;
+}
+.publication-item h3 {
+    margin-bottom: 8px;
+    color: #0366d6;
+}
+.publication-meta {
+    color: #586069;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+}
 </style>
 
 # 👋 Ciao, sono Marco Perrotta
@@ -110,10 +124,22 @@ I miei principali ambiti di interesse includono il machine learning, la programm
 
 ---
 
-## 📝 Pubblicazioni Recenti
+## 📝 Pubblicazioni e Tesi
 
-### [Minimal Rules from Decision Forests: a Systematic Approach](https://overlay.uniud.it/workshop/2024/papers/paper14.pdf)
-Analisi, formalizzazione e approccio iniziale alla risoluzione del problema dell'estrazione di regole minime da foreste decisionali.
+<div class="publication-item">
+    <h3><a href="./tesi.pdf" target="_blank">📗 Un framework sistematico logic-based per spiegare modelli simbolici di ensemble</a></h3>
+    <div class="publication-meta">
+        Tesi di Laurea Triennale • Università degli Studi di Ferrara • Informatica • 2024
+    </div>
+    <p>La mia tesi di laurea triennale, che approfondisce gli aspetti teorici e pratici del framework LUMEN per spiegare modelli simbolici di ensembl.</p>
+</div>
 
+<div class="publication-item">
+    <h3><a href="https://overlay.uniud.it/workshop/2024/papers/paper14.pdf" target="_blank">📑 Minimal Rules from Decision Forests: a Systematic Approach</a></h3>
+    <div class="publication-meta">
+        Workshop Paper • 2024
+    </div>
+    <p>Analisi, formalizzazione e approccio iniziale alla risoluzione del problema dell'estrazione di regole minime da foreste decisionali.</p>
+</div>
 
 ---
