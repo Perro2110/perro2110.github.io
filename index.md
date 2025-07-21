@@ -117,8 +117,6 @@ I miei principali ambiti di interesse includono il machine learning, la programm
 *Laurea Magistrale in Intelligenza Artificiale, Data Science e Big Data*  
 **In corso**
 
-
-### Università degli Studi di Ferrara
 *Laurea Triennale in Informatica*  
 `2022 - 2025`  
 🎓 **Votazione: 110/110 cum laude**
