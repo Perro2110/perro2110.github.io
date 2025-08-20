@@ -30,6 +30,12 @@
             position: absolute; width: 80px; height: 100px;
             cursor: pointer; transition: all 0.3s ease; user-select: none;
         }
+
+        .clicked {
+            border: 2px dashed lightblue;
+
+        }
+
         .file-icon:hover, .folder-icon:hover, .link-icon:hover, .mail-icon:hover { transform: scale(1.1); }
         .icon-image {
             width: 64px; height: 64px; margin: 0 auto 5px;
@@ -394,6 +400,14 @@ Un framework per l'apprendimento automatico simbolico, trasparente e interpretab
                     const fileKey = this.getAttribute('data-file');
                     openFile(fileKey);
                 });
+                icon.addEventListener('click',function(){
+                    a = desktop.children;
+                    for (el of a)
+                        el.classList.remove("clicked");
+
+                    this.classList.add('clicked');
+                }
+            )
             });
 
             // Aggiungi event listeners per le cartelle
@@ -402,6 +416,14 @@ Un framework per l'apprendimento automatico simbolico, trasparente e interpretab
                     const folderKey = this.getAttribute('data-folder');
                     openFolder(folderKey);
                 });
+                icon.addEventListener('click',function(){
+                    a = desktop.children;
+                    for (el of a)
+                        el.classList.remove("clicked");
+
+                    this.classList.add('clicked');
+                }
+            )
             });
 
             // NUOVO: Aggiungi event listeners per i collegamenti
@@ -410,6 +432,13 @@ Un framework per l'apprendimento automatico simbolico, trasparente e interpretab
                     const linkKey = this.getAttribute('data-link');
                     openLink(linkKey);
                 });
+                icon.addEventListener('click',function(){
+                    a = desktop.children;
+                    for (el of a)
+                        el.classList.remove("clicked");
+
+                    this.classList.add('clicked');
+                })
             });
 
             // NUOVO: Aggiungi event listeners per le mail
@@ -418,6 +447,13 @@ Un framework per l'apprendimento automatico simbolico, trasparente e interpretab
                     const fileKey = this.getAttribute('data-file');
                     openFile(fileKey);
                 });
+                icon.addEventListener('click',function(){
+                    a = desktop.children;
+                    for (el of a)
+                        el.classList.remove("clicked");
+
+                    this.classList.add('clicked');
+                })
             });
 
             // Rendi le finestre draggable
@@ -502,6 +538,13 @@ Un framework per l'apprendimento automatico simbolico, trasparente e interpretab
                 fileElement.addEventListener('dblclick', () => {
                     openFileFromFolder(folderKey, index);
                 });
+                fileElement.addEventListener('click',function(){
+                    a = this.parentNode.children;
+                    for (el of a)
+                        el.classList.remove("clicked");
+
+                    this.classList.add('clicked');
+                })
                 folderContent.appendChild(fileElement);
             });
 
@@ -519,6 +562,15 @@ Un framework per l'apprendimento automatico simbolico, trasparente e interpretab
                     linkElement.addEventListener('dblclick', () => {
                         openLink(link.key);
                     });
+
+                      linkElement.addEventListener('click',function(){
+                            a = this.parentNode.children;
+                            for (el of a)
+                                el.classList.remove("clicked");
+
+                            this.classList.add('clicked');
+                        })
+
                     folderContent.appendChild(linkElement);
                 });
             }
@@ -535,6 +587,15 @@ Un framework per l'apprendimento automatico simbolico, trasparente e interpretab
                     downloadElement.addEventListener('dblclick', () => {
                         downloadFile(download.key);
                     });
+
+                downloadElement.addEventListener('click',function(){
+                    a = this.parentNode.children;
+                    for (el of a)
+                        el.classList.remove("clicked");
+
+                    this.classList.add('clicked');
+                })
+
                     folderContent.appendChild(downloadElement);
                 });
             }
