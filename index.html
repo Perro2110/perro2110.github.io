@@ -3,16 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marco Perrotta's site</title>
+    <title>Marco Perrotta's Portfolio</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        @import url('https://fonts.googleapis.com/css2?family=VT323&family=Courier+Prime:wght@400;700&display=swap');
+        
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+
+        
         body {
-            font-family: 'Ubuntu', 'Arial', sans-serif;
-            /* Sfondo monocromatico grigio-blu */
-            background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+            font-family: 'Courier Prime', 'Courier New', monospace;
+            background: linear-gradient(45deg, #2a2a2a 0%, #1a1a1a 100%);
             height: 100vh;
             overflow: hidden;
             position: relative;
+        }
+
+        /* Retro CRT effect */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                repeating-linear-gradient(
+                    90deg,
+                    rgba(0, 255, 0, 0.03),
+                    rgba(0, 255, 0, 0.03) 2px,
+                    transparent 2px,
+                    transparent 4px
+                );
+            pointer-events: none;
+            z-index: 1;
         }
 
         .desktop {
@@ -20,202 +47,458 @@
             height: 100vh;
             position: relative;
             padding: 20px;
-            /* Effetti sottili monocromatici grigio-blu */
-            background-image:
-                radial-gradient(circle at 20% 50%, rgba(52, 73, 94, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(44, 62, 80, 0.2) 0%, transparent 50%),
-                radial-gradient(circle at 40% 80%, rgba(58, 83, 108, 0.25) 0%, transparent 50%);
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(0, 255, 0, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(0, 200, 255, 0.03) 0%, transparent 50%);
         }
+
         .file-icon, .folder-icon, .link-icon, .mail-icon {
-            position: absolute; width: 80px; height: 100px;
-            cursor: pointer; transition: all 0.3s ease; user-select: none;
+            position: absolute;
+            width: 80px;
+            height: 100px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+            z-index: 2;
         }
 
         .clicked {
-            border: 2px dashed lightblue;
-
+            border: 2px dashed #00ff41;
+            background: rgba(0, 255, 65, 0.1);
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
         }
 
-        .file-icon:hover, .folder-icon:hover, .link-icon:hover, .mail-icon:hover { transform: scale(1.1); }
+        .file-icon:hover, .folder-icon:hover, .link-icon:hover, .mail-icon:hover { 
+            transform: scale(1.05);
+            filter: brightness(1.2);
+        }
+
         .icon-image {
-            width: 64px; height: 64px; margin: 0 auto 5px;
-            background-size: contain; background-repeat: no-repeat; background-position: center;
-        }
-        .file-icon .icon-image {
-            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ffffff"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/></svg>');
-        }
-        .folder-icon .icon-image {
-            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ffd700"><path d="M10,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V8C22,6.89 21.1,6 20,6H12L10,4Z"/></svg>');
-        }
-        .link-icon .icon-image {
-            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%2300aaff"><path d="M16.36,14C16.44,13.34 16.5,12.68 16.5,12C16.5,11.32 16.44,10.66 16.36,10H19.74C19.9,10.64 20,11.31 20,12C20,12.69 19.9,13.36 19.74,14M14.59,19.56C15.19,18.45 15.65,17.25 15.97,16H18.92C17.96,17.65 16.43,18.93 14.59,19.56M14.34,14H9.66C9.56,13.34 9.5,12.68 9.5,12C9.5,11.32 9.56,10.65 9.66,10H14.34C14.43,10.65 14.5,11.32 14.5,12C14.5,12.68 14.43,13.34 14.34,14M12,19.96C11.17,18.76 10.5,17.43 10.09,16H13.91C13.5,17.43 12.83,18.76 12,19.96M8,8H5.08C6.03,6.34 7.57,5.06 9.4,4.44C8.8,5.55 8.35,6.75 8,8M5.08,16H8C8.35,17.25 8.8,18.45 9.4,19.56C7.57,18.93 6.03,17.65 5.08,16M4.26,14C4.1,13.36 4,12.69 4,12C4,11.31 4.1,10.64 4.26,10H7.64C7.56,10.66 7.5,11.32 7.5,12C7.5,12.68 7.56,13.34 7.64,14M12,4.03C12.83,5.23 13.5,6.57 13.91,8H10.09C10.5,6.57 11.17,5.23 12,4.03M18.92,8H15.97C15.65,6.75 15.19,5.55 14.59,4.44C16.43,5.07 17.96,6.34 18.92,8M12,2C6.47,2 2,6.5 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"/></svg>');
-            position: relative;
-        }
-        .mail-icon .icon-image {
-            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ff6b6b"><path d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.11,4 20,4Z"/></svg>');
-        }
-        /* Piccola freccia per indicare che è un collegamento */
-        .link-icon .icon-image::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            right: -2px;
-            width: 16px;
-            height: 16px;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="rgb(255,255,255)"><path d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"/></svg>');
-
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 5px;
             background-size: contain;
             background-repeat: no-repeat;
+            background-position: center;
+            border: 2px solid #333;
+            border-radius: 4px;
+            background-color: #444;
         }
+
+        .file-icon .icon-image {
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%2300ff41"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/></svg>');
+            border-color: #00ff41;
+        }
+
+        .folder-icon .icon-image {
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ffaa00"><path d="M10,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V8C22,6.89 21.1,6 20,6H12L10,4Z"/></svg>');
+            border-color: #ffaa00;
+        }
+
+        .link-icon .icon-image {
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%2300aaff"><path d="M16.36,14C16.44,13.34 16.5,12.68 16.5,12C16.5,11.32 16.44,10.66 16.36,10H19.74C19.9,10.64 20,11.31 20,12C20,12.69 19.9,13.36 19.74,14M14.59,19.56C15.19,18.45 15.65,17.25 15.97,16H18.92C17.96,17.65 16.43,18.93 14.59,19.56M14.34,14H9.66C9.56,13.34 9.5,12.68 9.5,12C9.5,11.32 9.56,10.65 9.66,10H14.34C14.43,10.65 14.5,11.32 14.5,12C14.5,12.68 14.43,13.34 14.34,14M12,19.96C11.17,18.76 10.5,17.43 10.09,16H13.91C13.5,17.43 12.83,18.76 12,19.96M8,8H5.08C6.03,6.34 7.57,5.06 9.4,4.44C8.8,5.55 8.35,6.75 8,8M5.08,16H8C8.35,17.25 8.8,18.45 9.4,19.56C7.57,18.93 6.03,17.65 5.08,16M4.26,14C4.1,13.36 4,12.69 4,12C4,11.31 4.1,10.64 4.26,10H7.64C7.56,10.66 7.5,11.32 7.5,12C7.5,12.68 7.56,13.34 7.64,14M12,4.03C12.83,5.23 13.5,6.57 13.91,8H10.09C10.5,6.57 11.17,5.23 12,4.03M18.92,8H15.97C15.65,6.75 15.19,5.55 14.59,4.44C16.43,5.07 17.96,6.34 18.92,8M12,2C6.47,2 2,6.5 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"/></svg>');
+            border-color: #00aaff;
+            position: relative;
+        }
+
+        .mail-icon .icon-image {
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ff6b6b"><path d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.11,4 20,4Z"/></svg>');
+            border-color: #ff6b6b;
+        }
+
+        .link-icon .icon-image::after {
+            content: '↗';
+            position: absolute;
+            bottom: -8px;
+            right: -8px;
+            width: 16px;
+            height: 16px;
+            background: #00aaff;
+            color: white;
+            border-radius: 2px;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #333;
+        }
+
         .icon-label {
-            color: white; font-size: 12px; text-align: center;
-            background: rgba(0, 0, 0, 0.6); padding: 2px 6px; border-radius: 4px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); word-wrap: break-word;
+            color: #00ff41;
+            font-size: 12px;
+            font-weight: bold;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 2px 6px;
+            border-radius: 2px;
+            border: 1px solid #333;
+            word-wrap: break-word;
+            font-family: 'VT323', monospace;
         }
+
         .editor-window, .folder-window {
-            position: fixed; background: #2d3748; border-radius: 8px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4); z-index: 1000;
-            width: 700px; height: 500px; /* Dimensioni fisse per test */
-            border: 1px solid #4a5568; display: none;
+            position: fixed;
+            background: #222;
+            border-radius: 0;
+            border: 3px outset #666;
+            box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            width: 700px;
+            height: 500px;
+            display: none;
         }
+
         .window-header {
-            background: linear-gradient(135deg, #4a5568, #2d3748); padding: 12px;
-            border-radius: 8px 8px 0 0; display: flex; justify-content: space-between; align-items: center;
-            cursor: move; border-bottom: 1px solid #1a202c;
-            height: 50px; /* Altezza fissa */
+            background: linear-gradient(180deg, #666 0%, #444 100%);
+            padding: 8px 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: move;
+            border-bottom: 2px inset #666;
+            height: 36px;
             flex-shrink: 0;
         }
-        .window-title { color: white; font-weight: bold; font-size: 14px; }
-        .window-controls { display: flex; gap: 8px; }
-        .control-btn {
-            width: 16px; height: 16px; border-radius: 50%; cursor: pointer; transition: opacity 0.2s;
+
+        .window-title {
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+            font-family: 'VT323', monospace;
         }
-        .control-btn.close { background: #ff5f56; }
-        .control-btn.minimize { background: #ffbd2e; }
-        .control-btn.maximize { background: #27ca3f; }
-        .control-btn:hover { opacity: 0.8; }
+
+        .window-controls {
+            display: flex;
+            gap: 4px;
+        }
+
+        .control-btn {
+            width: 16px;
+            height: 16px;
+            border: 2px outset #666;
+            cursor: pointer;
+            transition: all 0.1s ease;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: black;
+            font-weight: bold;
+        }
+
+        .control-btn.close { background: #ff6b6b; }
+        .control-btn.close::after { content: '×'; }
+        .control-btn.minimize { background: #feca57; }
+        .control-btn.minimize::after { content: '_'; }
+        .control-btn.maximize { background: #48dbfb; }
+        .control-btn.maximize::after { content: '□'; }
+        
+        .control-btn:active { border: 2px inset #666; }
+
         .editor-content {
-            height: calc(100% - 50px); /* Sottrae esattamente l'altezza del header */
+            height: calc(100% - 36px);
             display: flex;
             flex-direction: column;
         }
+
         .editor-toolbar {
-            background: #1a202c; padding: 8px 12px; border-bottom: 1px solid #4a5568;
-            font-size: 12px; color: #a0aec0;
-            height: 40px; /* Altezza fissa */
+            background: #333;
+            padding: 6px 12px;
+            border-bottom: 2px inset #666;
+            font-size: 12px;
+            color: #00ff41;
+            height: 28px;
             flex-shrink: 0;
             display: flex;
             align-items: center;
+            font-family: 'VT323', monospace;
+            text-shadow: 0 0 3px #00ff41;
         }
+
         .editor-textarea {
             flex: 1;
-            background: #1a202c; color: #e2e8f0; border: none; padding: 15px;
-            font-family: 'Consolas', 'Monaco', monospace; font-size: 14px; line-height: 1.5;
-            resize: none; outline: none;
-            overflow-y: auto; /* Scroll verticale quando necessario */
-            min-height: 0; /* Permette al flex di ridursi */
-        }
-        .folder-content {
-            padding: 20px;
-            height: calc(100% - 84px); /* Header + breadcrumb */
+            background: #111;
+            color: #00ff41;
+            border: none;
+            padding: 15px;
+            font-family: 'Courier Prime', 'Consolas', 'Monaco', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            resize: none;
+            outline: none;
             overflow-y: auto;
+            min-height: 0;
+            text-shadow: 0 0 2px #00ff41;
         }
+
+        .folder-content {
+            padding: 15px;
+            height: calc(100% - 64px);
+            overflow-y: auto;
+            background: #111;
+        }
+
         .folder-item {
-            display: flex; align-items: center; padding: 8px 12px; color: white;
-            cursor: pointer; border-radius: 4px; margin-bottom: 4px; transition: background-color 0.2s;
-            min-height: 36px; /* Altezza minima per dare spazio all'icona */
+            display: flex;
+            align-items: center;
+            padding: 6px 12px;
+            color: #00ff41;
+            cursor: pointer;
+            border-radius: 0;
+            margin-bottom: 2px;
+            transition: background-color 0.1s;
+            min-height: 32px;
+            font-family: 'VT323', monospace;
+            border: 1px solid transparent;
         }
-        .folder-item:hover { background: rgba(255, 255, 255, 0.1); }
+
+        .folder-item:hover {
+            background: rgba(0, 255, 65, 0.1);
+            border: 1px solid #00ff41;
+        }
+
+        .folder-item.clicked {
+            background: rgba(0, 255, 65, 0.2);
+            border: 1px solid #00ff41;
+        }
+
         .folder-item-icon {
-            width: 24px; height: 24px; margin-right: 16px; background-size: contain;
-            background-repeat: no-repeat; background-position: center;
-            flex-shrink: 0; /* Impedisce alla icona di rimpicciolirsi */
-            min-width: 24px; /* Larghezza minima garantita */
-        }
-        .breadcrumb {
-            background: #2d3748; padding: 8px 12px; border-bottom: 1px solid #4a5568;
-            color: #a0aec0; font-size: 12px;
-            height: 36px; /* Altezza fissa */
+            width: 24px;
+            height: 24px;
+            margin-right: 12px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
             flex-shrink: 0;
+            min-width: 24px;
+            border: 1px solid #333;
+            background-color: #222;
         }
-        .breadcrumb-item { color: #63b3ed; cursor: pointer; text-decoration: none; }
-        .breadcrumb-item:hover { text-decoration: underline; }
-        @keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
-        .editor-window.show, .folder-window.show { display: block; animation: fadeIn 0.3s ease; }
+
+        .breadcrumb {
+            background: #333;
+            padding: 6px 12px;
+            border-bottom: 2px inset #666;
+            color: #ffaa00;
+            font-size: 12px;
+            height: 28px;
+            flex-shrink: 0;
+            font-family: 'VT323', monospace;
+            text-shadow: 0 0 3px #ffaa00;
+        }
+
+        .breadcrumb-item {
+            color: #00aaff;
+            cursor: pointer;
+            text-decoration: none;
+            text-shadow: 0 0 3px #00aaff;
+        }
+
+        .breadcrumb-item:hover {
+            text-decoration: underline;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .editor-window.show, .folder-window.show {
+            display: block;
+            animation: fadeIn 0.2s ease;
+        }
+
         .taskbar {
-            position: fixed; bottom: 0; left: 0; right: 0; height: 50px;
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
-            backdrop-filter: blur(10px); border-top: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex; align-items: center; padding: 0 20px; z-index: 500;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: linear-gradient(180deg, #666 0%, #333 100%);
+            border-top: 2px outset #666;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 15px;
+            z-index: 500;
         }
+
+        .taskbar-left {
+            display: flex;
+            align-items: center;
+            flex: 1;
+        }
+
         .taskbar-item {
-            background: rgba(255, 255, 255, 0.1); color: white;
-            padding: 8px 16px; border-radius: 6px; margin-right: 8px; font-size: 12px;
-            cursor: pointer; transition: background 0.2s;
+            background: linear-gradient(180deg, #555 0%, #333 100%);
+            color: white;
+            padding: 4px 12px;
+            border: 2px outset #666;
+            margin-right: 5px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.1s ease;
+            font-family: 'VT323', monospace;
         }
-        .taskbar-item:hover { background: rgba(255, 255, 255, 0.2); }
 
-        /* Nuove classi per icone specifiche nelle cartelle */
-        .folder-item > span{margin-left:35px}
+        .taskbar-item:hover {
+            background: linear-gradient(180deg, #666 0%, #444 100%);
+        }
 
+        .taskbar-item:active {
+            border: 2px inset #666;
+        }
+
+        .taskbar-signature {
+            color: #ffaa00;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'VT323', monospace;
+            text-shadow: 0 0 3px #ffaa00;
+        }
+
+        .signature-name {
+            cursor: pointer;
+            transition: color 0.2s ease;
+            user-select: none;
+        }
+
+        .signature-name:hover {
+            color: #00ff41;
+            text-shadow: 0 0 5px #00ff41;
+        }
+
+        /* Easter Egg Chicken Icon */
+        .chicken-icon {
+            display: none;
+            font-size: 16px;
+            animation: retro-blink 1s infinite;
+        }
+
+        .chicken-icon.show {
+            display: inline-block;
+        }
+
+        @keyframes retro-blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* Folder specific icons - versioni retro */
         .folder-item-icon.email-icon {
             background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="rgb(255,107,107)"><path d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.11,4 20,4Z"/></svg>') !important;
+            border-color: #ff6b6b !important;
         }
+
         .folder-item-icon.linkedin-icon {
             background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="rgb(0,170,255)"><path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17A1.4 1.4 0 0 1 15.71 13.57V18.5H18.5M6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19S5.19 5.95 5.19 6.88A1.69 1.69 0 0 0 6.88 8.56M8.27 18.5V10.13H5.5V18.5H8.27Z"/></svg>') !important;
+            border-color: #00aaff !important;
         }
-        /* CORREZIONE: Icona file corretta nelle cartelle */
+
         .folder-item-icon.file-icon {
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="rgb(100,200,255)"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/></svg>') !important;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="rgb(0,255,65)"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/></svg>') !important;
+            border-color: #00ff41 !important;
         }
-        /* NUOVO: Icona PDF per download */
+
         .folder-item-icon.pdf-icon {
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="rgb(255,80,80)"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/><path d="M8,15H16V17H8V15M8,13H16V11H8V13M8,9H11V7H8V9Z" fill="rgb(255,255,255)"/></svg>') !important;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="rgb(255,170,0)"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/><path d="M8,15H16V17H8V15M8,13H16V11H8V13M8,9H11V7H8V9Z" fill="white"/></svg>') !important;
+            border-color: #ffaa00 !important;
         }
-        /* Indicatore di download */
+
         .folder-item.download-item::after {
-            content: '↓';
+            content: '⬇';
             margin-left: auto;
             font-weight: bold;
-            color: #4ade80;
-            font-size: 18px;
+            color: #00ff41;
+            font-size: 16px;
+            text-shadow: 0 0 5px #00ff41;
+            animation: retro-blink 2s infinite;
         }
+
+        /* Custom scrollbar retro */
+        ::-webkit-scrollbar {
+            width: 16px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #222;
+            border: 2px inset #666;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #555 0%, #333 100%);
+            border: 2px outset #666;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, #666 0%, #444 100%);
+        }
+
+        /* Posizionamento icone fisso */
+        .desktop .file-icon:nth-child(1) { top: 50px; left: 100px; }
+        .desktop .file-icon:nth-child(2) { top: 200px; left: 300px; }
+        .desktop .folder-icon:nth-child(3) { top: 300px; left: 150px; }
+        .desktop .folder-icon:nth-child(4) { top: 150px; left: 700px; }
+        .desktop .folder-icon:nth-child(5) { top: 350px; left: 600px; }
+        .desktop .folder-icon:nth-child(6) { top: 100px; left: 500px; }
+        .desktop .link-icon:nth-child(7) { top: 450px; left: 300px; }
+
+        .folder-item span{ margin-left:35px;}
+
+        .loading-content { height: calc(100% - 36px); background: #111; color: #00ff41; font-family: 'Courier Prime', monospace; padding: 10px; overflow-y: auto; white-space: pre-wrap; }
+        .loading { color: #ffaa00; }
+        .success { color: #00ff41; }
+        .system-info { color: #00aaff; }
+        .prompt { color: #ff6b6b; }
+        .overlay {position: absolute; top:0; left:0;width:100%;height:100%;background:linear-gradient(45deg, #2a2a2a 0%, #1a1a1a 100%);z-index:500;}
+        .hidden {
+          visibility: hidden;
+          opacity: 0;
+          pointer-events:none;
+          transition: visibility 0s 2s, opacity 2s linear;
+        }
+
     </style>
 </head>
 <body>
     <div class="desktop" id="desktop">
         <!-- File esistenti -->
-        <div class="file-icon" style="top: 50px; left: 100px;" data-file="readme">
+        <div class="file-icon" data-file="readme">
             <div class="icon-image"></div>
             <div class="icon-label">README.txt</div>
         </div>
-        <div class="file-icon" style="top: 200px; left: 300px;" data-file="notes">
+        
+        <div class="file-icon" data-file="notes">
             <div class="icon-image"></div>
             <div class="icon-label">appunti_su_di_me.txt</div>
         </div>
 
         <!-- Cartelle -->
-        <div class="folder-icon" style="top: 300px; left: 150px;" data-folder="documenti">
+        <div class="folder-icon" data-folder="documenti">
             <div class="icon-image"></div>
             <div class="icon-label">AboutMe</div>
         </div>
-        <div class="folder-icon" style="top: 150px; left: 700px;" data-folder="progetti">
+        
+        <div class="folder-icon" data-folder="progetti">
             <div class="icon-image"></div>
             <div class="icon-label">Progetti</div>
         </div>
-        <!-- Nuova cartella Pubblicazioni -->
-        <div class="folder-icon" style="top: 350px; left: 600px;" data-folder="pubblicazioni">
+        
+        <div class="folder-icon" data-folder="pubblicazioni">
             <div class="icon-image"></div>
             <div class="icon-label">Pubblicazioni</div>
         </div>
-        <!-- Nuova cartella Contatti -->
-        <div class="folder-icon" style="top: 100px; left: 500px;" data-folder="contatti">
+        
+        <div class="folder-icon" data-folder="contatti">
             <div class="icon-image"></div>
             <div class="icon-label">Contatti</div>
         </div>
 
-        <!-- NUOVO: Icona collegamento web -->
-        <div class="link-icon" style="top: 450px; left: 300px;" data-link="portfolio">
+        <!-- Collegamento web -->
+        <div class="link-icon" data-link="portfolio">
             <div class="icon-image"></div>
             <div class="icon-label">Il mio Portfolio</div>
         </div>
@@ -255,26 +538,147 @@
         <div class="folder-content" id="folderContent"></div>
     </div>
 
-    <!-- Taskbar -->
-    <div class="taskbar" id="taskbar"></div>
+    <!-- Taskbar retro -->
+    <div class="taskbar" id="taskbar">
+        <div class="taskbar-left" id="taskbarLeft"></div>
+        <div class="taskbar-signature">
+            Created by <span class="signature-name" id="signatureName">Marco Perrotta</span>
+            <span class="chicken-icon" id="chickenIcon">🐓</span>
+        </div>
+    </div>
+
+
+<!---------------->
+  <div class="overlay"></div>
+
+  <div class="editor-window show" id="bootWindow">
+        <div class="window-header">
+            <div class="window-title">System Boot</div>
+            <div class="window-controls">
+                <div class="control-btn close" onclick="document.getElementById('bootWindow').style.display='none'"></div>
+            </div>
+        </div>
+        <div class="loading-content" id="bootContent"></div>
+    </div>
+
+    <script>
+        
+        const bootSequence = [
+            { text: "Initializing Marco Perrotta Portfolio System...", class: "loading", delay: 100 },
+            { text: "", class: "", delay: 200 },
+            { text: "BIOS Version 2024.03.15", class: "system-info", delay: 150 },
+            { text: "Loading personal data modules...", class: "loading", delay: 300 },
+            { text: "[████████████████████████] 100%", class: "success", delay: 800 },
+            { text: "", class: "", delay: 200 },
+            { text: ">> System Ready. Executing profile.exe", class: "prompt", delay: 400 },
+            { text: "", class: "", delay: 300 },
+            { text: "==========================================", class: "system-info", delay: 100 },
+            { text: "         MARCO PERROTTA PROFILE", class: "success", delay: 150 },
+            { text: "==========================================", class: "system-info", delay: 100 },
+            { text: "", class: "", delay: 200 },
+            { text: "Name: Marco Perrotta", class: "", delay: 150 },
+            { text: "Location: Pozzuoli -> Ferrara", class: "", delay: 150 },
+            { text: "Status: Software Developer & AI Enthusiast", class: "", delay: 150 },
+            { text: "", class: "", delay: 200 },
+            { text: "Education:", class: "system-info", delay: 150 },
+            { text: "  • Università degli Studi di Ferrara", class: "", delay: 150 },
+            { text: "    - Laurea Magistrale in AI (in corso)", class: "", delay: 150 },
+            { text: "    - Laurea Triennale Informatica (110/110 cum laude)", class: "success", delay: 150 },
+            { text: "  • IIS N.Copernico A.Carpeggiani", class: "", delay: 150 },
+            { text: "    - Diploma Scienze Informatiche (100/100 cum laude)", class: "success", delay: 150 },
+            { text: "", class: "", delay: 200 },
+            { text: "Core Skills:", class: "system-info", delay: 150 },
+            { text: "  • Languages: C, Java, Julia, Haskell, Python", class: "", delay: 150 },
+            { text: "  • Systems: Unix-like OS, Git", class: "", delay: 150 },
+            { text: "  • Database: MySQL, PHP, Laravel", class: "", delay: 150 },
+            { text: "  • AI/ML: Machine Learning, Interpretable ML", class: "success", delay: 150 },
+            { text: "", class: "", delay: 200 },
+            { text: "Current Projects:", class: "system-info", delay: 150 },
+            { text: "  • SOLE.jl - Interpretable ML Framework", class: "success", delay: 150 },
+            { text: "  • LUMEN Algorithm - Logic-driven Extractor", class: "success", delay: 150 },
+            { text: "  • SOLEPOSTHOC.jl - Post-hoc Analysis Library", class: "success", delay: 150 },
+            { text: "", class: "", delay: 200 },
+            { text: "Publications:", class: "system-info", delay: 150 },
+            { text: "  • Tesi: Framework sistematico logic-based", class: "", delay: 150 },
+            { text: "  • Paper: Minimal Rules from Decision Forests", class: "", delay: 150 },
+            { text: "", class: "", delay: 200 },
+            { text: "Contact:", class: "system-info", delay: 150 },
+            { text: "  • Email: perrottamarco2011@gmail.com", class: "", delay: 150 },
+            { text: "  • GitHub: github.com/Perro2110", class: "", delay: 150 },
+            { text: "  • LinkedIn: /in/marco-perrotta-b159b6244", class: "", delay: 150 },
+            { text: "", class: "", delay: 200 },
+            { text: "Passion: Creating elegant solutions for complex problems", class: "success", delay: 150 },
+            { text: "Focus: Mathematical foundations + practical implementation", class: "success", delay: 150 },
+            { text: "", class: "", delay: 300 },
+            { text: "==========================================", class: "system-info", delay: 100 },
+            { text: "Profile loaded successfully.", class: "success", delay: 200 },
+            { text: "Starting desktop environment...", class: "loading", delay: 500 },
+            { text: "", class: "", delay: 200 },
+            { text: "Type 'minimize' or click minimize button to continue", class: "prompt", delay: 300 }
+        ];
+
+        function runBootSequence() {
+            
+            if(localStorage.getItem(`fakecookie`)){
+               document.getElementsByClassName("overlay")[0].classList.add("hidden"); 
+               return;
+            }
+
+            localStorage.setItem(`fakecookie`,true);             
+
+            const container = document.getElementById('bootContent');
+            
+            const win = document.getElementById('bootWindow');
+            win.style.left = `${(window.innerWidth - 700) / 2}px`;
+            win.style.top = `${(window.innerHeight - 500) / 2}px`;
+            win.style.display = 'block';
+
+            let i = 0;
+            function nextLine() {
+                if (i >= bootSequence.length){
+                    document.getElementsByClassName("overlay")[0].classList.add("hidden"); 
+                    return;
+                }
+                const item = bootSequence[i];
+                const line = document.createElement('div');
+                line.className = item.class;
+                line.textContent = item.text;
+                container.appendChild(line);
+                container.scrollTop = container.scrollHeight;
+                i++;
+                setTimeout(nextLine, item.delay);
+            }
+            nextLine();
+        }
+
+        window.onload = runBootSequence;
+    </script>
+<!---------------->
+
 
     <script>
         // File
         const files = {
-            readme: { name: "README.txt",
-                            content: `👋 Ciao, sono Marco Perrotta
+            readme: { 
+                name: "README.txt",
+                content: `👋 Ciao, sono Marco Perrotta
 Software Developer appassionato di tecnologia e innovazione.
 Mi piace creare soluzioni eleganti per problemi complessi.
 I miei principali ambiti di interesse includono il machine learning, la programmazione e l'ottimizzazione delle implementazioni.
 Attualmente, collaboro con il mio team di ricerca allo sviluppo di Sole.jl, un framework di apprendimento automatico interpretabile (IML) scritto nel linguaggio di programmazione Julia. Inoltre, sono fortemente interessato agli aspetti matematici e teorici che sottendono queste discipline.`
-                            } ,
-            notes: { name: "appunti_su_di_me.txt", content: `Nato a Pozzuoli e cresciuto a Ferrara, ho sviluppato fin da giovane una profonda passione per l'informatica e la tecnologia.
+            },
+            notes: { 
+                name: "appunti_su_di_me.txt", 
+                content: `Nato a Pozzuoli e cresciuto a Ferrara, ho sviluppato fin da giovane una profonda passione per l'informatica e la tecnologia.
 La mia curiosità per i computer, sbocciata durante l'adolescenza, si è evoluta nel tempo in un interesse professionale per gli aspetti più avanzati dell'intelligenza artificiale e della programmazione.
 I miei principali ambiti di interesse includono il machine learning, la programmazione e l'ottimizzazione delle implementazioni.
 Attualmente, collaboro con il mio team di ricerca allo sviluppo di Sole.jl, un framework di apprendimento automatico interpretabile (IML) scritto nel linguaggio di programmazione Julia.
 Inoltre, sono fortemente interessato agli aspetti matematici e teorici che sottendono queste discipline.
-Questo percorso mi ha portato a specializzarmi nell'ambito del machine learning, dove posso combinare il mio amore per la matematica con le sfide dell'implementazione pratica`},
-            email: { name: "email.txt", content: `📧 Il mio indirizzo email principale:
+Questo percorso mi ha portato a specializzarmi nell'ambito del machine learning, dove posso combinare il mio amore per la matematica con le sfide dell'implementazione pratica`
+            },
+            email: { 
+                name: "email.txt", 
+                content: `📧 Il mio indirizzo email principale:
 
 perrottamarco2011@gmail.com
 
@@ -282,10 +686,11 @@ Sentiti libero di contattarmi per:
 - Opportunità lavorative
 - Collaborazioni su progetti
 - Discussioni tecniche
-- Domande sui miei progetti`}
+- Domande sui miei progetti`
+            }
         };
 
-        // NUOVO: Collegamenti web
+        // Collegamenti web
         const links = {
             portfolio: {
                 name: "Il mio Portfolio",
@@ -304,7 +709,7 @@ Sentiti libero di contattarmi per:
             }
         };
 
-        // NUOVO: Download diretti per PDF
+        // Download diretti per PDF
         const downloads = {
             thesis: {
                 name: "Scarica Tesi (PDF)",
@@ -391,6 +796,7 @@ Un framework per l'apprendimento automatico simbolico, trasparente e interpretab
         let currentFolder = null;
         let openWindows = [];
         let windowZIndex = 1000;
+        let clickCount = 0; // Per l'easter egg
 
         // Event listeners
         document.addEventListener('DOMContentLoaded', function() {
@@ -400,14 +806,13 @@ Un framework per l'apprendimento automatico simbolico, trasparente e interpretab
                     const fileKey = this.getAttribute('data-file');
                     openFile(fileKey);
                 });
-                icon.addEventListener('click',function(){
-                    a = desktop.children;
-                    for (el of a)
+                icon.addEventListener('click', function(){
+                    const desktop = document.getElementById('desktop');
+                    const children = desktop.children;
+                    for (let el of children)
                         el.classList.remove("clicked");
-
                     this.classList.add('clicked');
-                }
-            )
+                });
             });
 
             // Aggiungi event listeners per le cartelle
@@ -416,69 +821,63 @@ Un framework per l'apprendimento automatico simbolico, trasparente e interpretab
                     const folderKey = this.getAttribute('data-folder');
                     openFolder(folderKey);
                 });
-                icon.addEventListener('click',function(){
-                    a = desktop.children;
-                    for (el of a)
+                icon.addEventListener('click', function(){
+                    const desktop = document.getElementById('desktop');
+                    const children = desktop.children;
+                    for (let el of children)
                         el.classList.remove("clicked");
-
                     this.classList.add('clicked');
-                }
-            )
+                });
             });
 
-            // NUOVO: Aggiungi event listeners per i collegamenti
+            // Aggiungi event listeners per i collegamenti
             document.querySelectorAll('.link-icon').forEach(icon => {
                 icon.addEventListener('dblclick', function() {
                     const linkKey = this.getAttribute('data-link');
                     openLink(linkKey);
                 });
-                icon.addEventListener('click',function(){
-                    a = desktop.children;
-                    for (el of a)
+                icon.addEventListener('click', function(){
+                    const desktop = document.getElementById('desktop');
+                    const children = desktop.children;
+                    for (let el of children)
                         el.classList.remove("clicked");
-
                     this.classList.add('clicked');
-                })
+                });
             });
 
-            // NUOVO: Aggiungi event listeners per le mail
-            document.querySelectorAll('.mail-icon').forEach(icon => {
-                icon.addEventListener('dblclick', function() {
-                    const fileKey = this.getAttribute('data-file');
-                    openFile(fileKey);
-                });
-                icon.addEventListener('click',function(){
-                    a = desktop.children;
-                    for (el of a)
-                        el.classList.remove("clicked");
-
-                    this.classList.add('clicked');
-                })
+            // Event listener per l'easter egg del pollo
+            document.getElementById('signatureName').addEventListener('click', function() {
+                clickCount++;
+                if (clickCount === 10) {
+                    document.getElementById('chickenIcon').classList.add('show');
+                    setTimeout(() => {
+                        document.getElementById('chickenIcon').classList.remove('show');
+                        clickCount = 0; // Reset counter
+                    }, 5000);
+                }
             });
 
             // Rendi le finestre draggable
             makeWindowDraggable('editorWindow');
             makeWindowDraggable('folderWindow');
+            makeWindowDraggable('bootWindow');
 
             // Aggiungi listener per aggiornare il contatore delle linee
             document.getElementById('editorTextarea').addEventListener('input', updateLineCount);
         });
 
-        // NUOVO: Funzione per aprire collegamenti
+        // Funzione per aprire collegamenti
         function openLink(linkKey) {
             const link = links[linkKey];
             if (!link) return;
-
-            // Apre il link in una nuova finestra/tab
             window.open(link.url, link.target || '_blank');
         }
 
-        // NUOVO: Funzione per scaricare file PDF
+        // Funzione per scaricare file PDF
         function downloadFile(downloadKey) {
             const download = downloads[downloadKey];
             if (!download) return;
 
-            // Crea un elemento link temporaneo per il download
             const a = document.createElement('a');
             a.href = download.url;
             a.download = download.filename;
@@ -501,7 +900,6 @@ Un framework per l'apprendimento automatico simbolico, trasparente e interpretab
             currentFile.textContent = file.name;
             editorTextarea.value = file.content;
 
-            // Posiziona la finestra al centro con dimensioni fisse
             editorWindow.style.left = `${(window.innerWidth - 700) / 2 + Math.random() * 50 - 25}px`;
             editorWindow.style.top = `${(window.innerHeight - 500) / 2 + Math.random() * 50 - 25}px`;
             editorWindow.style.zIndex = ++windowZIndex;
@@ -524,7 +922,6 @@ Un framework per l'apprendimento automatico simbolico, trasparente e interpretab
             folderTitle.textContent = folder.name;
             currentPath.textContent = folder.name;
 
-            // Genera il contenuto della cartella
             folderContent.innerHTML = '';
 
             // Aggiungi i file normali
@@ -538,13 +935,13 @@ Un framework per l'apprendimento automatico simbolico, trasparente e interpretab
                 fileElement.addEventListener('dblclick', () => {
                     openFileFromFolder(folderKey, index);
                 });
-                fileElement.addEventListener('click',function(){
-                    a = this.parentNode.children;
-                    for (el of a)
+                fileElement.addEventListener('click', function(){
+                    const parent = this.parentNode;
+                    const children = parent.children;
+                    for (let el of children)
                         el.classList.remove("clicked");
-
                     this.classList.add('clicked');
-                })
+                });
                 folderContent.appendChild(fileElement);
             });
 
@@ -563,19 +960,19 @@ Un framework per l'apprendimento automatico simbolico, trasparente e interpretab
                         openLink(link.key);
                     });
 
-                      linkElement.addEventListener('click',function(){
-                            a = this.parentNode.children;
-                            for (el of a)
-                                el.classList.remove("clicked");
-
-                            this.classList.add('clicked');
-                        })
+                    linkElement.addEventListener('click', function(){
+                        const parent = this.parentNode;
+                        const children = parent.children;
+                        for (let el of children)
+                            el.classList.remove("clicked");
+                        this.classList.add('clicked');
+                    });
 
                     folderContent.appendChild(linkElement);
                 });
             }
 
-            // NUOVO: Aggiungi i download PDF se presenti
+            // Aggiungi i download PDF se presenti
             if (folder.downloads) {
                 folder.downloads.forEach((download) => {
                     const downloadElement = document.createElement('div');
@@ -588,19 +985,18 @@ Un framework per l'apprendimento automatico simbolico, trasparente e interpretab
                         downloadFile(download.key);
                     });
 
-                downloadElement.addEventListener('click',function(){
-                    a = this.parentNode.children;
-                    for (el of a)
-                        el.classList.remove("clicked");
-
-                    this.classList.add('clicked');
-                })
+                    downloadElement.addEventListener('click', function(){
+                        const parent = this.parentNode;
+                        const children = parent.children;
+                        for (let el of children)
+                            el.classList.remove("clicked");
+                        this.classList.add('clicked');
+                    });
 
                     folderContent.appendChild(downloadElement);
                 });
             }
 
-            // Posiziona la finestra
             folderWindow.style.left = `${(window.innerWidth - 700) / 2 + Math.random() * 100 - 50}px`;
             folderWindow.style.top = `${(window.innerHeight - 500) / 2 + Math.random() * 100 - 50}px`;
             folderWindow.style.zIndex = ++windowZIndex;
@@ -642,7 +1038,6 @@ Un framework per l'apprendimento automatico simbolico, trasparente e interpretab
         }
 
         function goHome() {
-            // Implementazione per tornare al desktop
             closeFolder();
         }
 
@@ -653,7 +1048,7 @@ Un framework per l'apprendimento automatico simbolico, trasparente e interpretab
         }
 
         function addToTaskbar(title, type) {
-            const taskbar = document.getElementById('taskbar');
+            const taskbarLeft = document.getElementById('taskbarLeft');
             const taskbarItem = document.createElement('div');
             taskbarItem.className = 'taskbar-item';
             taskbarItem.textContent = title;
@@ -665,18 +1060,18 @@ Un framework per l'apprendimento automatico simbolico, trasparente e interpretab
                     document.getElementById('folderWindow').style.zIndex = ++windowZIndex;
                 }
             });
-            taskbar.appendChild(taskbarItem);
+            taskbarLeft.appendChild(taskbarItem);
         }
 
         function removeFromTaskbar(type) {
-            const taskbar = document.getElementById('taskbar');
-            const items = taskbar.querySelectorAll(`.taskbar-item[data-type="${type}"]`);
+            const taskbarLeft = document.getElementById('taskbarLeft');
+            const items = taskbarLeft.querySelectorAll(`.taskbar-item[data-type="${type}"]`);
             items.forEach(item => item.remove());
         }
 
         function makeWindowDraggable(windowId) {
-            const window = document.getElementById(windowId);
-            const header = window.querySelector('.window-header');
+            const windowEl = document.getElementById(windowId);
+            const header = windowEl.querySelector('.window-header');
             let isDragging = false;
             let currentX = 0;
             let currentY = 0;
@@ -688,10 +1083,10 @@ Un framework per l'apprendimento automatico simbolico, trasparente e interpretab
             document.addEventListener('mouseup', dragEnd);
 
             function dragStart(e) {
-                initialX = e.clientX - window.offsetLeft;
-                initialY = e.clientY - window.offsetTop;
+                initialX = e.clientX - windowEl.offsetLeft;
+                initialY = e.clientY - windowEl.offsetTop;
                 isDragging = true;
-                window.style.zIndex = ++windowZIndex;
+                windowEl.style.zIndex = ++windowZIndex;
             }
 
             function drag(e) {
@@ -700,8 +1095,8 @@ Un framework per l'apprendimento automatico simbolico, trasparente e interpretab
                     currentX = e.clientX - initialX;
                     currentY = e.clientY - initialY;
 
-                    window.style.left = currentX + 'px';
-                    window.style.top = currentY + 'px';
+                    windowEl.style.left = currentX + 'px';
+                    windowEl.style.top = currentY + 'px';
                 }
             }
 
