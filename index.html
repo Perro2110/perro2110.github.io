@@ -52,7 +52,7 @@
                 radial-gradient(circle at 75% 75%, rgba(0, 200, 255, 0.03) 0%, transparent 50%);
         }
 
-        .file-icon, .folder-icon, .link-icon, .mail-icon {
+        .file-icon, .folder-icon, .link-icon, .mail-icon, .video-icon {
             position: absolute;
             width: 80px;
             height: 100px;
@@ -68,7 +68,7 @@
             box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
         }
 
-        .file-icon:hover, .folder-icon:hover, .link-icon:hover, .mail-icon:hover { 
+        .file-icon:hover, .folder-icon:hover, .link-icon:hover, .mail-icon:hover, .video-icon:hover { 
             transform: scale(1.05);
             filter: brightness(1.2);
         }
@@ -106,6 +106,11 @@
             border-color: #ff6b6b;
         }
 
+        .video-icon .icon-image {
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ff00aa"><path d="M10,16.5V7.5L16,12M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"/></svg>');
+            border-color: #ff00aa;
+        }
+
         .link-icon .icon-image::after {
             content: '↗';
             position: absolute;
@@ -136,7 +141,7 @@
             font-family: 'VT323', monospace;
         }
 
-        .editor-window, .folder-window {
+        .editor-window, .folder-window, .video-window, .aquarium-window {
             position: fixed;
             background: #222;
             border-radius: 0;
@@ -146,6 +151,13 @@
             width: 700px;
             height: 500px;
             display: none;
+        }
+
+        .aquarium-window {
+            width: 520px;
+            height: 420px;
+            top: 20px;
+            right: 20px;
         }
 
         .window-header {
@@ -304,7 +316,7 @@
             to { opacity: 1; transform: scale(1); }
         }
 
-        .editor-window.show, .folder-window.show {
+        .editor-window.show, .folder-window.show, .video-window.show, .aquarium-window.show {
             display: block;
             animation: fadeIn 0.2s ease;
         }
@@ -437,6 +449,263 @@
             background: linear-gradient(180deg, #666 0%, #444 100%);
         }
 
+        /* Video player styles */
+        .video-content {
+            height: calc(100% - 36px);
+            background: #111;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .video-player-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .video-player {
+            width: 100%;
+            height: 100%;
+            max-width: 640px;
+            max-height: 360px;
+            border: 2px solid #666;
+            background: #000;
+        }
+
+        .video-info {
+            background: #333;
+            padding: 10px 15px;
+            border-top: 2px inset #666;
+            color: #ff00aa;
+            font-size: 12px;
+            font-family: 'VT323', monospace;
+            text-shadow: 0 0 3px #ff00aa;
+        }
+
+        /* Aquarium styles */
+        .aquarium-content {
+            height: calc(100% - 36px);
+            background: #111;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .aquarium-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, #0d47a1, #1a237e);
+            border: none;
+            box-shadow: none;
+            image-rendering: pixelated;
+            overflow: hidden;
+        }
+
+        /* Bubbles */
+        .bubble {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: radial-gradient(circle at 30% 30%, #00ffff, #0099cc);
+            border-radius: 50%;
+            opacity: 0.6;
+            box-shadow: 0 0 4px #00ffff;
+        }
+
+        /* Fish e creature */
+        .creature {
+            position: absolute;
+            image-rendering: pixelated;
+        }
+
+        /* Pesci nuotatori */
+        .fish {
+            width: 32px;
+            height: 16px;
+        }
+
+        .fish-body {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Fish 1 - Orange */
+        .fish1 .fish-body {
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 32 16" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="6" width="16" height="4" fill="%23ff9500"/><rect x="20" y="5" width="3" height="6" fill="%23ff9500"/><circle cx="2" cy="8" r="2" fill="%23000"/></svg>') no-repeat center;
+            background-size: contain;
+        }
+
+        /* Fish 2 - Green */
+        .fish2 .fish-body {
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 32 16" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="5" width="18" height="6" fill="%2300cc44"/><polygon points="22,6 26,8 22,10" fill="%2300cc44"/><circle cx="2" cy="8" r="2" fill="%23000"/></svg>') no-repeat center;
+            background-size: contain;
+            transform: scaleX(-1);
+        }
+
+        /* Fish 3 - Red */
+        .fish3 .fish-body {
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 32 16" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="6" width="14" height="4" fill="%23ff3333"/><polygon points="20,6 24,8 20,10" fill="%23ff3333"/><circle cx="3" cy="8" r="2" fill="%23000"/></svg>') no-repeat center;
+            background-size: contain;
+        }
+
+        /* Fish 4 - Yellow */
+        .fish4 .fish-body {
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 32 16" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="6" width="15" height="4" fill="%23ffff00"/><polygon points="20,7 24,8 20,9" fill="%23ffff00"/><circle cx="2" cy="8" r="1.5" fill="%23000"/></svg>') no-repeat center;
+            background-size: contain;
+            transform: scaleX(-1);
+        }
+
+        /* Fish 5 - Purple */
+        .fish5 .fish-body {
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 32 16" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="5" width="18" height="6" fill="%23cc44ff"/><polygon points="22,6 26,8 22,10" fill="%23cc44ff"/><circle cx="2" cy="8" r="2" fill="%23000"/></svg>') no-repeat center;
+            background-size: contain;
+        }
+
+        /* Starfish */
+        .starfish {
+            width: 24px;
+            height: 24px;
+        }
+
+        .starfish-body {
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polygon points="12,2 15,10 24,12 16,18 18,27 12,23 6,27 8,18 0,12 9,10" fill="%23ff6b9d" stroke="%23000" stroke-width="0.5"/></svg>') no-repeat center;
+            background-size: contain;
+        }
+
+        /* Jellyfish */
+        .jellyfish {
+            width: 20px;
+            height: 28px;
+        }
+
+        .jellyfish-body {
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 20 28" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="6" r="6" fill="%23ff66cc" opacity="0.7"/><line x1="6" y1="12" x2="4" y2="28" stroke="%23ff66cc" stroke-width="1"/><line x1="10" y1="12" x2="10" y2="28" stroke="%23ff66cc" stroke-width="1"/><line x1="14" y1="12" x2="16" y2="28" stroke="%23ff66cc" stroke-width="1"/></svg>') no-repeat center;
+            background-size: contain;
+        }
+
+        /* Sea Urchin */
+        .urchin {
+            width: 16px;
+            height: 16px;
+        }
+
+        .urchin-body {
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="4" fill="%23330033"/><line x1="8" y1="1" x2="8" y2="0" stroke="%23330033" stroke-width="1"/><line x1="15" y1="8" x2="16" y2="8" stroke="%23330033" stroke-width="1"/><line x1="8" y1="15" x2="8" y2="16" stroke="%23330033" stroke-width="1"/><line x1="1" y1="8" x2="0" y2="8" stroke="%23330033" stroke-width="1"/><line x1="12" y1="3" x2="13" y2="2" stroke="%23330033" stroke-width="1"/><line x1="13" y1="13" x2="12" y2="12" stroke="%23330033" stroke-width="1"/><line x1="3" y1="13" x2="4" y2="12" stroke="%23330033" stroke-width="1"/><line x1="2" y1="3" x2="3" y2="2" stroke="%23330033" stroke-width="1"/></svg>') no-repeat center;
+            background-size: contain;
+        }
+
+        /* Pineapple */
+        .pineapple {
+            width: 120px;
+            height: 60px;
+        }
+
+        .pineapple-body {
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg"><rect x="20" y="15" width="80" height="40" fill="%23ffbb00" stroke="%23000" stroke-width="1" rx="5"/><polygon points="40,15 45,0 55,15" fill="%2300dd44"/><polygon points="60,15 65,0 75,15" fill="%2300dd44"/><polygon points="80,15 85,0 95,15" fill="%2300dd44"/><line x1="30" y1="25" x2="90" y2="25" stroke="%23aa8800" stroke-width="1"/><line x1="30" y1="35" x2="90" y2="35" stroke="%23aa8800" stroke-width="1"/><line x1="30" y1="45" x2="90" y2="45" stroke="%23aa8800" stroke-width="1"/><line x1="35" y1="20" x2="35" y2="50" stroke="%23aa8800" stroke-width="1"/><line x1="50" y1="20" x2="50" y2="50" stroke="%23aa8800" stroke-width="1"/><line x1="65" y1="20" x2="65" y2="50" stroke="%23aa8800" stroke-width="1"/><line x1="80" y1="20" x2="80" y2="50" stroke="%23aa8800" stroke-width="1"/></svg>') no-repeat center;
+            background-size: contain;
+        }
+
+        /* Sponge */
+        .sponge {
+            width: 40px;
+            height: 40px;
+        }
+
+        .sponge-body {
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="5" width="32" height="32" fill="%23ffcc00" stroke="%23000" stroke-width="1" rx="3"/><circle cx="10" cy="10" r="2" fill="%23ffaa00"/><circle cx="20" cy="10" r="2" fill="%23ffaa00"/><circle cx="30" cy="10" r="2" fill="%23ffaa00"/><circle cx="10" cy="20" r="2" fill="%23ffaa00"/><circle cx="20" cy="20" r="2" fill="%23ffaa00"/><circle cx="30" cy="20" r="2" fill="%23ffaa00"/><circle cx="10" cy="30" r="2" fill="%23ffaa00"/><circle cx="20" cy="30" r="2" fill="%23ffaa00"/><circle cx="30" cy="30" r="2" fill="%23ffaa00"/></svg>') no-repeat center;
+            background-size: contain;
+        }
+
+        /* Arch Structure */
+        .arch {
+            position: absolute;
+            bottom: 40px;
+            width: 120px;
+            height: 60px;
+            border: 3px solid #8b6f47;
+            border-top: 3px solid #8b6f47;
+            border-radius: 120px 120px 0 0;
+            background: linear-gradient(to bottom, #9d8a7e, #8b7355);
+            opacity: 0.7;
+        }
+
+        /* Seaweed */
+        .seaweed {
+            position: absolute;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to top, #004400, #008800);
+            opacity: 0.8;
+        }
+
+        .seaweed::before,
+        .seaweed::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background: #006600;
+            left: 1px;
+        }
+
+        .seaweed::before {
+            height: 30%;
+            bottom: 70%;
+            transform: skewX(-5deg);
+        }
+
+        .seaweed::after {
+            height: 50%;
+            bottom: 50%;
+            transform: skewX(5deg);
+        }
+
+        /* Sand */
+        .sand {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: repeating-linear-gradient(90deg, #d4a574, #d4a574 2px, #c9985f 2px, #c9985f 4px);
+            opacity: 1;
+        }
+
+        /* Retro text */
+        .title {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: #00ffff;
+            font-size: 14px;
+            font-weight: bold;
+            text-shadow: 2px 2px #ff00ff;
+            z-index: 10;
+        }
+
+        .info {
+            position: absolute;
+            bottom: 42px;
+            right: 10px;
+            color: #ffff00;
+            font-size: 10px;
+            text-shadow: 1px 1px #ff0080;
+        }
+
         /* Posizionamento icone fisso */
         .desktop .file-icon:nth-child(1) { top: 50px; left: 100px; }
         .desktop .file-icon:nth-child(2) { top: 200px; left: 300px; }
@@ -445,6 +714,7 @@
         .desktop .folder-icon:nth-child(5) { top: 350px; left: 600px; }
         .desktop .folder-icon:nth-child(6) { top: 100px; left: 500px; }
         .desktop .link-icon:nth-child(7) { top: 450px; left: 300px; }
+        .desktop .video-icon:nth-child(8) { top: 250px; left: 800px; }
 
         .folder-item span{ margin-left:35px;}
 
@@ -502,6 +772,12 @@
             <div class="icon-image"></div>
             <div class="icon-label">Il mio Portfolio</div>
         </div>
+
+        <!-- Nuova icona video -->
+        <div class="video-icon" data-video="demo">
+            <div class="icon-image"></div>
+            <div class="icon-label">JuliaCon Local Paris 2025</div>
+        </div>
     </div>
 
     <!-- Finestra Editor -->
@@ -536,6 +812,115 @@
             <a href="#" class="breadcrumb-item" onclick="goHome()">Home</a> / <span id="currentPath">Desktop</span>
         </div>
         <div class="folder-content" id="folderContent"></div>
+    </div>
+
+    <!-- Nuova finestra Video Player -->
+    <div class="video-window" id="videoWindow">
+        <div class="window-header">
+            <div class="window-title" id="videoTitle">Video Player</div>
+            <div class="window-controls">
+                <div class="control-btn minimize"></div>
+                <div class="control-btn maximize"></div>
+                <div class="control-btn close" onclick="closeVideo()"></div>
+            </div>
+        </div>
+        <div class="video-content">
+<!-- Sostituisci questa sezione nel codice -->
+<div class="video-player-container">
+    <iframe class="video-player" id="youtubePlayer" 
+            src="" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            allowfullscreen>
+    </iframe>
+</div>
+            <div class="video-info" id="videoInfo">
+                Caricamento video in corso...
+            </div>
+        </div>
+    </div>
+
+    <!-- Finestra Aquarium -->
+    <div class="aquarium-window" id="aquariumWindow">
+        <div class="window-header">
+            <div class="window-title">Pixel Aquarium</div>
+            <div class="window-controls">
+                <div class="control-btn minimize"></div>
+                <div class="control-btn maximize"></div>
+                <div class="control-btn close" onclick="closeAquarium()"></div>
+            </div>
+        </div>
+        <div class="aquarium-content">
+            <div class="aquarium-container" id="aquariumContainer">
+                <!-- Fish -->
+                <div class="creature fish fish1" id="fish1">
+                    <div class="fish-body"></div>
+                </div>
+                <div class="creature fish fish2" id="fish2">
+                    <div class="fish-body"></div>
+                </div>
+                <div class="creature fish fish3" id="fish3">
+                    <div class="fish-body"></div>
+                </div>
+                <div class="creature fish fish4" id="fish4">
+                    <div class="fish-body"></div>
+                </div>
+
+                <!-- Starfish -->
+                <div class="creature starfish" id="starfish1">
+                    <div class="starfish-body"></div>
+                </div>
+
+                <!-- Jellyfish -->
+                <div class="creature jellyfish" id="jellyfish1">
+                    <div class="jellyfish-body"></div>
+                </div>
+                <div class="creature jellyfish" id="jellyfish2">
+                    <div class="jellyfish-body"></div>
+                </div>
+                <div class="creature jellyfish" id="jellyfish3">
+                    <div class="jellyfish-body"></div>
+                </div>
+                <div class="creature jellyfish" id="jellyfish4">
+                    <div class="jellyfish-body"></div>
+                </div>
+
+                <!-- Sea Urchin -->
+                <div class="creature urchin" id="urchin1">
+                    <div class="urchin-body"></div>
+                </div>
+                <div class="creature urchin" id="urchin2">
+                    <div class="urchin-body"></div>
+                </div>
+                <div class="creature urchin" id="urchin3">
+                    <div class="urchin-body"></div>
+                </div>
+                <div class="creature urchin" id="urchin4">
+                    <div class="urchin-body"></div>
+                </div>
+
+                <!-- Pineapple -->
+                <div class="creature pineapple" id="pineapple1">
+                    <div class="pineapple-body"></div>
+                </div>
+
+                <!-- Sponge -->
+                <div class="creature sponge" id="sponge1">
+                    <div class="sponge-body"></div>
+                </div>
+
+                <!-- Arch Structure -->
+                <div class="arch" style="left: 190px;"></div>
+
+                <!-- Seaweed -->
+                <div class="seaweed" style="left: 30px; height: 100px;"></div>
+                <div class="seaweed" style="left: 150px; height: 120px;"></div>
+                <div class="seaweed" style="left: 280px; height: 110px;"></div>
+                <div class="seaweed" style="left: 420px; height: 95px;"></div>
+
+                <div class="sand"></div>
+            </div>
+        </div>
     </div>
 
     <!-- Taskbar retro -->
@@ -709,6 +1094,16 @@ Sentiti libero di contattarmi per:
             }
         };
 
+        // Video da YouTube
+        const videos = {
+            demo: {
+                name: "JuliaCon Local Paris 2025",
+                youtubeId: "JVHeIdVPK8Y", // Sostituisci con l'ID del tuo video YouTube
+                title: "Presentazione a JuliaCon Local Paris 2025, del pacchetto SolePostHoc.jl",
+                description: "In questo video, abbiamo presentato tre grandi novità per Sole.jl. Io presento il pacchetto SolePostHoc.jl, che offre strumenti avanzati per l'analisi post-hoc di modelli di apprendimento automatico simbolico. Durante la presentazione, illustro le funzionalità principali del pacchetto e un caso d'uso."
+            }
+        };
+
         // Download diretti per PDF
         const downloads = {
             thesis: {
@@ -797,6 +1192,8 @@ Un framework per l'apprendimento automatico simbolico, trasparente e interpretab
         let openWindows = [];
         let windowZIndex = 1000;
         let clickCount = 0; // Per l'easter egg
+        let aquariumClosedTime = null;
+        const AQUARIUM_REOPEN_DELAY = 30000; // 30 secondi
 
         // Event listeners
         document.addEventListener('DOMContentLoaded', function() {
@@ -845,6 +1242,21 @@ Un framework per l'apprendimento automatico simbolico, trasparente e interpretab
                 });
             });
 
+            // Aggiungi event listeners per i video
+            document.querySelectorAll('.video-icon').forEach(icon => {
+                icon.addEventListener('dblclick', function() {
+                    const videoKey = this.getAttribute('data-video');
+                    openVideo(videoKey);
+                });
+                icon.addEventListener('click', function(){
+                    const desktop = document.getElementById('desktop');
+                    const children = desktop.children;
+                    for (let el of children)
+                        el.classList.remove("clicked");
+                    this.classList.add('clicked');
+                });
+            });
+
             // Event listener per l'easter egg del pollo
             document.getElementById('signatureName').addEventListener('click', function() {
                 clickCount++;
@@ -860,17 +1272,235 @@ Un framework per l'apprendimento automatico simbolico, trasparente e interpretab
             // Rendi le finestre draggable
             makeWindowDraggable('editorWindow');
             makeWindowDraggable('folderWindow');
+            makeWindowDraggable('videoWindow');
+            makeWindowDraggable('aquariumWindow');
             makeWindowDraggable('bootWindow');
 
             // Aggiungi listener per aggiornare il contatore delle linee
             document.getElementById('editorTextarea').addEventListener('input', updateLineCount);
+
+            // Avvia l'acquario dopo il boot
+            setTimeout(initializeAquarium, 1000);
         });
+
+        // Inizializza l'acquario
+        function initializeAquarium() {
+            const aquarium = document.getElementById('aquariumContainer');
+            const width = aquarium.offsetWidth;
+            const height = aquarium.offsetHeight - 40;
+
+            class SwimmingCreature {
+                constructor(element, speed, depth, type = 'fish') {
+                    this.element = element;
+                    this.x = Math.random() * width;
+                    this.y = depth;
+                    this.speed = speed;
+                    this.direction = Math.random() > 0.5 ? 1 : -1;
+                    this.type = type;
+                    this.wobble = Math.random() * 0.5;
+                    this.wobblePhase = Math.random() * Math.PI * 2;
+                }
+
+                update() {
+                    this.x += this.speed * this.direction;
+                    this.wobblePhase += 0.05;
+                    const wobbleY = Math.sin(this.wobblePhase) * this.wobble;
+
+                    if (this.x > width + 40) this.x = -40;
+                    if (this.x < -40) this.x = width + 40;
+
+                    this.element.style.left = this.x + 'px';
+                    this.element.style.top = (this.y + wobbleY) + 'px';
+                }
+            }
+
+            class StationaryCreature {
+                constructor(element, x, y) {
+                    this.element = element;
+                    this.x = x;
+                    this.y = y;
+                    this.bobPhase = Math.random() * Math.PI * 2;
+                    this.bobAmount = 2;
+                    this.bobSpeed = 0.02;
+                }
+
+                update() {
+                    this.bobPhase += this.bobSpeed;
+                    const bobY = Math.sin(this.bobPhase) * this.bobAmount;
+                    this.element.style.left = this.x + 'px';
+                    this.element.style.top = (this.y + bobY) + 'px';
+                }
+            }
+
+            class Jellyfish {
+                constructor(element, x, startY) {
+                    this.element = element;
+                    this.x = x;
+                    this.y = startY;
+                    this.minY = 80;
+                    this.maxY = 280;
+                    this.speed = 0.5 + Math.random() * 0.5;
+                    this.direction = Math.random() > 0.5 ? 1 : -1;
+                }
+
+                update() {
+                    this.y += this.speed * this.direction;
+                    if (this.y > this.maxY) this.direction = -1;
+                    if (this.y < this.minY) this.direction = 1;
+
+                    this.element.style.left = this.x + 'px';
+                    this.element.style.top = this.y + 'px';
+                }
+            }
+
+            const creatures = [];
+
+            // Swimming fish
+            creatures.push(new SwimmingCreature(document.getElementById('fish1'), 1.5, 50, 'fish'));
+            creatures.push(new SwimmingCreature(document.getElementById('fish2'), 1, 120, 'fish'));
+            creatures.push(new SwimmingCreature(document.getElementById('fish3'), 2, 180, 'fish'));
+            creatures.push(new SwimmingCreature(document.getElementById('fish4'), 0.8, 90, 'fish'));
+
+            // Starfish
+            creatures.push(new StationaryCreature(document.getElementById('starfish1'), 60, 320));
+
+            // Jellyfish - moving up and down
+            creatures.push(new Jellyfish(document.getElementById('jellyfish1'), 80, 150));
+            creatures.push(new Jellyfish(document.getElementById('jellyfish2'), 250, 200));
+            creatures.push(new Jellyfish(document.getElementById('jellyfish3'), 150, 120));
+            creatures.push(new Jellyfish(document.getElementById('jellyfish4'), 350, 180));
+
+            // Sea Urchin
+            creatures.push(new StationaryCreature(document.getElementById('urchin1'), 200, 330));
+            creatures.push(new StationaryCreature(document.getElementById('urchin2'), 330, 320));
+            creatures.push(new StationaryCreature(document.getElementById('urchin3'), 100, 325));
+            creatures.push(new StationaryCreature(document.getElementById('urchin4'), 420, 315));
+
+            // Pineapple
+            creatures.push(new StationaryCreature(document.getElementById('pineapple1'), 360, 295));
+
+            // Sponge - walks back and forth on the bottom
+            creatures.push(new SwimmingCreature(document.getElementById('sponge1'), 0.6, 310, 'sponge'));
+
+            // Bubbles
+            function createBubble() {
+                const bubble = document.createElement('div');
+                bubble.className = 'bubble';
+                const x = Math.random() * (width - 8);
+                const y = height + 40;
+                const duration = 3 + Math.random() * 3;
+                
+                bubble.style.left = x + 'px';
+                bubble.style.top = y + 'px';
+                aquarium.appendChild(bubble);
+
+                let time = 0;
+                const startX = x;
+                const wobble = Math.sin(Math.random()) * 20;
+
+                const bubbleInterval = setInterval(() => {
+                    time += 0.05;
+                    const newY = y - (time * 40);
+                    const newX = startX + Math.sin(time * 3) * wobble;
+
+                    bubble.style.top = newY + 'px';
+                    bubble.style.left = newX + 'px';
+                    bubble.style.opacity = Math.max(0, 0.6 - time / duration);
+
+                    if (time > duration) {
+                        clearInterval(bubbleInterval);
+                        bubble.remove();
+                    }
+                }, 30);
+            }
+
+            setInterval(createBubble, 600);
+
+            // Animation loop
+            function animate() {
+                creatures.forEach(creature => creature.update());
+                requestAnimationFrame(animate);
+            }
+
+            animate();
+
+            // Mostra l'acquario
+            showAquarium();
+        }
+
+        // Mostra l'acquario
+        function showAquarium() {
+            const aquariumWindow = document.getElementById('aquariumWindow');
+            aquariumWindow.style.zIndex = ++windowZIndex;
+            aquariumWindow.classList.add('show');
+            addToTaskbar('Pixel Aquarium', 'aquarium');
+        }
+
+        // Chiudi l'acquario
+        function closeAquarium() {
+            const aquariumWindow = document.getElementById('aquariumWindow');
+            aquariumWindow.classList.remove('show');
+            removeFromTaskbar('aquarium');
+            
+            // Imposta il timer per riaprire l'acquario
+            aquariumClosedTime = Date.now();
+            setTimeout(checkAquariumReopen, AQUARIUM_REOPEN_DELAY);
+        }
+
+        // Controlla se riaprire l'acquario
+        function checkAquariumReopen() {
+            const aquariumWindow = document.getElementById('aquariumWindow');
+            if (!aquariumWindow.classList.contains('show') && aquariumClosedTime && 
+                (Date.now() - aquariumClosedTime) >= AQUARIUM_REOPEN_DELAY) {
+                //showAquarium();
+                aquariumClosedTime = null;
+            }
+        }
 
         // Funzione per aprire collegamenti
         function openLink(linkKey) {
             const link = links[linkKey];
             if (!link) return;
             window.open(link.url, link.target || '_blank');
+        }
+
+        // Funzione per aprire video
+// Funzione per aprire video
+function openVideo(videoKey) {
+    const video = videos[videoKey];
+    if (!video) return;
+
+    const videoWindow = document.getElementById('videoWindow');
+    const videoTitle = document.getElementById('videoTitle');
+    const youtubePlayer = document.getElementById('youtubePlayer');
+    const videoInfo = document.getElementById('videoInfo');
+
+    videoTitle.textContent = `Video Player - ${video.name}`;
+    
+    // Costruisci l'URL di embed di YouTube SENZA autoplay
+    const youtubeUrl = `https://www.youtube.com/embed/${video.youtubeId}`;
+    youtubePlayer.src = youtubeUrl;
+    
+    videoInfo.textContent = `${video.title} - ${video.description}`;
+
+    videoWindow.style.left = `${(window.innerWidth - 700) / 2 + Math.random() * 50 - 25}px`;
+    videoWindow.style.top = `${(window.innerHeight - 500) / 2 + Math.random() * 50 - 25}px`;
+    videoWindow.style.zIndex = ++windowZIndex;
+
+    videoWindow.classList.add('show');
+    addToTaskbar(`Video - ${video.name}`, 'video');
+}
+
+        // Funzione per chiudere il video player
+        function closeVideo() {
+            const videoWindow = document.getElementById('videoWindow');
+            const youtubePlayer = document.getElementById('youtubePlayer');
+            
+            // Ferma il video quando si chiude la finestra
+            youtubePlayer.src = '';
+            
+            videoWindow.classList.remove('show');
+            removeFromTaskbar('video');
         }
 
         // Funzione per scaricare file PDF
@@ -1058,6 +1688,10 @@ Un framework per l'apprendimento automatico simbolico, trasparente e interpretab
                     document.getElementById('editorWindow').style.zIndex = ++windowZIndex;
                 } else if (type === 'folder') {
                     document.getElementById('folderWindow').style.zIndex = ++windowZIndex;
+                } else if (type === 'video') {
+                    document.getElementById('videoWindow').style.zIndex = ++windowZIndex;
+                } else if (type === 'aquarium') {
+                    document.getElementById('aquariumWindow').style.zIndex = ++windowZIndex;
                 }
             });
             taskbarLeft.appendChild(taskbarItem);
@@ -1111,6 +1745,10 @@ Un framework per l'apprendimento automatico simbolico, trasparente e interpretab
                 document.getElementById('editorWindow').style.zIndex = ++windowZIndex;
             } else if (e.target.closest('#folderWindow')) {
                 document.getElementById('folderWindow').style.zIndex = ++windowZIndex;
+            } else if (e.target.closest('#videoWindow')) {
+                document.getElementById('videoWindow').style.zIndex = ++windowZIndex;
+            } else if (e.target.closest('#aquariumWindow')) {
+                document.getElementById('aquariumWindow').style.zIndex = ++windowZIndex;
             }
         });
     </script>
