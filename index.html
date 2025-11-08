@@ -1244,14 +1244,30 @@ Sentiti libero di contattarmi per:
         };
 
         // Nuovo oggetto per PDF
-        const pdfs = {
-            cv: {
-                name: "Curriculum Vitae",
-                url: "https://github.com/Perro2110/perro2110.github.io/blob/7127477a6cf3bbced0342e9cc15cfce4f3b13572/CvEu.pdf",
-                title: "Curriculum Vitae - Marco Perrotta",
-                description: "Il mio CV aggiornato in formato europeo"
-            }
-        };
+    // Nuovo oggetto per PDF
+const pdfs = {
+    cv: {
+        name: "Curriculum Vitae",
+        url: "https://github.com/Perro2110/perro2110.github.io/raw/main/CvEu.pdf",
+        embedUrl: "https://docs.google.com/viewer?url=https://github.com/Perro2110/perro2110.github.io/raw/main/CvEu.pdf&embedded=true",
+        title: "Curriculum Vitae - Marco Perrotta",
+        description: "Il mio CV aggiornato in formato europeo"
+    },
+    thesis: {
+        name: "Tesi di Laurea",
+        url: "https://github.com/Perro2110/perro2110.github.io/raw/main/Tesi.pdf",
+        embedUrl: "https://docs.google.com/viewer?url=https://github.com/Perro2110/perro2110.github.io/raw/main/Tesi.pdf&embedded=true",
+        title: "Tesi di Laurea Triennale",
+        description: "Un framework sistematico logic-based per spiegare modelli simbolici di ensemble"
+    },
+    paper: {
+        name: "Workshop Paper",
+        url: "https://overlay.uniud.it/workshop/2024/papers/paper14.pdf",
+        embedUrl: "https://docs.google.com/viewer?url=https://overlay.uniud.it/workshop/2024/papers/paper14.pdf&embedded=true",
+        title: "Minimal Rules from Decision Forests",
+        description: "A Systematic Approach - Workshop Paper 2024"
+    }
+};
 
         // Download diretti per PDF (mantenuti uguali)
         const downloads = {
@@ -1309,24 +1325,24 @@ Un framework per l'apprendimento automatico simbolico, trasparente e interpretab
                 ]
             },
             pubblicazioni: {
-                name: "Pubblicazioni",
-                files: [
-                    { name: "tesi.txt", content: `- Tesi di Laurea Triennale • Università degli Studi di Ferrara
+    name: "Pubblicazioni",
+    files: [
+        { name: "tesi.txt", content: `- Tesi di Laurea Triennale • Università degli Studi di Ferrara
                         • Informatica • 2024
   "Un framework sistematico logic-based per spiegare modelli simbolici di
    ensemble"
     La mia tesi di laurea triennale, che approfondisce gli aspetti teorici e
     pratici del framework LUMEN per spiegare modelli simbolici di ensemble` },
-                    { name: "lista_paper.txt", content: `- Workshop Paper • 2024
+        { name: "lista_paper.txt", content: `- Workshop Paper • 2024
   "Minimal Rules from Decision Forests: a Systematic Approach"
     Analisi, formalizzazione e approccio iniziale alla risoluzione del problema
     dell'estrazione di regole minime da foreste decisionali.` }
-                ],
-                downloads: [
-                    { name: "Tesi (Download)", key: "thesis" },
-                    { name: "Minimal Rules from Decision Forests: a Systematic Approach (PDF-viewer)", key: "paper" }
-                ]
-            },
+    ],
+    pdfs: [
+        { name: "Tesi (PDF Viewer)", key: "thesis" },
+        { name: "Workshop Paper (PDF Viewer)", key: "paper" }
+    ]
+},
             contatti: {
                 name: "Contatti",
                 files: [],
@@ -1689,8 +1705,8 @@ Un framework per l'apprendimento automatico simbolico, trasparente e interpretab
 
             pdfTitle.textContent = `PDF Viewer - ${pdf.name}`;
             
-            // Imposta l'URL del PDF
-            pdfViewer.src = pdf.url;
+            // Usa l'URL di Google Docs Viewer per embeddare il PDF
+            pdfViewer.src = pdf.embedUrl;
             
             pdfInfo.textContent = `${pdf.title} - ${pdf.description}`;
 
@@ -1931,6 +1947,31 @@ Un framework per l'apprendimento automatico simbolico, trasparente e interpretab
                     folderContent.appendChild(linkElement);
                 });
             }
+
+            // Aggiungi i PDF viewer se presenti
+if (folder.pdfs) {
+    folder.pdfs.forEach((pdf) => {
+        const pdfElement = document.createElement('div');
+        pdfElement.className = 'folder-item';
+        pdfElement.innerHTML = `
+            <div class="folder-item-icon pdf-icon"></div>
+            <span>${pdf.name}</span>
+        `;
+        pdfElement.addEventListener('dblclick', () => {
+            openPdf(pdf.key);
+        });
+
+        pdfElement.addEventListener('click', function(){
+            const parent = this.parentNode;
+            const children = parent.children;
+            for (let el of children)
+                el.classList.remove("clicked");
+            this.classList.add('clicked');
+        });
+
+        folderContent.appendChild(pdfElement);
+    });
+}
 
             // Aggiungi i download PDF se presenti
             if (folder.downloads) {
