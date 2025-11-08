@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Marco Perrotta's Portfolio</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=VT323&family=Courier+Prime:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@400;500&display=swap');
         
         * { 
             margin: 0; 
@@ -13,33 +13,13 @@
             box-sizing: border-box; 
         }
 
-        
         body {
-            font-family: 'Courier Prime', 'Courier New', monospace;
-            background: linear-gradient(45deg, #2a2a2a 0%, #1a1a1a 100%);
+            font-family: 'Roboto', sans-serif;
+            background: #f5f5f5;
+            color: #333;
             height: 100vh;
             overflow: hidden;
             position: relative;
-        }
-
-        /* Retro CRT effect */
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                repeating-linear-gradient(
-                    90deg,
-                    rgba(0, 255, 0, 0.03),
-                    rgba(0, 255, 0, 0.03) 2px,
-                    transparent 2px,
-                    transparent 4px
-                );
-            pointer-events: none;
-            z-index: 1;
         }
 
         .desktop {
@@ -47,110 +27,119 @@
             height: 100vh;
             position: relative;
             padding: 20px;
-            background-image: 
-                radial-gradient(circle at 25% 25%, rgba(0, 255, 0, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 75% 75%, rgba(0, 200, 255, 0.03) 0%, transparent 50%);
+            background: #f5f5f5;
         }
 
-        .file-icon, .folder-icon, .link-icon, .mail-icon, .video-icon {
-            position: absolute;
+        .file-icon, .folder-icon, .link-icon, .mail-icon, .video-icon, .pdf-icon, .paint-icon {
             width: 80px;
-            height: 100px;
+            height: 80px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
             user-select: none;
             z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            position: absolute;
+        }
+
+        .file-icon:hover, .folder-icon:hover, .link-icon:hover, .mail-icon:hover, .video-icon:hover, .pdf-icon:hover, .paint-icon:hover { 
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+        }
+
+        .file-icon:active, .folder-icon:active, .link-icon:active, .mail-icon:active, .video-icon:active, .pdf-icon:active, .paint-icon:active { 
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
         }
 
         .clicked {
-            border: 2px dashed #00ff41;
-            background: rgba(0, 255, 65, 0.1);
-            box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
-        }
-
-        .file-icon:hover, .folder-icon:hover, .link-icon:hover, .mail-icon:hover, .video-icon:hover { 
-            transform: scale(1.05);
-            filter: brightness(1.2);
+            background: rgba(66, 133, 244, 0.08);
+            box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.4);
         }
 
         .icon-image {
-            width: 64px;
-            height: 64px;
-            margin: 0 auto 5px;
+            width: 40px;
+            height: 40px;
+            margin-bottom: 8px;
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
-            border: 2px solid #333;
-            border-radius: 4px;
-            background-color: #444;
+            border-radius: 8px;
         }
 
         .file-icon .icon-image {
-            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%2300ff41"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/></svg>');
-            border-color: #00ff41;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%235f6368"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/></svg>');
         }
 
         .folder-icon .icon-image {
-            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ffaa00"><path d="M10,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V8C22,6.89 21.1,6 20,6H12L10,4Z"/></svg>');
-            border-color: #ffaa00;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23fbbc04"><path d="M10,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V8C22,6.89 21.1,6 20,6H12L10,4Z"/></svg>');
         }
 
         .link-icon .icon-image {
-            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%2300aaff"><path d="M16.36,14C16.44,13.34 16.5,12.68 16.5,12C16.5,11.32 16.44,10.66 16.36,10H19.74C19.9,10.64 20,11.31 20,12C20,12.69 19.9,13.36 19.74,14M14.59,19.56C15.19,18.45 15.65,17.25 15.97,16H18.92C17.96,17.65 16.43,18.93 14.59,19.56M14.34,14H9.66C9.56,13.34 9.5,12.68 9.5,12C9.5,11.32 9.56,10.65 9.66,10H14.34C14.43,10.65 14.5,11.32 14.5,12C14.5,12.68 14.43,13.34 14.34,14M12,19.96C11.17,18.76 10.5,17.43 10.09,16H13.91C13.5,17.43 12.83,18.76 12,19.96M8,8H5.08C6.03,6.34 7.57,5.06 9.4,4.44C8.8,5.55 8.35,6.75 8,8M5.08,16H8C8.35,17.25 8.8,18.45 9.4,19.56C7.57,18.93 6.03,17.65 5.08,16M4.26,14C4.1,13.36 4,12.69 4,12C4,11.31 4.1,10.64 4.26,10H7.64C7.56,10.66 7.5,11.32 7.5,12C7.5,12.68 7.56,13.34 7.64,14M12,4.03C12.83,5.23 13.5,6.57 13.91,8H10.09C10.5,6.57 11.17,5.23 12,4.03M18.92,8H15.97C15.65,6.75 15.19,5.55 14.59,4.44C16.43,5.07 17.96,6.34 18.92,8M12,2C6.47,2 2,6.5 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"/></svg>');
-            border-color: #00aaff;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%2334a853"><path d="M16.36,14C16.44,13.34 16.5,12.68 16.5,12C16.5,11.32 16.44,10.66 16.36,10H19.74C19.9,10.64 20,11.31 20,12C20,12.69 19.9,13.36 19.74,14M14.59,19.56C15.19,18.45 15.65,17.25 15.97,16H18.92C17.96,17.65 16.43,18.93 14.59,19.56M14.34,14H9.66C9.56,13.34 9.5,12.68 9.5,12C9.5,11.32 9.56,10.65 9.66,10H14.34C14.43,10.65 14.5,11.32 14.5,12C14.5,12.68 14.43,13.34 14.34,14M12,19.96C11.17,18.76 10.5,17.43 10.09,16H13.91C13.5,17.43 12.83,18.76 12,19.96M8,8H5.08C6.03,6.34 7.57,5.06 9.4,4.44C8.8,5.55 8.35,6.75 8,8M5.08,16H8C8.35,17.25 8.8,18.45 9.4,19.56C7.57,18.93 6.03,17.65 5.08,16M4.26,14C4.1,13.36 4,12.69 4,12C4,11.31 4.1,10.64 4.26,10H7.64C7.56,10.66 7.5,11.32 7.5,12C7.5,12.68 7.56,13.34 7.64,14M12,4.03C12.83,5.23 13.5,6.57 13.91,8H10.09C10.5,6.57 11.17,5.23 12,4.03M18.92,8H15.97C15.65,6.75 15.19,5.55 14.59,4.44C16.43,5.07 17.96,6.34 18.92,8M12,2C6.47,2 2,6.5 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"/></svg>');
             position: relative;
         }
 
         .mail-icon .icon-image {
-            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ff6b6b"><path d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.11,4 20,4Z"/></svg>');
-            border-color: #ff6b6b;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ea4335"><path d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.11,4 20,4Z"/></svg>');
         }
 
         .video-icon .icon-image {
-            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ff00aa"><path d="M10,16.5V7.5L16,12M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"/></svg>');
-            border-color: #ff00aa;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%234285f4"><path d="M10,16.5V7.5L16,12M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"/></svg>');
+        }
+
+        .pdf-icon .icon-image {
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23d93025"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/></svg>');
+        }
+
+        .paint-icon .icon-image {
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%239C27B0"><path d="M18,4V3A1,1 0 0,0 17,2H5A1,1 0 0,0 4,3V7A1,1 0 0,0 5,8H17A1,1 0 0,0 18,7V6H19V10H9V21A1,1 0 0,0 10,22H12A1,1 0 0,0 13,21V12H21V4H18Z"/></svg>');
         }
 
         .link-icon .icon-image::after {
             content: '↗';
             position: absolute;
-            bottom: -8px;
-            right: -8px;
-            width: 16px;
-            height: 16px;
-            background: #00aaff;
+            bottom: -2px;
+            right: -2px;
+            width: 14px;
+            height: 14px;
+            background: #34a853;
             color: white;
-            border-radius: 2px;
-            font-size: 10px;
+            border-radius: 50%;
+            font-size: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid #333;
+            border: 1px solid white;
         }
 
         .icon-label {
-            color: #00ff41;
+            color: #5f6368;
             font-size: 12px;
-            font-weight: bold;
+            font-weight: 500;
             text-align: center;
-            background: rgba(0, 0, 0, 0.8);
-            padding: 2px 6px;
-            border-radius: 2px;
-            border: 1px solid #333;
+            padding: 2px 4px;
+            border-radius: 4px;
             word-wrap: break-word;
-            font-family: 'VT323', monospace;
+            max-width: 70px;
+            line-height: 1.2;
         }
 
-        .editor-window, .folder-window, .video-window, .aquarium-window {
+        .editor-window, .folder-window, .video-window, .aquarium-window, .pdf-window, .paint-window {
             position: fixed;
-            background: #222;
-            border-radius: 0;
-            border: 3px outset #666;
-            box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.6);
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
             z-index: 1000;
             width: 700px;
             height: 500px;
             display: none;
+            overflow: hidden;
         }
 
         .aquarium-window {
@@ -160,119 +149,121 @@
             right: 20px;
         }
 
+        .pdf-window {
+            width: 800px;
+            height: 600px;
+        }
+
+        .paint-window {
+            width: 600px;
+            height: 500px;
+        }
+
         .window-header {
-            background: linear-gradient(180deg, #666 0%, #444 100%);
-            padding: 8px 12px;
+            background: white;
+            padding: 12px 16px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             cursor: move;
-            border-bottom: 2px inset #666;
-            height: 36px;
+            border-bottom: 1px solid #e8eaed;
+            height: 48px;
             flex-shrink: 0;
         }
 
         .window-title {
-            color: white;
-            font-weight: bold;
-            font-size: 14px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-            font-family: 'VT323', monospace;
+            color: #3c4043;
+            font-weight: 500;
+            font-size: 16px;
         }
 
         .window-controls {
             display: flex;
-            gap: 4px;
+            gap: 8px;
         }
 
         .control-btn {
-            width: 16px;
-            height: 16px;
-            border: 2px outset #666;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
             cursor: pointer;
-            transition: all 0.1s ease;
-            font-size: 10px;
+            transition: all 0.2s ease;
+            font-size: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: black;
+            color: #5f6368;
             font-weight: bold;
+            background: transparent;
         }
 
-        .control-btn.close { background: #ff6b6b; }
+        .control-btn.close:hover { background: #fce8e6; color: #d93025; }
         .control-btn.close::after { content: '×'; }
-        .control-btn.minimize { background: #feca57; }
+        .control-btn.minimize:hover { background: #f1f3f4; color: #5f6368; }
         .control-btn.minimize::after { content: '_'; }
-        .control-btn.maximize { background: #48dbfb; }
+        .control-btn.maximize:hover { background: #f1f3f4; color: #5f6368; }
         .control-btn.maximize::after { content: '□'; }
         
-        .control-btn:active { border: 2px inset #666; }
-
         .editor-content {
-            height: calc(100% - 36px);
+            height: calc(100% - 48px);
             display: flex;
             flex-direction: column;
         }
 
         .editor-toolbar {
-            background: #333;
-            padding: 6px 12px;
-            border-bottom: 2px inset #666;
-            font-size: 12px;
-            color: #00ff41;
-            height: 28px;
+            background: #f8f9fa;
+            padding: 8px 16px;
+            border-bottom: 1px solid #e8eaed;
+            font-size: 13px;
+            color: #5f6368;
+            height: 36px;
             flex-shrink: 0;
             display: flex;
             align-items: center;
-            font-family: 'VT323', monospace;
-            text-shadow: 0 0 3px #00ff41;
         }
 
         .editor-textarea {
             flex: 1;
-            background: #111;
-            color: #00ff41;
+            background: white;
+            color: #3c4043;
             border: none;
-            padding: 15px;
-            font-family: 'Courier Prime', 'Consolas', 'Monaco', monospace;
+            padding: 16px;
+            font-family: 'Roboto Mono', monospace;
             font-size: 14px;
             line-height: 1.5;
             resize: none;
             outline: none;
             overflow-y: auto;
             min-height: 0;
-            text-shadow: 0 0 2px #00ff41;
         }
 
         .folder-content {
-            padding: 15px;
-            height: calc(100% - 64px);
+            padding: 16px;
+            height: calc(100% - 84px);
             overflow-y: auto;
-            background: #111;
+            background: white;
         }
 
         .folder-item {
             display: flex;
             align-items: center;
-            padding: 6px 12px;
-            color: #00ff41;
+            padding: 8px 12px;
+            color: #3c4043;
             cursor: pointer;
-            border-radius: 0;
-            margin-bottom: 2px;
-            transition: background-color 0.1s;
-            min-height: 32px;
-            font-family: 'VT323', monospace;
+            border-radius: 8px;
+            margin-bottom: 4px;
+            transition: background-color 0.2s;
+            min-height: 40px;
             border: 1px solid transparent;
         }
 
         .folder-item:hover {
-            background: rgba(0, 255, 65, 0.1);
-            border: 1px solid #00ff41;
+            background: #f1f3f4;
         }
 
         .folder-item.clicked {
-            background: rgba(0, 255, 65, 0.2);
-            border: 1px solid #00ff41;
+            background: #e8f0fe;
+            border: 1px solid #d2e3fc;
         }
 
         .folder-item-icon {
@@ -284,27 +275,23 @@
             background-position: center;
             flex-shrink: 0;
             min-width: 24px;
-            border: 1px solid #333;
-            background-color: #222;
+            border-radius: 4px;
         }
 
         .breadcrumb {
-            background: #333;
-            padding: 6px 12px;
-            border-bottom: 2px inset #666;
-            color: #ffaa00;
-            font-size: 12px;
-            height: 28px;
+            background: #f8f9fa;
+            padding: 8px 16px;
+            border-bottom: 1px solid #e8eaed;
+            color: #5f6368;
+            font-size: 13px;
+            height: 36px;
             flex-shrink: 0;
-            font-family: 'VT323', monospace;
-            text-shadow: 0 0 3px #ffaa00;
         }
 
         .breadcrumb-item {
-            color: #00aaff;
+            color: #1a73e8;
             cursor: pointer;
             text-decoration: none;
-            text-shadow: 0 0 3px #00aaff;
         }
 
         .breadcrumb-item:hover {
@@ -312,11 +299,11 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.9); }
+            from { opacity: 0; transform: scale(0.95); }
             to { opacity: 1; transform: scale(1); }
         }
 
-        .editor-window.show, .folder-window.show, .video-window.show, .aquarium-window.show {
+        .editor-window.show, .folder-window.show, .video-window.show, .aquarium-window.show, .pdf-window.show, .paint-window.show {
             display: block;
             animation: fadeIn 0.2s ease;
         }
@@ -326,14 +313,15 @@
             bottom: 0;
             left: 0;
             right: 0;
-            height: 40px;
-            background: linear-gradient(180deg, #666 0%, #333 100%);
-            border-top: 2px outset #666;
+            height: 48px;
+            background: white;
+            border-top: 1px solid #e8eaed;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 15px;
+            padding: 0 16px;
             z-index: 500;
+            box-shadow: 0 -1px 4px rgba(0,0,0,0.05);
         }
 
         .taskbar-left {
@@ -343,116 +331,109 @@
         }
 
         .taskbar-item {
-            background: linear-gradient(180deg, #555 0%, #333 100%);
-            color: white;
-            padding: 4px 12px;
-            border: 2px outset #666;
-            margin-right: 5px;
-            font-size: 12px;
+            background: white;
+            color: #5f6368;
+            padding: 6px 12px;
+            border-radius: 20px;
+            margin-right: 8px;
+            font-size: 13px;
             cursor: pointer;
-            transition: all 0.1s ease;
-            font-family: 'VT323', monospace;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
         }
 
         .taskbar-item:hover {
-            background: linear-gradient(180deg, #666 0%, #444 100%);
+            background: #f1f3f4;
         }
 
         .taskbar-item:active {
-            border: 2px inset #666;
+            background: #e8f0fe;
+            border-color: #d2e3fc;
         }
 
         .taskbar-signature {
-            color: #ffaa00;
-            font-size: 11px;
+            color: #5f6368;
+            font-size: 13px;
             display: flex;
             align-items: center;
             gap: 8px;
-            font-family: 'VT323', monospace;
-            text-shadow: 0 0 3px #ffaa00;
         }
 
         .signature-name {
             cursor: pointer;
             transition: color 0.2s ease;
             user-select: none;
+            font-weight: 500;
         }
 
         .signature-name:hover {
-            color: #00ff41;
-            text-shadow: 0 0 5px #00ff41;
+            color: #1a73e8;
         }
 
         /* Easter Egg Chicken Icon */
         .chicken-icon {
             display: none;
             font-size: 16px;
-            animation: retro-blink 1s infinite;
+            animation: gentle-bounce 1s infinite;
         }
 
         .chicken-icon.show {
             display: inline-block;
         }
 
-        @keyframes retro-blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
+        @keyframes gentle-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
         }
 
-        /* Folder specific icons - versioni retro */
+        /* Folder specific icons */
         .folder-item-icon.email-icon {
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="rgb(255,107,107)"><path d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.11,4 20,4Z"/></svg>') !important;
-            border-color: #ff6b6b !important;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="rgb(234,67,53)"><path d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.11,4 20,4Z"/></svg>') !important;
         }
 
         .folder-item-icon.linkedin-icon {
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="rgb(0,170,255)"><path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17A1.4 1.4 0 0 1 15.71 13.57V18.5H18.5M6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19S5.19 5.95 5.19 6.88A1.69 1.69 0 0 0 6.88 8.56M8.27 18.5V10.13H5.5V18.5H8.27Z"/></svg>') !important;
-            border-color: #00aaff !important;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="rgb(66,103,178)"><path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17A1.4 1.4 0 0 1 15.71 13.57V18.5H18.5M6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19S5.19 5.95 5.19 6.88A1.69 1.69 0 0 0 6.88 8.56M8.27 18.5V10.13H5.5V18.5H8.27Z"/></svg>') !important;
         }
 
         .folder-item-icon.file-icon {
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="rgb(0,255,65)"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/></svg>') !important;
-            border-color: #00ff41 !important;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="rgb(95,99,104)"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/></svg>') !important;
         }
 
         .folder-item-icon.pdf-icon {
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="rgb(255,170,0)"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/><path d="M8,15H16V17H8V15M8,13H16V11H8V13M8,9H11V7H8V9Z" fill="white"/></svg>') !important;
-            border-color: #ffaa00 !important;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="rgb(217,48,37)"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/><path d="M8,15H16V17H8V15M8,13H16V11H8V13M8,9H11V7H8V9Z" fill="white"/></svg>') !important;
         }
 
         .folder-item.download-item::after {
             content: '⬇';
             margin-left: auto;
             font-weight: bold;
-            color: #00ff41;
+            color: #1a73e8;
             font-size: 16px;
-            text-shadow: 0 0 5px #00ff41;
-            animation: retro-blink 2s infinite;
         }
 
-        /* Custom scrollbar retro */
+        /* Custom scrollbar */
         ::-webkit-scrollbar {
-            width: 16px;
+            width: 8px;
         }
 
         ::-webkit-scrollbar-track {
-            background: #222;
-            border: 2px inset #666;
+            background: #f1f3f4;
+            border-radius: 4px;
         }
 
         ::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, #555 0%, #333 100%);
-            border: 2px outset #666;
+            background: #dadce0;
+            border-radius: 4px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(180deg, #666 0%, #444 100%);
+            background: #bdc1c6;
         }
 
         /* Video player styles */
         .video-content {
-            height: calc(100% - 36px);
-            background: #111;
+            height: calc(100% - 48px);
+            background: white;
             display: flex;
             flex-direction: column;
         }
@@ -470,24 +451,128 @@
             height: 100%;
             max-width: 640px;
             max-height: 360px;
-            border: 2px solid #666;
+            border-radius: 8px;
             background: #000;
         }
 
         .video-info {
-            background: #333;
-            padding: 10px 15px;
-            border-top: 2px inset #666;
-            color: #ff00aa;
-            font-size: 12px;
-            font-family: 'VT323', monospace;
-            text-shadow: 0 0 3px #ff00aa;
+            background: #f8f9fa;
+            padding: 12px 16px;
+            border-top: 1px solid #e8eaed;
+            color: #5f6368;
+            font-size: 13px;
+        }
+
+        /* PDF viewer styles */
+        .pdf-content {
+            height: calc(100% - 48px);
+            background: white;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pdf-viewer-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .pdf-viewer {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .pdf-info {
+            background: #f8f9fa;
+            padding: 12px 16px;
+            border-top: 1px solid #e8eaed;
+            color: #5f6368;
+            font-size: 13px;
+        }
+
+        /* Paint styles */
+        .paint-content {
+            height: calc(100% - 48px);
+            background: white;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .paint-toolbar {
+            background: #f8f9fa;
+            padding: 8px 16px;
+            border-bottom: 1px solid #e8eaed;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            height: 48px;
+            flex-shrink: 0;
+        }
+
+        .paint-tool {
+            width: 32px;
+            height: 32px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .paint-tool:hover {
+            background: #e8f0fe;
+        }
+
+        .paint-tool.active {
+            background: #1a73e8;
+            color: white;
+        }
+
+        .color-picker {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid #dadce0;
+            cursor: pointer;
+        }
+
+        .brush-size {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .brush-size input {
+            width: 80px;
+        }
+
+        .paint-canvas-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            background: #f8f9fa;
+        }
+
+        .paint-canvas {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            cursor: crosshair;
         }
 
         /* Aquarium styles */
         .aquarium-content {
-            height: calc(100% - 36px);
-            background: #111;
+            height: calc(100% - 48px);
+            background: white;
             overflow: hidden;
             position: relative;
         }
@@ -706,24 +791,14 @@
             text-shadow: 1px 1px #ff0080;
         }
 
-        /* Posizionamento icone fisso */
-        .desktop .file-icon:nth-child(1) { top: 50px; left: 100px; }
-        .desktop .file-icon:nth-child(2) { top: 200px; left: 300px; }
-        .desktop .folder-icon:nth-child(3) { top: 300px; left: 150px; }
-        .desktop .folder-icon:nth-child(4) { top: 150px; left: 700px; }
-        .desktop .folder-icon:nth-child(5) { top: 350px; left: 600px; }
-        .desktop .folder-icon:nth-child(6) { top: 100px; left: 500px; }
-        .desktop .link-icon:nth-child(7) { top: 450px; left: 300px; }
-        .desktop .video-icon:nth-child(8) { top: 250px; left: 800px; }
-
         .folder-item span{ margin-left:35px;}
 
-        .loading-content { height: calc(100% - 36px); background: #111; color: #00ff41; font-family: 'Courier Prime', monospace; padding: 10px; overflow-y: auto; white-space: pre-wrap; }
-        .loading { color: #ffaa00; }
-        .success { color: #00ff41; }
-        .system-info { color: #00aaff; }
-        .prompt { color: #ff6b6b; }
-        .overlay {position: absolute; top:0; left:0;width:100%;height:100%;background:linear-gradient(45deg, #2a2a2a 0%, #1a1a1a 100%);z-index:500;}
+        .loading-content { height: calc(100% - 48px); background: white; color: #5f6368; font-family: 'Roboto Mono', monospace; padding: 16px; overflow-y: auto; white-space: pre-wrap; }
+        .loading { color: #fbbc04; }
+        .success { color: #34a853; }
+        .system-info { color: #4285f4; }
+        .prompt { color: #ea4335; }
+        .overlay {position: absolute; top:0; left:0;width:100%;height:100%;background:white;z-index:500;}
         .hidden {
           visibility: hidden;
           opacity: 0;
@@ -736,47 +811,59 @@
 <body>
     <div class="desktop" id="desktop">
         <!-- File esistenti -->
-        <div class="file-icon" data-file="readme">
+        <div class="file-icon" data-file="readme" style="top: 60px; left: 120px;">
             <div class="icon-image"></div>
             <div class="icon-label">README.txt</div>
         </div>
         
-        <div class="file-icon" data-file="notes">
+        <div class="file-icon" data-file="notes" style="top: 180px; left: 350px;">
             <div class="icon-image"></div>
             <div class="icon-label">appunti_su_di_me.txt</div>
         </div>
 
         <!-- Cartelle -->
-        <div class="folder-icon" data-folder="documenti">
+        <div class="folder-icon" data-folder="documenti" style="top: 320px; left: 180px;">
             <div class="icon-image"></div>
             <div class="icon-label">AboutMe</div>
         </div>
         
-        <div class="folder-icon" data-folder="progetti">
+        <div class="folder-icon" data-folder="progetti" style="top: 150px; left: 750px;">
             <div class="icon-image"></div>
             <div class="icon-label">Progetti</div>
         </div>
         
-        <div class="folder-icon" data-folder="pubblicazioni">
+        <div class="folder-icon" data-folder="pubblicazioni" style="top: 380px; left: 650px;">
             <div class="icon-image"></div>
             <div class="icon-label">Pubblicazioni</div>
         </div>
         
-        <div class="folder-icon" data-folder="contatti">
+        <div class="folder-icon" data-folder="contatti" style="top: 90px; left: 520px;">
             <div class="icon-image"></div>
             <div class="icon-label">Contatti</div>
         </div>
 
         <!-- Collegamento web -->
-        <div class="link-icon" data-link="portfolio">
+        <div class="link-icon" data-link="portfolio" style="top: 480px; left: 320px;">
             <div class="icon-image"></div>
             <div class="icon-label">Il mio Portfolio</div>
         </div>
 
         <!-- Nuova icona video -->
-        <div class="video-icon" data-video="demo">
+        <div class="video-icon" data-video="demo" style="top: 270px; left: 850px;">
             <div class="icon-image"></div>
             <div class="icon-label">JuliaCon Local Paris 2025</div>
+        </div>
+
+        <!-- Nuova icona CV -->
+        <div class="pdf-icon" data-pdf="cv" style="top: 420px; left: 950px;">
+            <div class="icon-image"></div>
+            <div class="icon-label">Curriculum Vitae</div>
+        </div>
+
+        <!-- Nuova icona Paint -->
+        <div class="paint-icon" data-paint="paint" style="top: 220px; left: 1100px;">
+            <div class="icon-image"></div>
+            <div class="icon-label">Mini Paint</div>
         </div>
     </div>
 
@@ -825,17 +912,74 @@
             </div>
         </div>
         <div class="video-content">
-<!-- Sostituisci questa sezione nel codice -->
-<div class="video-player-container">
-    <iframe class="video-player" id="youtubePlayer" 
-            src="" 
-            frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-            allowfullscreen>
-    </iframe>
-</div>
+            <div class="video-player-container">
+                <iframe class="video-player" id="youtubePlayer" 
+                        src="" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowfullscreen>
+                </iframe>
+            </div>
             <div class="video-info" id="videoInfo">
                 Caricamento video in corso...
+            </div>
+        </div>
+    </div>
+
+    <!-- Nuova finestra PDF Viewer -->
+    <div class="pdf-window" id="pdfWindow">
+        <div class="window-header">
+            <div class="window-title" id="pdfTitle">PDF Viewer</div>
+            <div class="window-controls">
+                <div class="control-btn minimize"></div>
+                <div class="control-btn maximize"></div>
+                <div class="control-btn close" onclick="closePdf()"></div>
+            </div>
+        </div>
+        <div class="pdf-content">
+            <div class="pdf-viewer-container">
+                <iframe class="pdf-viewer" id="pdfViewer" 
+                        src="" 
+                        frameborder="0">
+                </iframe>
+            </div>
+            <div class="pdf-info" id="pdfInfo">
+                Visualizzazione del Curriculum Vitae
+            </div>
+        </div>
+    </div>
+
+    <!-- Nuova finestra Paint -->
+    <div class="paint-window" id="paintWindow">
+        <div class="window-header">
+            <div class="window-title" id="paintTitle">Mini Paint</div>
+            <div class="window-controls">
+                <div class="control-btn minimize"></div>
+                <div class="control-btn maximize"></div>
+                <div class="control-btn close" onclick="closePaint()"></div>
+            </div>
+        </div>
+        <div class="paint-content">
+            <div class="paint-toolbar">
+                <div class="paint-tool active" id="brushTool" title="Pennello">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20.71,4.63L19.37,3.29C19,2.9 18.35,2.9 17.96,3.29L9,12.25L11.75,15L20.71,6.04C21.1,5.65 21.1,5 20.71,4.63M7,14A3,3 0 0,0 4,17C4,18.31 2.84,19 2,19C2.92,20.22 4.5,21 6,21A4,4 0 0,0 10,17A3,3 0 0,0 7,14Z"/>
+                    </svg>
+                </div>
+                <div class="paint-tool" id="eraserTool" title="Gomma">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M16.24,3.56L21.19,8.5C21.97,9.29 21.97,10.55 21.19,11.34L12,20.53C10.44,22.09 7.91,22.09 6.34,20.53L2.81,17C2.03,16.21 2.03,14.95 2.81,14.16L13.41,3.56C14.2,2.78 15.46,2.78 16.24,3.56M4.22,15.58L7.76,19.11C8.54,19.9 9.8,19.9 10.59,19.11L14.12,15.58L9.17,10.63L4.22,15.58Z"/>
+                    </svg>
+                </div>
+                <div class="color-picker" id="colorPicker" style="background-color: #000000;"></div>
+                <div class="brush-size">
+                    <span>Dimensione:</span>
+                    <input type="range" id="brushSize" min="1" max="20" value="5">
+                </div>
+                <button id="clearCanvas" style="margin-left: auto; padding: 6px 12px; background: #f1f3f4; border: 1px solid #dadce0; border-radius: 4px; cursor: pointer;">Pulisci</button>
+            </div>
+            <div class="paint-canvas-container">
+                <canvas class="paint-canvas" id="paintCanvas" width="500" height="350"></canvas>
             </div>
         </div>
     </div>
@@ -923,7 +1067,7 @@
         </div>
     </div>
 
-    <!-- Taskbar retro -->
+    <!-- Taskbar -->
     <div class="taskbar" id="taskbar">
         <div class="taskbar-left" id="taskbarLeft"></div>
         <div class="taskbar-signature">
@@ -932,11 +1076,9 @@
         </div>
     </div>
 
+    <div class="overlay"></div>
 
-<!---------------->
-  <div class="overlay"></div>
-
-  <div class="editor-window show" id="bootWindow">
+    <div class="editor-window show" id="bootWindow">
         <div class="window-header">
             <div class="window-title">System Boot</div>
             <div class="window-controls">
@@ -947,7 +1089,7 @@
     </div>
 
     <script>
-        
+        // Boot sequence (mantenuta uguale)
         const bootSequence = [
             { text: "Initializing Marco Perrotta Portfolio System...", class: "loading", delay: 100 },
             { text: "", class: "", delay: 200 },
@@ -1003,7 +1145,6 @@
         ];
 
         function runBootSequence() {
-            
             if(localStorage.getItem(`fakecookie`)){
                document.getElementsByClassName("overlay")[0].classList.add("hidden"); 
                return;
@@ -1038,11 +1179,9 @@
 
         window.onload = runBootSequence;
     </script>
-<!---------------->
-
 
     <script>
-        // File
+        // File (mantenuti uguali)
         const files = {
             readme: { 
                 name: "README.txt",
@@ -1075,7 +1214,7 @@ Sentiti libero di contattarmi per:
             }
         };
 
-        // Collegamenti web
+        // Collegamenti web (mantenuti uguali)
         const links = {
             portfolio: {
                 name: "Il mio Portfolio",
@@ -1094,17 +1233,27 @@ Sentiti libero di contattarmi per:
             }
         };
 
-        // Video da YouTube
+        // Video da YouTube (mantenuti uguali)
         const videos = {
             demo: {
                 name: "JuliaCon Local Paris 2025",
-                youtubeId: "JVHeIdVPK8Y", // Sostituisci con l'ID del tuo video YouTube
+                youtubeId: "JVHeIdVPK8Y",
                 title: "Presentazione a JuliaCon Local Paris 2025, del pacchetto SolePostHoc.jl",
                 description: "In questo video, abbiamo presentato tre grandi novità per Sole.jl. Io presento il pacchetto SolePostHoc.jl, che offre strumenti avanzati per l'analisi post-hoc di modelli di apprendimento automatico simbolico. Durante la presentazione, illustro le funzionalità principali del pacchetto e un caso d'uso."
             }
         };
 
-        // Download diretti per PDF
+        // Nuovo oggetto per PDF
+        const pdfs = {
+            cv: {
+                name: "Curriculum Vitae",
+                url: "https://github.com/Perro2110/perro2110.github.io/raw/main/CvEu.pdf",
+                title: "Curriculum Vitae - Marco Perrotta",
+                description: "Il mio CV aggiornato in formato europeo"
+            }
+        };
+
+        // Download diretti per PDF (mantenuti uguali)
         const downloads = {
             thesis: {
                 name: "Scarica Tesi (PDF)",
@@ -1118,7 +1267,7 @@ Sentiti libero di contattarmi per:
             }
         };
 
-        // Funzione helper per ottenere l'icona appropriata
+        // Funzione helper per ottenere l'icona appropriata (mantenuta uguale)
         function getIconClass(linkKey) {
             switch(linkKey) {
                 case 'email':
@@ -1130,7 +1279,7 @@ Sentiti libero di contattarmi per:
             }
         }
 
-        // Cartelle
+        // Cartelle (mantenute uguali)
         const folders = {
             documenti: {
                 name: "AboutMe",
@@ -1195,6 +1344,12 @@ Un framework per l'apprendimento automatico simbolico, trasparente e interpretab
         let aquariumClosedTime = null;
         const AQUARIUM_REOPEN_DELAY = 30000; // 30 secondi
 
+        // Variabili per il paint
+        let isPainting = false;
+        let currentTool = 'brush';
+        let currentColor = '#000000';
+        let brushSize = 5;
+
         // Event listeners
         document.addEventListener('DOMContentLoaded', function() {
             // Aggiungi event listeners per i file
@@ -1257,6 +1412,36 @@ Un framework per l'apprendimento automatico simbolico, trasparente e interpretab
                 });
             });
 
+            // Aggiungi event listeners per i PDF
+            document.querySelectorAll('.pdf-icon').forEach(icon => {
+                icon.addEventListener('dblclick', function() {
+                    const pdfKey = this.getAttribute('data-pdf');
+                    openPdf(pdfKey);
+                });
+                icon.addEventListener('click', function(){
+                    const desktop = document.getElementById('desktop');
+                    const children = desktop.children;
+                    for (let el of children)
+                        el.classList.remove("clicked");
+                    this.classList.add('clicked');
+                });
+            });
+
+            // Aggiungi event listeners per il paint
+            document.querySelectorAll('.paint-icon').forEach(icon => {
+                icon.addEventListener('dblclick', function() {
+                    const paintKey = this.getAttribute('data-paint');
+                    openPaint(paintKey);
+                });
+                icon.addEventListener('click', function(){
+                    const desktop = document.getElementById('desktop');
+                    const children = desktop.children;
+                    for (let el of children)
+                        el.classList.remove("clicked");
+                    this.classList.add('clicked');
+                });
+            });
+
             // Event listener per l'easter egg del pollo
             document.getElementById('signatureName').addEventListener('click', function() {
                 clickCount++;
@@ -1274,6 +1459,8 @@ Un framework per l'apprendimento automatico simbolico, trasparente e interpretab
             makeWindowDraggable('folderWindow');
             makeWindowDraggable('videoWindow');
             makeWindowDraggable('aquariumWindow');
+            makeWindowDraggable('pdfWindow');
+            makeWindowDraggable('paintWindow');
             makeWindowDraggable('bootWindow');
 
             // Aggiungi listener per aggiornare il contatore delle linee
@@ -1283,7 +1470,7 @@ Un framework per l'apprendimento automatico simbolico, trasparente e interpretab
             setTimeout(initializeAquarium, 1000);
         });
 
-        // Inizializza l'acquario
+        // Inizializza l'acquario (mantenuta uguale)
         function initializeAquarium() {
             const aquarium = document.getElementById('aquariumContainer');
             const width = aquarium.offsetWidth;
@@ -1428,7 +1615,7 @@ Un framework per l'apprendimento automatico simbolico, trasparente e interpretab
             showAquarium();
         }
 
-        // Mostra l'acquario
+        // Mostra l'acquario (mantenuta uguale)
         function showAquarium() {
             const aquariumWindow = document.getElementById('aquariumWindow');
             aquariumWindow.style.zIndex = ++windowZIndex;
@@ -1436,7 +1623,7 @@ Un framework per l'apprendimento automatico simbolico, trasparente e interpretab
             addToTaskbar('Pixel Aquarium', 'aquarium');
         }
 
-        // Chiudi l'acquario
+        // Chiudi l'acquario (mantenuta uguale)
         function closeAquarium() {
             const aquariumWindow = document.getElementById('aquariumWindow');
             aquariumWindow.classList.remove('show');
@@ -1447,7 +1634,7 @@ Un framework per l'apprendimento automatico simbolico, trasparente e interpretab
             setTimeout(checkAquariumReopen, AQUARIUM_REOPEN_DELAY);
         }
 
-        // Controlla se riaprire l'acquario
+        // Controlla se riaprire l'acquario (mantenuta uguale)
         function checkAquariumReopen() {
             const aquariumWindow = document.getElementById('aquariumWindow');
             if (!aquariumWindow.classList.contains('show') && aquariumClosedTime && 
@@ -1457,41 +1644,183 @@ Un framework per l'apprendimento automatico simbolico, trasparente e interpretab
             }
         }
 
-        // Funzione per aprire collegamenti
+        // Funzione per aprire collegamenti (mantenuta uguale)
         function openLink(linkKey) {
             const link = links[linkKey];
             if (!link) return;
             window.open(link.url, link.target || '_blank');
         }
 
-        // Funzione per aprire video
-// Funzione per aprire video
-function openVideo(videoKey) {
-    const video = videos[videoKey];
-    if (!video) return;
+        // Funzione per aprire video (mantenuta uguale)
+        function openVideo(videoKey) {
+            const video = videos[videoKey];
+            if (!video) return;
 
-    const videoWindow = document.getElementById('videoWindow');
-    const videoTitle = document.getElementById('videoTitle');
-    const youtubePlayer = document.getElementById('youtubePlayer');
-    const videoInfo = document.getElementById('videoInfo');
+            const videoWindow = document.getElementById('videoWindow');
+            const videoTitle = document.getElementById('videoTitle');
+            const youtubePlayer = document.getElementById('youtubePlayer');
+            const videoInfo = document.getElementById('videoInfo');
 
-    videoTitle.textContent = `Video Player - ${video.name}`;
-    
-    // Costruisci l'URL di embed di YouTube SENZA autoplay
-    const youtubeUrl = `https://www.youtube.com/embed/${video.youtubeId}`;
-    youtubePlayer.src = youtubeUrl;
-    
-    videoInfo.textContent = `${video.title} - ${video.description}`;
+            videoTitle.textContent = `Video Player - ${video.name}`;
+            
+            // Costruisci l'URL di embed di YouTube SENZA autoplay
+            const youtubeUrl = `https://www.youtube.com/embed/${video.youtubeId}`;
+            youtubePlayer.src = youtubeUrl;
+            
+            videoInfo.textContent = `${video.title} - ${video.description}`;
 
-    videoWindow.style.left = `${(window.innerWidth - 700) / 2 + Math.random() * 50 - 25}px`;
-    videoWindow.style.top = `${(window.innerHeight - 500) / 2 + Math.random() * 50 - 25}px`;
-    videoWindow.style.zIndex = ++windowZIndex;
+            videoWindow.style.left = `${(window.innerWidth - 700) / 2 + Math.random() * 50 - 25}px`;
+            videoWindow.style.top = `${(window.innerHeight - 500) / 2 + Math.random() * 50 - 25}px`;
+            videoWindow.style.zIndex = ++windowZIndex;
 
-    videoWindow.classList.add('show');
-    addToTaskbar(`Video - ${video.name}`, 'video');
-}
+            videoWindow.classList.add('show');
+            addToTaskbar(`Video - ${video.name}`, 'video');
+        }
 
-        // Funzione per chiudere il video player
+        // Nuova funzione per aprire PDF
+        function openPdf(pdfKey) {
+            const pdf = pdfs[pdfKey];
+            if (!pdf) return;
+
+            const pdfWindow = document.getElementById('pdfWindow');
+            const pdfTitle = document.getElementById('pdfTitle');
+            const pdfViewer = document.getElementById('pdfViewer');
+            const pdfInfo = document.getElementById('pdfInfo');
+
+            pdfTitle.textContent = `PDF Viewer - ${pdf.name}`;
+            
+            // Imposta l'URL del PDF
+            pdfViewer.src = pdf.url;
+            
+            pdfInfo.textContent = `${pdf.title} - ${pdf.description}`;
+
+            pdfWindow.style.left = `${(window.innerWidth - 800) / 2 + Math.random() * 50 - 25}px`;
+            pdfWindow.style.top = `${(window.innerHeight - 600) / 2 + Math.random() * 50 - 25}px`;
+            pdfWindow.style.zIndex = ++windowZIndex;
+
+            pdfWindow.classList.add('show');
+            addToTaskbar(`PDF - ${pdf.name}`, 'pdf');
+        }
+
+        // Nuova funzione per aprire il paint
+        function openPaint(paintKey) {
+            const paintWindow = document.getElementById('paintWindow');
+            const paintTitle = document.getElementById('paintTitle');
+
+            paintTitle.textContent = `Mini Paint`;
+
+            paintWindow.style.left = `${(window.innerWidth - 600) / 2 + Math.random() * 50 - 25}px`;
+            paintWindow.style.top = `${(window.innerHeight - 500) / 2 + Math.random() * 50 - 25}px`;
+            paintWindow.style.zIndex = ++windowZIndex;
+
+            paintWindow.classList.add('show');
+            addToTaskbar(`Mini Paint`, 'paint');
+            
+            // Inizializza il canvas dopo che la finestra è visibile
+            setTimeout(initializePaint, 100);
+        }
+
+        // Inizializza il paint
+        function initializePaint() {
+            const canvas = document.getElementById('paintCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Imposta lo sfondo bianco
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Event listeners per gli strumenti
+            document.getElementById('brushTool').addEventListener('click', function() {
+                currentTool = 'brush';
+                document.getElementById('brushTool').classList.add('active');
+                document.getElementById('eraserTool').classList.remove('active');
+            });
+            
+            document.getElementById('eraserTool').addEventListener('click', function() {
+                currentTool = 'eraser';
+                document.getElementById('eraserTool').classList.add('active');
+                document.getElementById('brushTool').classList.remove('active');
+            });
+            
+            // Event listener per il selettore di colore
+            document.getElementById('colorPicker').addEventListener('click', function() {
+                const newColor = prompt('Inserisci un colore esadecimale (es. #FF0000 per rosso):', currentColor);
+                if (newColor && /^#[0-9A-F]{6}$/i.test(newColor)) {
+                    currentColor = newColor;
+                    this.style.backgroundColor = newColor;
+                }
+            });
+            
+            // Event listener per la dimensione del pennello
+            document.getElementById('brushSize').addEventListener('input', function() {
+                brushSize = this.value;
+            });
+            
+            // Event listener per pulire la tela
+            document.getElementById('clearCanvas').addEventListener('click', function() {
+                ctx.fillStyle = 'white';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            });
+            
+            // Event listeners per il disegno
+            canvas.addEventListener('mousedown', startPainting);
+            canvas.addEventListener('mouseup', stopPainting);
+            canvas.addEventListener('mousemove', draw);
+            canvas.addEventListener('mouseout', stopPainting);
+            
+            function startPainting(e) {
+                isPainting = true;
+                draw(e);
+            }
+            
+            function stopPainting() {
+                isPainting = false;
+                ctx.beginPath();
+            }
+            
+            function draw(e) {
+                if (!isPainting) return;
+                
+                const rect = canvas.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                ctx.lineWidth = brushSize;
+                ctx.lineCap = 'round';
+                
+                if (currentTool === 'brush') {
+                    ctx.strokeStyle = currentColor;
+                } else if (currentTool === 'eraser') {
+                    ctx.strokeStyle = 'white';
+                }
+                
+                ctx.lineTo(x, y);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(x, y);
+            }
+        }
+
+        // Funzione per chiudere il paint
+        function closePaint() {
+            const paintWindow = document.getElementById('paintWindow');
+            paintWindow.classList.remove('show');
+            removeFromTaskbar('paint');
+        }
+
+        // Funzione per chiudere il PDF viewer
+        function closePdf() {
+            const pdfWindow = document.getElementById('pdfWindow');
+            const pdfViewer = document.getElementById('pdfViewer');
+            
+            // Ferma il caricamento del PDF quando si chiude la finestra
+            pdfViewer.src = '';
+            
+            pdfWindow.classList.remove('show');
+            removeFromTaskbar('pdf');
+        }
+
+        // Funzione per chiudere il video player (mantenuta uguale)
         function closeVideo() {
             const videoWindow = document.getElementById('videoWindow');
             const youtubePlayer = document.getElementById('youtubePlayer');
@@ -1503,7 +1832,7 @@ function openVideo(videoKey) {
             removeFromTaskbar('video');
         }
 
-        // Funzione per scaricare file PDF
+        // Funzione per scaricare file PDF (mantenuta uguale)
         function downloadFile(downloadKey) {
             const download = downloads[downloadKey];
             if (!download) return;
@@ -1517,6 +1846,7 @@ function openVideo(videoKey) {
             document.body.removeChild(a);
         }
 
+        // Funzioni rimanenti (mantenute uguali)
         function openFile(fileKey) {
             const file = files[fileKey];
             if (!file) return;
@@ -1692,6 +2022,10 @@ function openVideo(videoKey) {
                     document.getElementById('videoWindow').style.zIndex = ++windowZIndex;
                 } else if (type === 'aquarium') {
                     document.getElementById('aquariumWindow').style.zIndex = ++windowZIndex;
+                } else if (type === 'pdf') {
+                    document.getElementById('pdfWindow').style.zIndex = ++windowZIndex;
+                } else if (type === 'paint') {
+                    document.getElementById('paintWindow').style.zIndex = ++windowZIndex;
                 }
             });
             taskbarLeft.appendChild(taskbarItem);
@@ -1749,6 +2083,10 @@ function openVideo(videoKey) {
                 document.getElementById('videoWindow').style.zIndex = ++windowZIndex;
             } else if (e.target.closest('#aquariumWindow')) {
                 document.getElementById('aquariumWindow').style.zIndex = ++windowZIndex;
+            } else if (e.target.closest('#pdfWindow')) {
+                document.getElementById('pdfWindow').style.zIndex = ++windowZIndex;
+            } else if (e.target.closest('#paintWindow')) {
+                document.getElementById('paintWindow').style.zIndex = ++windowZIndex;
             }
         });
     </script>
