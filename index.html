@@ -3,191 +3,2133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Le Leggi Razziali - Giorgio Bassani</title>
+    <title>Marco Perrotta's Portfolio</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@400;500&display=swap');
+        
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
         }
 
         body {
-            min-height: 100vh;
-            background-image: url('img.png');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-            display: flex;
-            justify-content: flex-end;
-            align-items: flex-end;
-            font-family: 'Garamond', 'Georgia', serif;
-            padding: 40px;
-            filter: grayscale(70%) contrast(1.1) sepia(20%);
+            font-family: 'Roboto', sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            height: 100vh;
+            overflow: hidden;
             position: relative;
         }
 
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
+        .desktop {
             width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.4));
-            pointer-events: none;
-        }
-
-        body::after {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,.03) 2px, rgba(0,0,0,.03) 4px),
-                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0,0,0,.03) 2px, rgba(0,0,0,.03) 4px);
-            pointer-events: none;
-            opacity: 0.3;
-        }
-
-        .container {
-            background-color: rgba(250, 248, 245, 0.95);
-            padding: 50px 60px;
-            border-radius: 2px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            max-width: 650px;
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            height: 100vh;
             position: relative;
-            z-index: 1;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+
+        .file-icon, .folder-icon, .link-icon, .mail-icon, .video-icon, .pdf-icon, .paint-icon {
+            width: 80px;
+            height: 80px;
             cursor: pointer;
             transition: all 0.3s ease;
             user-select: none;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            position: absolute;
         }
 
-        .container:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.6);
+        .file-icon:hover, .folder-icon:hover, .link-icon:hover, .mail-icon:hover, .video-icon:hover, .pdf-icon:hover, .paint-icon:hover { 
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.12);
         }
 
-        .container:active {
+        .file-icon:active, .folder-icon:active, .link-icon:active, .mail-icon:active, .video-icon:active, .pdf-icon:active, .paint-icon:active { 
             transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
         }
 
-        h1 {
-            text-align: center;
-            color: #1a1a1a;
-            font-size: 1.8em;
+        .clicked {
+            background: rgba(66, 133, 244, 0.08);
+            box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.4);
+        }
+
+        .icon-image {
+            width: 40px;
+            height: 40px;
             margin-bottom: 8px;
-            font-weight: 400;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            border-radius: 8px;
         }
 
-        .container:hover h1 {
-            letter-spacing: 4px;
+        .file-icon .icon-image {
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%235f6368"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/></svg>');
         }
 
-        .author {
+        .folder-icon .icon-image {
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23fbbc04"><path d="M10,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V8C22,6.89 21.1,6 20,6H12L10,4Z"/></svg>');
+        }
+
+        .link-icon .icon-image {
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%2334a853"><path d="M16.36,14C16.44,13.34 16.5,12.68 16.5,12C16.5,11.32 16.44,10.66 16.36,10H19.74C19.9,10.64 20,11.31 20,12C20,12.69 19.9,13.36 19.74,14M14.59,19.56C15.19,18.45 15.65,17.25 15.97,16H18.92C17.96,17.65 16.43,18.93 14.59,19.56M14.34,14H9.66C9.56,13.34 9.5,12.68 9.5,12C9.5,11.32 9.56,10.65 9.66,10H14.34C14.43,10.65 14.5,11.32 14.5,12C14.5,12.68 14.43,13.34 14.34,14M12,19.96C11.17,18.76 10.5,17.43 10.09,16H13.91C13.5,17.43 12.83,18.76 12,19.96M8,8H5.08C6.03,6.34 7.57,5.06 9.4,4.44C8.8,5.55 8.35,6.75 8,8M5.08,16H8C8.35,17.25 8.8,18.45 9.4,19.56C7.57,18.93 6.03,17.65 5.08,16M4.26,14C4.1,13.36 4,12.69 4,12C4,11.31 4.1,10.64 4.26,10H7.64C7.56,10.66 7.5,11.32 7.5,12C7.5,12.68 7.56,13.34 7.64,14M12,4.03C12.83,5.23 13.5,6.57 13.91,8H10.09C10.5,6.57 11.17,5.23 12,4.03M18.92,8H15.97C15.65,6.75 15.19,5.55 14.59,4.44C16.43,5.07 17.96,6.34 18.92,8M12,2C6.47,2 2,6.5 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"/></svg>');
+            position: relative;
+        }
+
+        .mail-icon .icon-image {
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ea4335"><path d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.11,4 20,4Z"/></svg>');
+        }
+
+        .video-icon .icon-image {
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%234285f4"><path d="M10,16.5V7.5L16,12M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"/></svg>');
+        }
+
+        .pdf-icon .icon-image {
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23d93025"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/></svg>');
+        }
+
+        .paint-icon .icon-image {
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%239C27B0"><path d="M18,4V3A1,1 0 0,0 17,2H5A1,1 0 0,0 4,3V7A1,1 0 0,0 5,8H17A1,1 0 0,0 18,7V6H19V10H9V21A1,1 0 0,0 10,22H12A1,1 0 0,0 13,21V12H21V4H18Z"/></svg>');
+        }
+
+        .link-icon .icon-image::after {
+            content: '↗';
+            position: absolute;
+            bottom: -2px;
+            right: -2px;
+            width: 14px;
+            height: 14px;
+            background: #34a853;
+            color: white;
+            border-radius: 50%;
+            font-size: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid white;
+        }
+
+        .icon-label {
+            color: #5f6368;
+            font-size: 12px;
+            font-weight: 500;
             text-align: center;
-            color: #555;
-            font-style: italic;
-            margin-bottom: 30px;
-            font-size: 1.2em;
-            letter-spacing: 1px;
+            padding: 2px 4px;
+            border-radius: 4px;
+            word-wrap: break-word;
+            max-width: 70px;
+            line-height: 1.2;
         }
 
-        .play-hint {
-            text-align: center;
-            color: #888;
-            font-size: 0.9em;
-            font-style: italic;
-            margin-top: 25px;
-            opacity: 0.7;
-            transition: opacity 0.3s ease;
-            letter-spacing: 0.5px;
+        .editor-window, .folder-window, .video-window, .aquarium-window, .pdf-window, .paint-window {
+            position: fixed;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            z-index: 1000;
+            width: 700px;
+            height: 500px;
+            display: none;
+            overflow: hidden;
         }
 
-        .container:hover .play-hint {
-            opacity: 1;
+        .aquarium-window {
+            width: 520px;
+            height: 420px;
+            top: 20px;
+            right: 20px;
         }
 
-        .playing .play-hint {
-            color: #1a1a1a;
+        .pdf-window {
+            width: 800px;
+            height: 600px;
+        }
+
+        .paint-window {
+            width: 600px;
+            height: 500px;
+        }
+
+        .window-header {
+            background: white;
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: move;
+            border-bottom: 1px solid #e8eaed;
+            height: 48px;
+            flex-shrink: 0;
+        }
+
+        .window-title {
+            color: #3c4043;
+            font-weight: 500;
+            font-size: 16px;
+        }
+
+        .window-controls {
+            display: flex;
+            gap: 8px;
+        }
+
+        .control-btn {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #5f6368;
+            font-weight: bold;
+            background: transparent;
+        }
+
+        .control-btn.close:hover { background: #fce8e6; color: #d93025; }
+        .control-btn.close::after { content: '×'; }
+        .control-btn.minimize:hover { background: #f1f3f4; color: #5f6368; }
+        .control-btn.minimize::after { content: '_'; }
+        .control-btn.maximize:hover { background: #f1f3f4; color: #5f6368; }
+        .control-btn.maximize::after { content: '□'; }
+        
+        .editor-content {
+            height: calc(100% - 48px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .editor-toolbar {
+            background: #f8f9fa;
+            padding: 8px 16px;
+            border-bottom: 1px solid #e8eaed;
+            font-size: 13px;
+            color: #5f6368;
+            height: 36px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .editor-textarea {
+            flex: 1;
+            background: white;
+            color: #3c4043;
+            border: none;
+            padding: 16px;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            resize: none;
+            outline: none;
+            overflow-y: auto;
+            min-height: 0;
+        }
+
+        .folder-content {
+            padding: 16px;
+            height: calc(100% - 84px);
+            overflow-y: auto;
+            background: white;
+        }
+
+        .folder-item {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            color: #3c4043;
+            cursor: pointer;
+            border-radius: 8px;
+            margin-bottom: 4px;
+            transition: background-color 0.2s;
+            min-height: 40px;
+            border: 1px solid transparent;
+        }
+
+        .folder-item:hover {
+            background: #f1f3f4;
+        }
+
+        .folder-item.clicked {
+            background: #e8f0fe;
+            border: 1px solid #d2e3fc;
+        }
+
+        .folder-item-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 12px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            flex-shrink: 0;
+            min-width: 24px;
+            border-radius: 4px;
+        }
+
+        .breadcrumb {
+            background: #f8f9fa;
+            padding: 8px 16px;
+            border-bottom: 1px solid #e8eaed;
+            color: #5f6368;
+            font-size: 13px;
+            height: 36px;
+            flex-shrink: 0;
+        }
+
+        .breadcrumb-item {
+            color: #1a73e8;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .breadcrumb-item:hover {
+            text-decoration: underline;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .editor-window.show, .folder-window.show, .video-window.show, .aquarium-window.show, .pdf-window.show, .paint-window.show {
+            display: block;
+            animation: fadeIn 0.2s ease;
+        }
+
+        .taskbar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 48px;
+            background: white;
+            border-top: 1px solid #e8eaed;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            z-index: 500;
+            box-shadow: 0 -1px 4px rgba(0,0,0,0.05);
+        }
+
+        .taskbar-left {
+            display: flex;
+            align-items: center;
+            flex: 1;
+        }
+
+        .taskbar-item {
+            background: white;
+            color: #5f6368;
+            padding: 6px 12px;
+            border-radius: 20px;
+            margin-right: 8px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+
+        .taskbar-item:hover {
+            background: #f1f3f4;
+        }
+
+        .taskbar-item:active {
+            background: #e8f0fe;
+            border-color: #d2e3fc;
+        }
+
+        .taskbar-signature {
+            color: #5f6368;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .signature-name {
+            cursor: pointer;
+            transition: color 0.2s ease;
+            user-select: none;
             font-weight: 500;
         }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.6; }
+        .signature-name:hover {
+            color: #1a73e8;
         }
 
-        .playing h1 {
-            animation: pulse 3s ease-in-out infinite;
+        /* Easter Egg Chicken Icon */
+        .chicken-icon {
+            display: none;
+            font-size: 16px;
+            animation: gentle-bounce 1s infinite;
         }
 
-        @media (max-width: 768px) {
-            body {
-                padding: 20px;
-                justify-content: center;
-                align-items: center;
-            }
-
-            .container {
-                padding: 40px 30px;
-                max-width: 100%;
-            }
-            
-            h1 {
-                font-size: 1.5em;
-            }
-            
-            .author {
-                font-size: 1em;
-            }
-
-            .play-hint {
-                font-size: 0.8em;
-            }
+        .chicken-icon.show {
+            display: inline-block;
         }
+
+        @keyframes gentle-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
+        }
+
+        /* Folder specific icons */
+        .folder-item-icon.email-icon {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="rgb(234,67,53)"><path d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.11,4 20,4Z"/></svg>') !important;
+        }
+
+        .folder-item-icon.linkedin-icon {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="rgb(66,103,178)"><path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17A1.4 1.4 0 0 1 15.71 13.57V18.5H18.5M6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19S5.19 5.95 5.19 6.88A1.69 1.69 0 0 0 6.88 8.56M8.27 18.5V10.13H5.5V18.5H8.27Z"/></svg>') !important;
+        }
+
+        .folder-item-icon.file-icon {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="rgb(95,99,104)"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/></svg>') !important;
+        }
+
+        .folder-item-icon.pdf-icon {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="rgb(217,48,37)"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/><path d="M8,15H16V17H8V15M8,13H16V11H8V13M8,9H11V7H8V9Z" fill="white"/></svg>') !important;
+        }
+
+        .folder-item.download-item::after {
+            content: '⬇';
+            margin-left: auto;
+            font-weight: bold;
+            color: #1a73e8;
+            font-size: 16px;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f3f4;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #dadce0;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #bdc1c6;
+        }
+
+        /* Video player styles */
+        .video-content {
+            height: calc(100% - 48px);
+            background: white;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .video-player-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .video-player {
+            width: 100%;
+            height: 100%;
+            max-width: 640px;
+            max-height: 360px;
+            border-radius: 8px;
+            background: #000;
+        }
+
+        .video-info {
+            background: #f8f9fa;
+            padding: 12px 16px;
+            border-top: 1px solid #e8eaed;
+            color: #5f6368;
+            font-size: 13px;
+        }
+
+        /* PDF viewer styles */
+        .pdf-content {
+            height: calc(100% - 48px);
+            background: white;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pdf-viewer-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .pdf-viewer {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .pdf-info {
+            background: #f8f9fa;
+            padding: 12px 16px;
+            border-top: 1px solid #e8eaed;
+            color: #5f6368;
+            font-size: 13px;
+        }
+
+        /* Paint styles */
+        .paint-content {
+            height: calc(100% - 48px);
+            background: white;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .paint-toolbar {
+            background: #f8f9fa;
+            padding: 8px 16px;
+            border-bottom: 1px solid #e8eaed;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            height: 48px;
+            flex-shrink: 0;
+        }
+
+        .paint-tool {
+            width: 32px;
+            height: 32px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .paint-tool:hover {
+            background: #e8f0fe;
+        }
+
+        .paint-tool.active {
+            background: #1a73e8;
+            color: white;
+        }
+
+        .color-picker {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid #dadce0;
+            cursor: pointer;
+        }
+
+        .brush-size {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .brush-size input {
+            width: 80px;
+        }
+
+        .paint-canvas-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            background: #f8f9fa;
+        }
+
+        .paint-canvas {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            cursor: crosshair;
+        }
+
+        /* Aquarium styles */
+        .aquarium-content {
+            height: calc(100% - 48px);
+            background: white;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .aquarium-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, #0d47a1, #1a237e);
+            border: none;
+            box-shadow: none;
+            image-rendering: pixelated;
+            overflow: hidden;
+        }
+
+        /* Bubbles */
+        .bubble {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: radial-gradient(circle at 30% 30%, #00ffff, #0099cc);
+            border-radius: 50%;
+            opacity: 0.6;
+            box-shadow: 0 0 4px #00ffff;
+        }
+
+        /* Fish e creature */
+        .creature {
+            position: absolute;
+            image-rendering: pixelated;
+        }
+
+        /* Pesci nuotatori */
+        .fish {
+            width: 32px;
+            height: 16px;
+        }
+
+        .fish-body {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Fish 1 - Orange */
+        .fish1 .fish-body {
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 32 16" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="6" width="16" height="4" fill="%23ff9500"/><rect x="20" y="5" width="3" height="6" fill="%23ff9500"/><circle cx="2" cy="8" r="2" fill="%23000"/></svg>') no-repeat center;
+            background-size: contain;
+        }
+
+        /* Fish 2 - Green */
+        .fish2 .fish-body {
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 32 16" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="5" width="18" height="6" fill="%2300cc44"/><polygon points="22,6 26,8 22,10" fill="%2300cc44"/><circle cx="2" cy="8" r="2" fill="%23000"/></svg>') no-repeat center;
+            background-size: contain;
+            transform: scaleX(-1);
+        }
+
+        /* Fish 3 - Red */
+        .fish3 .fish-body {
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 32 16" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="6" width="14" height="4" fill="%23ff3333"/><polygon points="20,6 24,8 20,10" fill="%23ff3333"/><circle cx="3" cy="8" r="2" fill="%23000"/></svg>') no-repeat center;
+            background-size: contain;
+        }
+
+        /* Fish 4 - Yellow */
+        .fish4 .fish-body {
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 32 16" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="6" width="15" height="4" fill="%23ffff00"/><polygon points="20,7 24,8 20,9" fill="%23ffff00"/><circle cx="2" cy="8" r="1.5" fill="%23000"/></svg>') no-repeat center;
+            background-size: contain;
+            transform: scaleX(-1);
+        }
+
+        /* Fish 5 - Purple */
+        .fish5 .fish-body {
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 32 16" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="5" width="18" height="6" fill="%23cc44ff"/><polygon points="22,6 26,8 22,10" fill="%23cc44ff"/><circle cx="2" cy="8" r="2" fill="%23000"/></svg>') no-repeat center;
+            background-size: contain;
+        }
+
+        /* Starfish */
+        .starfish {
+            width: 24px;
+            height: 24px;
+        }
+
+        .starfish-body {
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polygon points="12,2 15,10 24,12 16,18 18,27 12,23 6,27 8,18 0,12 9,10" fill="%23ff6b9d" stroke="%23000" stroke-width="0.5"/></svg>') no-repeat center;
+            background-size: contain;
+        }
+
+        /* Jellyfish */
+        .jellyfish {
+            width: 20px;
+            height: 28px;
+        }
+
+        .jellyfish-body {
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 20 28" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="6" r="6" fill="%23ff66cc" opacity="0.7"/><line x1="6" y1="12" x2="4" y2="28" stroke="%23ff66cc" stroke-width="1"/><line x1="10" y1="12" x2="10" y2="28" stroke="%23ff66cc" stroke-width="1"/><line x1="14" y1="12" x2="16" y2="28" stroke="%23ff66cc" stroke-width="1"/></svg>') no-repeat center;
+            background-size: contain;
+        }
+
+        /* Sea Urchin */
+        .urchin {
+            width: 16px;
+            height: 16px;
+        }
+
+        .urchin-body {
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="4" fill="%23330033"/><line x1="8" y1="1" x2="8" y2="0" stroke="%23330033" stroke-width="1"/><line x1="15" y1="8" x2="16" y2="8" stroke="%23330033" stroke-width="1"/><line x1="8" y1="15" x2="8" y2="16" stroke="%23330033" stroke-width="1"/><line x1="1" y1="8" x2="0" y2="8" stroke="%23330033" stroke-width="1"/><line x1="12" y1="3" x2="13" y2="2" stroke="%23330033" stroke-width="1"/><line x1="13" y1="13" x2="12" y2="12" stroke="%23330033" stroke-width="1"/><line x1="3" y1="13" x2="4" y2="12" stroke="%23330033" stroke-width="1"/><line x1="2" y1="3" x2="3" y2="2" stroke="%23330033" stroke-width="1"/></svg>') no-repeat center;
+            background-size: contain;
+        }
+
+        /* Pineapple */
+        .pineapple {
+            width: 120px;
+            height: 60px;
+        }
+
+        .pineapple-body {
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg"><rect x="20" y="15" width="80" height="40" fill="%23ffbb00" stroke="%23000" stroke-width="1" rx="5"/><polygon points="40,15 45,0 55,15" fill="%2300dd44"/><polygon points="60,15 65,0 75,15" fill="%2300dd44"/><polygon points="80,15 85,0 95,15" fill="%2300dd44"/><line x1="30" y1="25" x2="90" y2="25" stroke="%23aa8800" stroke-width="1"/><line x1="30" y1="35" x2="90" y2="35" stroke="%23aa8800" stroke-width="1"/><line x1="30" y1="45" x2="90" y2="45" stroke="%23aa8800" stroke-width="1"/><line x1="35" y1="20" x2="35" y2="50" stroke="%23aa8800" stroke-width="1"/><line x1="50" y1="20" x2="50" y2="50" stroke="%23aa8800" stroke-width="1"/><line x1="65" y1="20" x2="65" y2="50" stroke="%23aa8800" stroke-width="1"/><line x1="80" y1="20" x2="80" y2="50" stroke="%23aa8800" stroke-width="1"/></svg>') no-repeat center;
+            background-size: contain;
+        }
+
+        /* Sponge */
+        .sponge {
+            width: 40px;
+            height: 40px;
+        }
+
+        .sponge-body {
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="5" width="32" height="32" fill="%23ffcc00" stroke="%23000" stroke-width="1" rx="3"/><circle cx="10" cy="10" r="2" fill="%23ffaa00"/><circle cx="20" cy="10" r="2" fill="%23ffaa00"/><circle cx="30" cy="10" r="2" fill="%23ffaa00"/><circle cx="10" cy="20" r="2" fill="%23ffaa00"/><circle cx="20" cy="20" r="2" fill="%23ffaa00"/><circle cx="30" cy="20" r="2" fill="%23ffaa00"/><circle cx="10" cy="30" r="2" fill="%23ffaa00"/><circle cx="20" cy="30" r="2" fill="%23ffaa00"/><circle cx="30" cy="30" r="2" fill="%23ffaa00"/></svg>') no-repeat center;
+            background-size: contain;
+        }
+
+        /* Arch Structure */
+        .arch {
+            position: absolute;
+            bottom: 40px;
+            width: 120px;
+            height: 60px;
+            border: 3px solid #8b6f47;
+            border-top: 3px solid #8b6f47;
+            border-radius: 120px 120px 0 0;
+            background: linear-gradient(to bottom, #9d8a7e, #8b7355);
+            opacity: 0.7;
+        }
+
+        /* Seaweed */
+        .seaweed {
+            position: absolute;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to top, #004400, #008800);
+            opacity: 0.8;
+        }
+
+        .seaweed::before,
+        .seaweed::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background: #006600;
+            left: 1px;
+        }
+
+        .seaweed::before {
+            height: 30%;
+            bottom: 70%;
+            transform: skewX(-5deg);
+        }
+
+        .seaweed::after {
+            height: 50%;
+            bottom: 50%;
+            transform: skewX(5deg);
+        }
+
+        /* Sand */
+        .sand {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: repeating-linear-gradient(90deg, #d4a574, #d4a574 2px, #c9985f 2px, #c9985f 4px);
+            opacity: 1;
+        }
+
+        /* Retro text */
+        .title {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: #00ffff;
+            font-size: 14px;
+            font-weight: bold;
+            text-shadow: 2px 2px #ff00ff;
+            z-index: 10;
+        }
+
+        .info {
+            position: absolute;
+            bottom: 42px;
+            right: 10px;
+            color: #ffff00;
+            font-size: 10px;
+            text-shadow: 1px 1px #ff0080;
+        }
+
+        .folder-item span{ margin-left:35px;}
+
+        .loading-content { height: calc(100% - 48px); background: white; color: #5f6368; font-family: 'Roboto Mono', monospace; padding: 16px; overflow-y: auto; white-space: pre-wrap; }
+        .loading { color: #fbbc04; }
+        .success { color: #34a853; }
+        .system-info { color: #4285f4; }
+        .prompt { color: #ea4335; }
+        .overlay {position: absolute; top:0; left:0;width:100%;height:100%;background:white;z-index:500;}
+        .hidden {
+          visibility: hidden;
+          opacity: 0;
+          pointer-events:none;
+          transition: visibility 0s 2s, opacity 2s linear;
+        }
+
     </style>
 </head>
 <body>
-    <audio id="audioPlayer" loop>
-        <source src="audio.mp3" type="audio/mpeg">
-        Il tuo browser non supporta l'elemento audio.
-    </audio>
+    <div class="desktop" id="desktop">
+        <!-- File esistenti -->
+        <div class="file-icon" data-file="readme" style="top: 60px; left: 120px;">
+            <div class="icon-image"></div>
+            <div class="icon-label">README.txt</div>
+        </div>
+        
+        <div class="file-icon" data-file="notes" style="top: 180px; left: 350px;">
+            <div class="icon-image"></div>
+            <div class="icon-label">appunti_su_di_me.txt</div>
+        </div>
 
-    <div class="container" onclick="toggleAudio()">
-        <h1>Le Leggi Razziali</h1>
-        <p class="author">Giorgio Bassani</p>
-        <p class="play-hint">▶ Clicca per avviare la musica</p>
+        <!-- Cartelle -->
+        <div class="folder-icon" data-folder="documenti" style="top: 320px; left: 180px;">
+            <div class="icon-image"></div>
+            <div class="icon-label">AboutMe</div>
+        </div>
+        
+        <div class="folder-icon" data-folder="progetti" style="top: 150px; left: 750px;">
+            <div class="icon-image"></div>
+            <div class="icon-label">Progetti</div>
+        </div>
+        
+        <div class="folder-icon" data-folder="pubblicazioni" style="top: 380px; left: 650px;">
+            <div class="icon-image"></div>
+            <div class="icon-label">Pubblicazioni</div>
+        </div>
+        
+        <div class="folder-icon" data-folder="contatti" style="top: 90px; left: 520px;">
+            <div class="icon-image"></div>
+            <div class="icon-label">Contatti</div>
+        </div>
+
+        <!-- Collegamento web -->
+        <div class="link-icon" data-link="portfolio" style="top: 480px; left: 320px;">
+            <div class="icon-image"></div>
+            <div class="icon-label">Il mio Portfolio</div>
+        </div>
+
+        <!-- Nuova icona video -->
+        <div class="video-icon" data-video="demo" style="top: 270px; left: 850px;">
+            <div class="icon-image"></div>
+            <div class="icon-label">JuliaCon Local Paris 2025</div>
+        </div>
+
+        <!-- Nuova icona CV -->
+        <div class="pdf-icon" data-pdf="cv" style="top: 420px; left: 950px;">
+            <div class="icon-image"></div>
+            <div class="icon-label">Curriculum Vitae</div>
+        </div>
+
+        <!-- Nuova icona Paint -->
+        <div class="paint-icon" data-paint="paint" style="top: 220px; left: 1100px;">
+            <div class="icon-image"></div>
+            <div class="icon-label">Mini Paint</div>
+        </div>
+    </div>
+
+    <!-- Finestra Editor -->
+    <div class="editor-window" id="editorWindow">
+        <div class="window-header">
+            <div class="window-title" id="editorTitle">Editor di Testo</div>
+            <div class="window-controls">
+                <div class="control-btn minimize"></div>
+                <div class="control-btn maximize"></div>
+                <div class="control-btn close" onclick="closeEditor()"></div>
+            </div>
+        </div>
+        <div class="editor-content">
+            <div class="editor-toolbar">
+                File: <span id="currentFile">Nessun file aperto</span> | Linee: <span id="lineCount">0</span>
+            </div>
+            <textarea class="editor-textarea" id="editorTextarea" placeholder="Contenuto del file..."></textarea>
+        </div>
+    </div>
+
+    <!-- Finestra Cartella -->
+    <div class="folder-window" id="folderWindow">
+        <div class="window-header">
+            <div class="window-title" id="folderTitle">Esplora File</div>
+            <div class="window-controls">
+                <div class="control-btn minimize"></div>
+                <div class="control-btn maximize"></div>
+                <div class="control-btn close" onclick="closeFolder()"></div>
+            </div>
+        </div>
+        <div class="breadcrumb" id="breadcrumb">
+            <a href="#" class="breadcrumb-item" onclick="goHome()">Home</a> / <span id="currentPath">Desktop</span>
+        </div>
+        <div class="folder-content" id="folderContent"></div>
+    </div>
+
+    <!-- Nuova finestra Video Player -->
+    <div class="video-window" id="videoWindow">
+        <div class="window-header">
+            <div class="window-title" id="videoTitle">Video Player</div>
+            <div class="window-controls">
+                <div class="control-btn minimize"></div>
+                <div class="control-btn maximize"></div>
+                <div class="control-btn close" onclick="closeVideo()"></div>
+            </div>
+        </div>
+        <div class="video-content">
+            <div class="video-player-container">
+                <iframe class="video-player" id="youtubePlayer" 
+                        src="" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowfullscreen>
+                </iframe>
+            </div>
+            <div class="video-info" id="videoInfo">
+                Caricamento video in corso...
+            </div>
+        </div>
+    </div>
+
+    <!-- Nuova finestra PDF Viewer -->
+    <div class="pdf-window" id="pdfWindow">
+        <div class="window-header">
+            <div class="window-title" id="pdfTitle">PDF Viewer</div>
+            <div class="window-controls">
+                <div class="control-btn minimize"></div>
+                <div class="control-btn maximize"></div>
+                <div class="control-btn close" onclick="closePdf()"></div>
+            </div>
+        </div>
+        <div class="pdf-content">
+            <div class="pdf-viewer-container">
+                <iframe class="pdf-viewer" id="pdfViewer" 
+                        src="" 
+                        frameborder="0">
+                </iframe>
+            </div>
+            <div class="pdf-info" id="pdfInfo">
+                Visualizzazione del Curriculum Vitae
+            </div>
+        </div>
+    </div>
+
+    <!-- Nuova finestra Paint -->
+    <div class="paint-window" id="paintWindow">
+        <div class="window-header">
+            <div class="window-title" id="paintTitle">Mini Paint</div>
+            <div class="window-controls">
+                <div class="control-btn minimize"></div>
+                <div class="control-btn maximize"></div>
+                <div class="control-btn close" onclick="closePaint()"></div>
+            </div>
+        </div>
+        <div class="paint-content">
+            <div class="paint-toolbar">
+                <div class="paint-tool active" id="brushTool" title="Pennello">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20.71,4.63L19.37,3.29C19,2.9 18.35,2.9 17.96,3.29L9,12.25L11.75,15L20.71,6.04C21.1,5.65 21.1,5 20.71,4.63M7,14A3,3 0 0,0 4,17C4,18.31 2.84,19 2,19C2.92,20.22 4.5,21 6,21A4,4 0 0,0 10,17A3,3 0 0,0 7,14Z"/>
+                    </svg>
+                </div>
+                <div class="paint-tool" id="eraserTool" title="Gomma">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M16.24,3.56L21.19,8.5C21.97,9.29 21.97,10.55 21.19,11.34L12,20.53C10.44,22.09 7.91,22.09 6.34,20.53L2.81,17C2.03,16.21 2.03,14.95 2.81,14.16L13.41,3.56C14.2,2.78 15.46,2.78 16.24,3.56M4.22,15.58L7.76,19.11C8.54,19.9 9.8,19.9 10.59,19.11L14.12,15.58L9.17,10.63L4.22,15.58Z"/>
+                    </svg>
+                </div>
+                <div class="color-picker" id="colorPicker" style="background-color: #000000;"></div>
+                <div class="brush-size">
+                    <span>Dimensione:</span>
+                    <input type="range" id="brushSize" min="1" max="20" value="5">
+                </div>
+                <button id="clearCanvas" style="margin-left: auto; padding: 6px 12px; background: #f1f3f4; border: 1px solid #dadce0; border-radius: 4px; cursor: pointer;">Pulisci</button>
+            </div>
+            <div class="paint-canvas-container">
+                <canvas class="paint-canvas" id="paintCanvas" width="500" height="350"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Finestra Aquarium -->
+    <div class="aquarium-window" id="aquariumWindow">
+        <div class="window-header">
+            <div class="window-title">Pixel Aquarium</div>
+            <div class="window-controls">
+                <div class="control-btn minimize"></div>
+                <div class="control-btn maximize"></div>
+                <div class="control-btn close" onclick="closeAquarium()"></div>
+            </div>
+        </div>
+        <div class="aquarium-content">
+            <div class="aquarium-container" id="aquariumContainer">
+                <!-- Fish -->
+                <div class="creature fish fish1" id="fish1">
+                    <div class="fish-body"></div>
+                </div>
+                <div class="creature fish fish2" id="fish2">
+                    <div class="fish-body"></div>
+                </div>
+                <div class="creature fish fish3" id="fish3">
+                    <div class="fish-body"></div>
+                </div>
+                <div class="creature fish fish4" id="fish4">
+                    <div class="fish-body"></div>
+                </div>
+
+                <!-- Starfish -->
+                <div class="creature starfish" id="starfish1">
+                    <div class="starfish-body"></div>
+                </div>
+
+                <!-- Jellyfish -->
+                <div class="creature jellyfish" id="jellyfish1">
+                    <div class="jellyfish-body"></div>
+                </div>
+                <div class="creature jellyfish" id="jellyfish2">
+                    <div class="jellyfish-body"></div>
+                </div>
+                <div class="creature jellyfish" id="jellyfish3">
+                    <div class="jellyfish-body"></div>
+                </div>
+                <div class="creature jellyfish" id="jellyfish4">
+                    <div class="jellyfish-body"></div>
+                </div>
+
+                <!-- Sea Urchin -->
+                <div class="creature urchin" id="urchin1">
+                    <div class="urchin-body"></div>
+                </div>
+                <div class="creature urchin" id="urchin2">
+                    <div class="urchin-body"></div>
+                </div>
+                <div class="creature urchin" id="urchin3">
+                    <div class="urchin-body"></div>
+                </div>
+                <div class="creature urchin" id="urchin4">
+                    <div class="urchin-body"></div>
+                </div>
+
+                <!-- Pineapple -->
+                <div class="creature pineapple" id="pineapple1">
+                    <div class="pineapple-body"></div>
+                </div>
+
+                <!-- Sponge -->
+                <div class="creature sponge" id="sponge1">
+                    <div class="sponge-body"></div>
+                </div>
+
+                <!-- Arch Structure -->
+                <div class="arch" style="left: 190px;"></div>
+
+                <!-- Seaweed -->
+                <div class="seaweed" style="left: 30px; height: 100px;"></div>
+                <div class="seaweed" style="left: 150px; height: 120px;"></div>
+                <div class="seaweed" style="left: 280px; height: 110px;"></div>
+                <div class="seaweed" style="left: 420px; height: 95px;"></div>
+
+                <div class="sand"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Taskbar -->
+    <div class="taskbar" id="taskbar">
+        <div class="taskbar-left" id="taskbarLeft"></div>
+        <div class="taskbar-signature">
+            Created by <span class="signature-name" id="signatureName">Marco Perrotta</span>
+            <span class="chicken-icon" id="chickenIcon">🐓</span>
+        </div>
+    </div>
+
+    <div class="overlay"></div>
+
+    <div class="editor-window show" id="bootWindow">
+        <div class="window-header">
+            <div class="window-title">System Boot</div>
+            <div class="window-controls">
+                <div class="control-btn close" onclick="document.getElementById('bootWindow').style.display='none'"></div>
+            </div>
+        </div>
+        <div class="loading-content" id="bootContent"></div>
     </div>
 
     <script>
-        const audio = document.getElementById('audioPlayer');
-        const container = document.querySelector('.container');
-        const playHint = document.querySelector('.play-hint');
-        let isPlaying = false;
+        // Boot sequence (mantenuta uguale)
+        const bootSequence = [
+            { text: "Initializing Marco Perrotta Portfolio System...", class: "loading", delay: 100 },
+            { text: "", class: "", delay: 200 },
+            { text: "BIOS Version 2024.03.15", class: "system-info", delay: 150 },
+            { text: "Loading personal data modules...", class: "loading", delay: 300 },
+            { text: "[████████████████████████] 100%", class: "success", delay: 800 },
+            { text: "", class: "", delay: 200 },
+            { text: ">> System Ready. Executing profile.exe", class: "prompt", delay: 400 },
+            { text: "", class: "", delay: 300 },
+            { text: "==========================================", class: "system-info", delay: 100 },
+            { text: "         MARCO PERROTTA PROFILE", class: "success", delay: 150 },
+            { text: "==========================================", class: "system-info", delay: 100 },
+            { text: "", class: "", delay: 200 },
+            { text: "Name: Marco Perrotta", class: "", delay: 150 },
+            { text: "Location: Pozzuoli -> Ferrara", class: "", delay: 150 },
+            { text: "Status: Software Developer & AI Enthusiast", class: "", delay: 150 },
+            { text: "", class: "", delay: 200 },
+            { text: "Education:", class: "system-info", delay: 150 },
+            { text: "  • Università degli Studi di Ferrara", class: "", delay: 150 },
+            { text: "    - Laurea Magistrale in AI (in corso)", class: "", delay: 150 },
+            { text: "    - Laurea Triennale Informatica (110/110 cum laude)", class: "success", delay: 150 },
+            { text: "  • IIS N.Copernico A.Carpeggiani", class: "", delay: 150 },
+            { text: "    - Diploma Scienze Informatiche (100/100 cum laude)", class: "success", delay: 150 },
+            { text: "", class: "", delay: 200 },
+            { text: "Core Skills:", class: "system-info", delay: 150 },
+            { text: "  • Languages: C, Java, Julia, Haskell, Python", class: "", delay: 150 },
+            { text: "  • Systems: Unix-like OS, Git", class: "", delay: 150 },
+            { text: "  • Database: MySQL, PHP, Laravel", class: "", delay: 150 },
+            { text: "  • AI/ML: Machine Learning, Interpretable ML", class: "success", delay: 150 },
+            { text: "", class: "", delay: 200 },
+            { text: "Current Projects:", class: "system-info", delay: 150 },
+            { text: "  • SOLE.jl - Interpretable ML Framework", class: "success", delay: 150 },
+            { text: "  • LUMEN Algorithm - Logic-driven Extractor", class: "success", delay: 150 },
+            { text: "  • SOLEPOSTHOC.jl - Post-hoc Analysis Library", class: "success", delay: 150 },
+            { text: "", class: "", delay: 200 },
+            { text: "Publications:", class: "system-info", delay: 150 },
+            { text: "  • Tesi: Framework sistematico logic-based", class: "", delay: 150 },
+            { text: "  • Paper: Minimal Rules from Decision Forests", class: "", delay: 150 },
+            { text: "", class: "", delay: 200 },
+            { text: "Contact:", class: "system-info", delay: 150 },
+            { text: "  • Email: perrottamarco2011@gmail.com", class: "", delay: 150 },
+            { text: "  • GitHub: github.com/Perro2110", class: "", delay: 150 },
+            { text: "  • LinkedIn: /in/marco-perrotta-b159b6244", class: "", delay: 150 },
+            { text: "", class: "", delay: 200 },
+            { text: "Passion: Creating elegant solutions for complex problems", class: "success", delay: 150 },
+            { text: "Focus: Mathematical foundations + practical implementation", class: "success", delay: 150 },
+            { text: "", class: "", delay: 300 },
+            { text: "==========================================", class: "system-info", delay: 100 },
+            { text: "Profile loaded successfully.", class: "success", delay: 200 },
+            { text: "Starting desktop environment...", class: "loading", delay: 500 },
+            { text: "", class: "", delay: 200 },
+            { text: "Click minimize button to continue", class: "prompt", delay: 300 }
+        ];
 
-        function toggleAudio() {
-            if (isPlaying) {
-                audio.pause();
-                playHint.textContent = '▶ Clicca per avviare la musica';
-                container.classList.remove('playing');
-                isPlaying = false;
-            } else {
-                audio.play().catch(error => {
-                    console.log('Errore nella riproduzione:', error);
-                });
-                playHint.textContent = '❚❚ In riproduzione...';
-                container.classList.add('playing');
-                isPlaying = true;
+        function runBootSequence() {
+            if(localStorage.getItem(`fakecookie`)){
+               document.getElementsByClassName("overlay")[0].classList.add("hidden"); 
+               return;
+            }
+
+            localStorage.setItem(`fakecookie`,true);             
+
+            const container = document.getElementById('bootContent');
+            
+            const win = document.getElementById('bootWindow');
+            win.style.left = `${(window.innerWidth - 700) / 2}px`;
+            win.style.top = `${(window.innerHeight - 500) / 2}px`;
+            win.style.display = 'block';
+
+            let i = 0;
+            function nextLine() {
+                if (i >= bootSequence.length){
+                    document.getElementsByClassName("overlay")[0].classList.add("hidden"); 
+                    return;
+                }
+                const item = bootSequence[i];
+                const line = document.createElement('div');
+                line.className = item.class;
+                line.textContent = item.text;
+                container.appendChild(line);
+                container.scrollTop = container.scrollHeight;
+                i++;
+                setTimeout(nextLine, item.delay);
+            }
+            nextLine();
+        }
+
+        window.onload = runBootSequence;
+    </script>
+
+    <script>
+        // File (mantenuti uguali)
+        const files = {
+            readme: { 
+                name: "README.txt",
+                content: `👋 Ciao, sono Marco Perrotta
+Software Developer appassionato di tecnologia e innovazione.
+Mi piace creare soluzioni eleganti per problemi complessi.
+I miei principali ambiti di interesse includono il machine learning, la programmazione e l'ottimizzazione delle implementazioni.
+Attualmente, collaboro con il mio team di ricerca allo sviluppo di Sole.jl, un framework di apprendimento automatico interpretabile (IML) scritto nel linguaggio di programmazione Julia. Inoltre, sono fortemente interessato agli aspetti matematici e teorici che sottendono queste discipline.`
+            },
+            notes: { 
+                name: "appunti_su_di_me.txt", 
+                content: `Nato a Pozzuoli e cresciuto a Ferrara, ho sviluppato fin da giovane una profonda passione per l'informatica e la tecnologia.
+La mia curiosità per i computer, sbocciata durante l'adolescenza, si è evoluta nel tempo in un interesse professionale per gli aspetti più avanzati dell'intelligenza artificiale e della programmazione.
+I miei principali ambiti di interesse includono il machine learning, la programmazione e l'ottimizzazione delle implementazioni.
+Attualmente, collaboro con il mio team di ricerca allo sviluppo di Sole.jl, un framework di apprendimento automatico interpretabile (IML) scritto nel linguaggio di programmazione Julia.
+Inoltre, sono fortemente interessato agli aspetti matematici e teorici che sottendono queste discipline.
+Questo percorso mi ha portato a specializzarmi nell'ambito del machine learning, dove posso combinare il mio amore per la matematica con le sfide dell'implementazione pratica`
+            },
+            email: { 
+                name: "email.txt", 
+                content: `📧 Il mio indirizzo email principale:
+
+perrottamarco2011@gmail.com
+
+Sentiti libero di contattarmi per:
+- Opportunità lavorative
+- Collaborazioni su progetti
+- Discussioni tecniche
+- Domande sui miei progetti`
+            }
+        };
+
+        // Collegamenti web (mantenuti uguali)
+        const links = {
+            portfolio: {
+                name: "Il mio Portfolio",
+                url: "https://github.com/Perro2110",
+                target: "_blank"
+            },
+            linkedin: {
+                name: "LinkedIn",
+                url: "https://linkedin.com/in/marco-perrotta-b159b6244",
+                target: "_blank"
+            },
+            email: {
+                name: "Invia Email",
+                url: "mailto:perrottamarco2011@gmail.com?subject=Contatto dal Portfolio&body=Ciao Marco,%0D%0A%0D%0AHo visto il tuo portfolio e vorrei contattarti per:%0D%0A%0D%0A",
+                target: "_self"
+            }
+        };
+
+        // Video da YouTube (mantenuti uguali)
+        const videos = {
+            demo: {
+                name: "JuliaCon Local Paris 2025",
+                youtubeId: "JVHeIdVPK8Y",
+                title: "Presentazione a JuliaCon Local Paris 2025, del pacchetto SolePostHoc.jl",
+                description: "In questo video, abbiamo presentato tre grandi novità per Sole.jl. Io presento il pacchetto SolePostHoc.jl, che offre strumenti avanzati per l'analisi post-hoc di modelli di apprendimento automatico simbolico. Durante la presentazione, illustro le funzionalità principali del pacchetto e un caso d'uso."
+            }
+        };
+
+        // Nuovo oggetto per PDF
+    // Nuovo oggetto per PDF
+const pdfs = {
+    cv: {
+        name: "Curriculum Vitae",
+        url: "https://github.com/Perro2110/perro2110.github.io/raw/main/CvEu.pdf",
+        embedUrl: "https://docs.google.com/viewer?url=https://github.com/Perro2110/perro2110.github.io/raw/main/CvEu.pdf&embedded=true",
+        title: "Curriculum Vitae - Marco Perrotta",
+        description: "Il mio CV aggiornato in formato europeo"
+    },
+    thesis: {
+        name: "Tesi di Laurea",
+        url: "https://github.com/Perro2110/perro2110.github.io/raw/main/Tesi.pdf",
+        embedUrl: "https://docs.google.com/viewer?url=https://github.com/Perro2110/perro2110.github.io/raw/main/Tesi.pdf&embedded=true",
+        title: "Tesi di Laurea Triennale",
+        description: "Un framework sistematico logic-based per spiegare modelli simbolici di ensemble"
+    },
+    paper: {
+        name: "Workshop Paper",
+        url: "https://overlay.uniud.it/workshop/2024/papers/paper14.pdf",
+        embedUrl: "https://docs.google.com/viewer?url=https://overlay.uniud.it/workshop/2024/papers/paper14.pdf&embedded=true",
+        title: "Minimal Rules from Decision Forests",
+        description: "A Systematic Approach - Workshop Paper 2024"
+    }
+};
+
+        // Download diretti per PDF (mantenuti uguali)
+        const downloads = {
+            thesis: {
+                name: "Scarica Tesi (PDF)",
+                url: "https://github.com/Perro2110/perro2110.github.io/raw/main/Tesi.pdf",
+                filename: "Tesi_Marco_Perrotta.pdf"
+            },
+            paper: {
+                name: "Scarica Paper Workshop (PDF)",
+                url: "https://overlay.uniud.it/workshop/2024/papers/paper14.pdf",
+                filename: "Workshop_Paper_Marco_Perrotta.pdf"
+            }
+        };
+
+        // Funzione helper per ottenere l'icona appropriata (mantenuta uguale)
+        function getIconClass(linkKey) {
+            switch(linkKey) {
+                case 'email':
+                    return 'email-icon';
+                case 'linkedin':
+                    return 'linkedin-icon';
+                default:
+                    return 'file-icon';
             }
         }
+
+        // Cartelle (mantenute uguali)
+        const folders = {
+            documenti: {
+                name: "AboutMe",
+                files: [
+                    { name: "formazione.txt", content: `📚 Formazione
+- Università degli Studi di Ferrara
+    Laurea Magistrale in AI (in corso)
+    Laurea Triennale in Informatica (2022-2025) - 110/110 cum laude
+
+- IIS N.Copernico A.Carpeggiani
+    Diploma in Scienze Informatiche (2017-2022) - 100/100 cum laude`},
+                    { name: "competenze.txt", content: `🛠 Competenze Tecniche
+- C, Java, Julia, Haskell, Python
+- Unix-like OS, Git
+- MySQL, PHP, Laravel` }
+                ]
+            },
+            progetti: {
+                name: "Progetti",
+                files: [
+                    { name: "Lumen.txt", content: `Algoritmo LUMEN
+Logic-driven Unified Minimal Extractor of Notions è un algoritmo esatto e altamente parallelizzabile che, grazie alla sua elevata parametrizzazione, consente, qualora richiesto, di individuare un equilibrio ottimale tra la precisione dei risultati e la complessità computazionale.` },
+                    { name: "SolePostHoc.txt", content: `Libreria SOLEPOSTHOC.jl
+Libreria integrata nell'ecosistema SOLE dedicata all'implementazione di algoritmi post-hoc avanzati, con particolare enfasi sul unificazione di meccanismi di estrazione concettuale.` },
+                    { name: "Sole.txt", content: `Framework SOLE.jl
+Un framework per l'apprendimento automatico simbolico, trasparente e interpretabile` }
+                ]
+            },
+            pubblicazioni: {
+    name: "Pubblicazioni",
+    files: [
+        { name: "tesi.txt", content: `- Tesi di Laurea Triennale • Università degli Studi di Ferrara
+                        • Informatica • 2024
+  "Un framework sistematico logic-based per spiegare modelli simbolici di
+   ensemble"
+    La mia tesi di laurea triennale, che approfondisce gli aspetti teorici e
+    pratici del framework LUMEN per spiegare modelli simbolici di ensemble` },
+        { name: "lista_paper.txt", content: `- Workshop Paper • 2024
+  "Minimal Rules from Decision Forests: a Systematic Approach"
+    Analisi, formalizzazione e approccio iniziale alla risoluzione del problema
+    dell'estrazione di regole minime da foreste decisionali.` }
+    ],
+    pdfs: [
+        { name: "Tesi (PDF Viewer)", key: "thesis" },
+        { name: "Workshop Paper (PDF Viewer)", key: "paper" }
+    ]
+},
+            contatti: {
+                name: "Contatti",
+                files: [],
+                links: [
+                    { name: "Invia Email", key: "email" },
+                    { name: "LinkedIn", key: "linkedin" }
+                ]
+            }
+        };
+
+        let currentFolder = null;
+        let openWindows = [];
+        let windowZIndex = 1000;
+        let clickCount = 0; // Per l'easter egg
+        let aquariumClosedTime = null;
+        const AQUARIUM_REOPEN_DELAY = 30000; // 30 secondi
+
+        // Variabili per il paint
+        let isPainting = false;
+        let currentTool = 'brush';
+        let currentColor = '#000000';
+        let brushSize = 5;
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Aggiungi event listeners per i file
+            document.querySelectorAll('.file-icon').forEach(icon => {
+                icon.addEventListener('dblclick', function() {
+                    const fileKey = this.getAttribute('data-file');
+                    openFile(fileKey);
+                });
+                icon.addEventListener('click', function(){
+                    const desktop = document.getElementById('desktop');
+                    const children = desktop.children;
+                    for (let el of children)
+                        el.classList.remove("clicked");
+                    this.classList.add('clicked');
+                });
+            });
+
+            // Aggiungi event listeners per le cartelle
+            document.querySelectorAll('.folder-icon').forEach(icon => {
+                icon.addEventListener('dblclick', function() {
+                    const folderKey = this.getAttribute('data-folder');
+                    openFolder(folderKey);
+                });
+                icon.addEventListener('click', function(){
+                    const desktop = document.getElementById('desktop');
+                    const children = desktop.children;
+                    for (let el of children)
+                        el.classList.remove("clicked");
+                    this.classList.add('clicked');
+                });
+            });
+
+            // Aggiungi event listeners per i collegamenti
+            document.querySelectorAll('.link-icon').forEach(icon => {
+                icon.addEventListener('dblclick', function() {
+                    const linkKey = this.getAttribute('data-link');
+                    openLink(linkKey);
+                });
+                icon.addEventListener('click', function(){
+                    const desktop = document.getElementById('desktop');
+                    const children = desktop.children;
+                    for (let el of children)
+                        el.classList.remove("clicked");
+                    this.classList.add('clicked');
+                });
+            });
+
+            // Aggiungi event listeners per i video
+            document.querySelectorAll('.video-icon').forEach(icon => {
+                icon.addEventListener('dblclick', function() {
+                    const videoKey = this.getAttribute('data-video');
+                    openVideo(videoKey);
+                });
+                icon.addEventListener('click', function(){
+                    const desktop = document.getElementById('desktop');
+                    const children = desktop.children;
+                    for (let el of children)
+                        el.classList.remove("clicked");
+                    this.classList.add('clicked');
+                });
+            });
+
+            // Aggiungi event listeners per i PDF
+            document.querySelectorAll('.pdf-icon').forEach(icon => {
+                icon.addEventListener('dblclick', function() {
+                    const pdfKey = this.getAttribute('data-pdf');
+                    openPdf(pdfKey);
+                });
+                icon.addEventListener('click', function(){
+                    const desktop = document.getElementById('desktop');
+                    const children = desktop.children;
+                    for (let el of children)
+                        el.classList.remove("clicked");
+                    this.classList.add('clicked');
+                });
+            });
+
+            // Aggiungi event listeners per il paint
+            document.querySelectorAll('.paint-icon').forEach(icon => {
+                icon.addEventListener('dblclick', function() {
+                    const paintKey = this.getAttribute('data-paint');
+                    openPaint(paintKey);
+                });
+                icon.addEventListener('click', function(){
+                    const desktop = document.getElementById('desktop');
+                    const children = desktop.children;
+                    for (let el of children)
+                        el.classList.remove("clicked");
+                    this.classList.add('clicked');
+                });
+            });
+
+            // Event listener per l'easter egg del pollo
+            document.getElementById('signatureName').addEventListener('click', function() {
+                clickCount++;
+                if (clickCount === 10) {
+                    document.getElementById('chickenIcon').classList.add('show');
+                    setTimeout(() => {
+                        document.getElementById('chickenIcon').classList.remove('show');
+                        clickCount = 0; // Reset counter
+                    }, 5000);
+                }
+            });
+
+            // Rendi le finestre draggable
+            makeWindowDraggable('editorWindow');
+            makeWindowDraggable('folderWindow');
+            makeWindowDraggable('videoWindow');
+            makeWindowDraggable('aquariumWindow');
+            makeWindowDraggable('pdfWindow');
+            makeWindowDraggable('paintWindow');
+            makeWindowDraggable('bootWindow');
+
+            // Aggiungi listener per aggiornare il contatore delle linee
+            document.getElementById('editorTextarea').addEventListener('input', updateLineCount);
+
+            // Avvia l'acquario dopo il boot
+            setTimeout(initializeAquarium, 1000);
+        });
+
+        // Inizializza l'acquario (mantenuta uguale)
+        function initializeAquarium() {
+            const aquarium = document.getElementById('aquariumContainer');
+            const width = aquarium.offsetWidth;
+            const height = aquarium.offsetHeight - 40;
+
+            class SwimmingCreature {
+                constructor(element, speed, depth, type = 'fish') {
+                    this.element = element;
+                    this.x = Math.random() * width;
+                    this.y = depth;
+                    this.speed = speed;
+                    this.direction = Math.random() > 0.5 ? 1 : -1;
+                    this.type = type;
+                    this.wobble = Math.random() * 0.5;
+                    this.wobblePhase = Math.random() * Math.PI * 2;
+                }
+
+                update() {
+                    this.x += this.speed * this.direction;
+                    this.wobblePhase += 0.05;
+                    const wobbleY = Math.sin(this.wobblePhase) * this.wobble;
+
+                    if (this.x > width + 40) this.x = -40;
+                    if (this.x < -40) this.x = width + 40;
+
+                    this.element.style.left = this.x + 'px';
+                    this.element.style.top = (this.y + wobbleY) + 'px';
+                }
+            }
+
+            class StationaryCreature {
+                constructor(element, x, y) {
+                    this.element = element;
+                    this.x = x;
+                    this.y = y;
+                    this.bobPhase = Math.random() * Math.PI * 2;
+                    this.bobAmount = 2;
+                    this.bobSpeed = 0.02;
+                }
+
+                update() {
+                    this.bobPhase += this.bobSpeed;
+                    const bobY = Math.sin(this.bobPhase) * this.bobAmount;
+                    this.element.style.left = this.x + 'px';
+                    this.element.style.top = (this.y + bobY) + 'px';
+                }
+            }
+
+            class Jellyfish {
+                constructor(element, x, startY) {
+                    this.element = element;
+                    this.x = x;
+                    this.y = startY;
+                    this.minY = 80;
+                    this.maxY = 280;
+                    this.speed = 0.5 + Math.random() * 0.5;
+                    this.direction = Math.random() > 0.5 ? 1 : -1;
+                }
+
+                update() {
+                    this.y += this.speed * this.direction;
+                    if (this.y > this.maxY) this.direction = -1;
+                    if (this.y < this.minY) this.direction = 1;
+
+                    this.element.style.left = this.x + 'px';
+                    this.element.style.top = this.y + 'px';
+                }
+            }
+
+            const creatures = [];
+
+            // Swimming fish
+            creatures.push(new SwimmingCreature(document.getElementById('fish1'), 1.5, 50, 'fish'));
+            creatures.push(new SwimmingCreature(document.getElementById('fish2'), 1, 120, 'fish'));
+            creatures.push(new SwimmingCreature(document.getElementById('fish3'), 2, 180, 'fish'));
+            creatures.push(new SwimmingCreature(document.getElementById('fish4'), 0.8, 90, 'fish'));
+
+            // Starfish
+            creatures.push(new StationaryCreature(document.getElementById('starfish1'), 60, 320));
+
+            // Jellyfish - moving up and down
+            creatures.push(new Jellyfish(document.getElementById('jellyfish1'), 80, 150));
+            creatures.push(new Jellyfish(document.getElementById('jellyfish2'), 250, 200));
+            creatures.push(new Jellyfish(document.getElementById('jellyfish3'), 150, 120));
+            creatures.push(new Jellyfish(document.getElementById('jellyfish4'), 350, 180));
+
+            // Sea Urchin
+            creatures.push(new StationaryCreature(document.getElementById('urchin1'), 200, 330));
+            creatures.push(new StationaryCreature(document.getElementById('urchin2'), 330, 320));
+            creatures.push(new StationaryCreature(document.getElementById('urchin3'), 100, 325));
+            creatures.push(new StationaryCreature(document.getElementById('urchin4'), 420, 315));
+
+            // Pineapple
+            creatures.push(new StationaryCreature(document.getElementById('pineapple1'), 360, 295));
+
+            // Sponge - walks back and forth on the bottom
+            creatures.push(new SwimmingCreature(document.getElementById('sponge1'), 0.6, 310, 'sponge'));
+
+            // Bubbles
+            function createBubble() {
+                const bubble = document.createElement('div');
+                bubble.className = 'bubble';
+                const x = Math.random() * (width - 8);
+                const y = height + 40;
+                const duration = 3 + Math.random() * 3;
+                
+                bubble.style.left = x + 'px';
+                bubble.style.top = y + 'px';
+                aquarium.appendChild(bubble);
+
+                let time = 0;
+                const startX = x;
+                const wobble = Math.sin(Math.random()) * 20;
+
+                const bubbleInterval = setInterval(() => {
+                    time += 0.05;
+                    const newY = y - (time * 40);
+                    const newX = startX + Math.sin(time * 3) * wobble;
+
+                    bubble.style.top = newY + 'px';
+                    bubble.style.left = newX + 'px';
+                    bubble.style.opacity = Math.max(0, 0.6 - time / duration);
+
+                    if (time > duration) {
+                        clearInterval(bubbleInterval);
+                        bubble.remove();
+                    }
+                }, 30);
+            }
+
+            setInterval(createBubble, 600);
+
+            // Animation loop
+            function animate() {
+                creatures.forEach(creature => creature.update());
+                requestAnimationFrame(animate);
+            }
+
+            animate();
+
+            // Mostra l'acquario
+            showAquarium();
+        }
+
+        // Mostra l'acquario (mantenuta uguale)
+        function showAquarium() {
+            const aquariumWindow = document.getElementById('aquariumWindow');
+            aquariumWindow.style.zIndex = ++windowZIndex;
+            aquariumWindow.classList.add('show');
+            addToTaskbar('Pixel Aquarium', 'aquarium');
+        }
+
+        // Chiudi l'acquario (mantenuta uguale)
+        function closeAquarium() {
+            const aquariumWindow = document.getElementById('aquariumWindow');
+            aquariumWindow.classList.remove('show');
+            removeFromTaskbar('aquarium');
+            
+            // Imposta il timer per riaprire l'acquario
+            aquariumClosedTime = Date.now();
+            setTimeout(checkAquariumReopen, AQUARIUM_REOPEN_DELAY);
+        }
+
+        // Controlla se riaprire l'acquario (mantenuta uguale)
+        function checkAquariumReopen() {
+            const aquariumWindow = document.getElementById('aquariumWindow');
+            if (!aquariumWindow.classList.contains('show') && aquariumClosedTime && 
+                (Date.now() - aquariumClosedTime) >= AQUARIUM_REOPEN_DELAY) {
+                //showAquarium();
+                aquariumClosedTime = null;
+            }
+        }
+
+        // Funzione per aprire collegamenti (mantenuta uguale)
+        function openLink(linkKey) {
+            const link = links[linkKey];
+            if (!link) return;
+            window.open(link.url, link.target || '_blank');
+        }
+
+        // Funzione per aprire video (mantenuta uguale)
+        function openVideo(videoKey) {
+            const video = videos[videoKey];
+            if (!video) return;
+
+            const videoWindow = document.getElementById('videoWindow');
+            const videoTitle = document.getElementById('videoTitle');
+            const youtubePlayer = document.getElementById('youtubePlayer');
+            const videoInfo = document.getElementById('videoInfo');
+
+            videoTitle.textContent = `Video Player - ${video.name}`;
+            
+            // Costruisci l'URL di embed di YouTube SENZA autoplay
+            const youtubeUrl = `https://www.youtube.com/embed/${video.youtubeId}`;
+            youtubePlayer.src = youtubeUrl;
+            
+            videoInfo.textContent = `${video.title} - ${video.description}`;
+
+            videoWindow.style.left = `${(window.innerWidth - 700) / 2 + Math.random() * 50 - 25}px`;
+            videoWindow.style.top = `${(window.innerHeight - 500) / 2 + Math.random() * 50 - 25}px`;
+            videoWindow.style.zIndex = ++windowZIndex;
+
+            videoWindow.classList.add('show');
+            addToTaskbar(`Video - ${video.name}`, 'video');
+        }
+
+        // Nuova funzione per aprire PDF
+        function openPdf(pdfKey) {
+            const pdf = pdfs[pdfKey];
+            if (!pdf) return;
+
+            const pdfWindow = document.getElementById('pdfWindow');
+            const pdfTitle = document.getElementById('pdfTitle');
+            const pdfViewer = document.getElementById('pdfViewer');
+            const pdfInfo = document.getElementById('pdfInfo');
+
+            pdfTitle.textContent = `PDF Viewer - ${pdf.name}`;
+            
+            // Usa l'URL di Google Docs Viewer per embeddare il PDF
+            pdfViewer.src = pdf.embedUrl;
+            
+            pdfInfo.textContent = `${pdf.title} - ${pdf.description}`;
+
+            pdfWindow.style.left = `${(window.innerWidth - 800) / 2 + Math.random() * 50 - 25}px`;
+            pdfWindow.style.top = `${(window.innerHeight - 600) / 2 + Math.random() * 50 - 25}px`;
+            pdfWindow.style.zIndex = ++windowZIndex;
+
+            pdfWindow.classList.add('show');
+            addToTaskbar(`PDF - ${pdf.name}`, 'pdf');
+        }
+
+        // Nuova funzione per aprire il paint
+        function openPaint(paintKey) {
+            const paintWindow = document.getElementById('paintWindow');
+            const paintTitle = document.getElementById('paintTitle');
+
+            paintTitle.textContent = `Mini Paint`;
+
+            paintWindow.style.left = `${(window.innerWidth - 600) / 2 + Math.random() * 50 - 25}px`;
+            paintWindow.style.top = `${(window.innerHeight - 500) / 2 + Math.random() * 50 - 25}px`;
+            paintWindow.style.zIndex = ++windowZIndex;
+
+            paintWindow.classList.add('show');
+            addToTaskbar(`Mini Paint`, 'paint');
+            
+            // Inizializza il canvas dopo che la finestra è visibile
+            setTimeout(initializePaint, 100);
+        }
+
+        // Inizializza il paint
+        function initializePaint() {
+            const canvas = document.getElementById('paintCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Imposta lo sfondo bianco
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Event listeners per gli strumenti
+            document.getElementById('brushTool').addEventListener('click', function() {
+                currentTool = 'brush';
+                document.getElementById('brushTool').classList.add('active');
+                document.getElementById('eraserTool').classList.remove('active');
+            });
+            
+            document.getElementById('eraserTool').addEventListener('click', function() {
+                currentTool = 'eraser';
+                document.getElementById('eraserTool').classList.add('active');
+                document.getElementById('brushTool').classList.remove('active');
+            });
+            
+            // Event listener per il selettore di colore
+            document.getElementById('colorPicker').addEventListener('click', function() {
+                const newColor = prompt('Inserisci un colore esadecimale (es. #FF0000 per rosso):', currentColor);
+                if (newColor && /^#[0-9A-F]{6}$/i.test(newColor)) {
+                    currentColor = newColor;
+                    this.style.backgroundColor = newColor;
+                }
+            });
+            
+            // Event listener per la dimensione del pennello
+            document.getElementById('brushSize').addEventListener('input', function() {
+                brushSize = this.value;
+            });
+            
+            // Event listener per pulire la tela
+            document.getElementById('clearCanvas').addEventListener('click', function() {
+                ctx.fillStyle = 'white';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            });
+            
+            // Event listeners per il disegno
+            canvas.addEventListener('mousedown', startPainting);
+            canvas.addEventListener('mouseup', stopPainting);
+            canvas.addEventListener('mousemove', draw);
+            canvas.addEventListener('mouseout', stopPainting);
+            
+            function startPainting(e) {
+                isPainting = true;
+                draw(e);
+            }
+            
+            function stopPainting() {
+                isPainting = false;
+                ctx.beginPath();
+            }
+            
+            function draw(e) {
+                if (!isPainting) return;
+                
+                const rect = canvas.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                ctx.lineWidth = brushSize;
+                ctx.lineCap = 'round';
+                
+                if (currentTool === 'brush') {
+                    ctx.strokeStyle = currentColor;
+                } else if (currentTool === 'eraser') {
+                    ctx.strokeStyle = 'white';
+                }
+                
+                ctx.lineTo(x, y);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(x, y);
+            }
+        }
+
+        // Funzione per chiudere il paint
+        function closePaint() {
+            const paintWindow = document.getElementById('paintWindow');
+            paintWindow.classList.remove('show');
+            removeFromTaskbar('paint');
+        }
+
+        // Funzione per chiudere il PDF viewer
+        function closePdf() {
+            const pdfWindow = document.getElementById('pdfWindow');
+            const pdfViewer = document.getElementById('pdfViewer');
+            
+            // Ferma il caricamento del PDF quando si chiude la finestra
+            pdfViewer.src = '';
+            
+            pdfWindow.classList.remove('show');
+            removeFromTaskbar('pdf');
+        }
+
+        // Funzione per chiudere il video player (mantenuta uguale)
+        function closeVideo() {
+            const videoWindow = document.getElementById('videoWindow');
+            const youtubePlayer = document.getElementById('youtubePlayer');
+            
+            // Ferma il video quando si chiude la finestra
+            youtubePlayer.src = '';
+            
+            videoWindow.classList.remove('show');
+            removeFromTaskbar('video');
+        }
+
+        // Funzione per scaricare file PDF (mantenuta uguale)
+        function downloadFile(downloadKey) {
+            const download = downloads[downloadKey];
+            if (!download) return;
+
+            const a = document.createElement('a');
+            a.href = download.url;
+            a.download = download.filename;
+            a.target = '_blank';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+
+        // Funzioni rimanenti (mantenute uguali)
+        function openFile(fileKey) {
+            const file = files[fileKey];
+            if (!file) return;
+
+            const editorWindow = document.getElementById('editorWindow');
+            const editorTitle = document.getElementById('editorTitle');
+            const editorTextarea = document.getElementById('editorTextarea');
+            const currentFile = document.getElementById('currentFile');
+
+            editorTitle.textContent = `Editor - ${file.name}`;
+            currentFile.textContent = file.name;
+            editorTextarea.value = file.content;
+
+            editorWindow.style.left = `${(window.innerWidth - 700) / 2 + Math.random() * 50 - 25}px`;
+            editorWindow.style.top = `${(window.innerHeight - 500) / 2 + Math.random() * 50 - 25}px`;
+            editorWindow.style.zIndex = ++windowZIndex;
+
+            editorWindow.classList.add('show');
+            updateLineCount();
+            addToTaskbar(`Editor - ${file.name}`, 'editor');
+        }
+
+        function openFolder(folderKey) {
+            const folder = folders[folderKey];
+            if (!folder) return;
+
+            currentFolder = folderKey;
+            const folderWindow = document.getElementById('folderWindow');
+            const folderTitle = document.getElementById('folderTitle');
+            const folderContent = document.getElementById('folderContent');
+            const currentPath = document.getElementById('currentPath');
+
+            folderTitle.textContent = folder.name;
+            currentPath.textContent = folder.name;
+
+            folderContent.innerHTML = '';
+
+            // Aggiungi i file normali
+            folder.files.forEach((file, index) => {
+                const fileElement = document.createElement('div');
+                fileElement.className = 'folder-item';
+                fileElement.innerHTML = `
+                    <div class="folder-item-icon file-icon"></div>
+                    <span>${file.name}</span>
+                `;
+                fileElement.addEventListener('dblclick', () => {
+                    openFileFromFolder(folderKey, index);
+                });
+                fileElement.addEventListener('click', function(){
+                    const parent = this.parentNode;
+                    const children = parent.children;
+                    for (let el of children)
+                        el.classList.remove("clicked");
+                    this.classList.add('clicked');
+                });
+                folderContent.appendChild(fileElement);
+            });
+
+            // Aggiungi i collegamenti se presenti
+            if (folder.links) {
+                folder.links.forEach((link) => {
+                    const linkElement = document.createElement('div');
+                    linkElement.className = 'folder-item';
+
+                    const iconClass = getIconClass(link.key);
+                    linkElement.innerHTML = `
+                        <div class="folder-item-icon ${iconClass}"></div>
+                        <span>${link.name}</span>
+                    `;
+                    linkElement.addEventListener('dblclick', () => {
+                        openLink(link.key);
+                    });
+
+                    linkElement.addEventListener('click', function(){
+                        const parent = this.parentNode;
+                        const children = parent.children;
+                        for (let el of children)
+                            el.classList.remove("clicked");
+                        this.classList.add('clicked');
+                    });
+
+                    folderContent.appendChild(linkElement);
+                });
+            }
+
+            // Aggiungi i PDF viewer se presenti
+if (folder.pdfs) {
+    folder.pdfs.forEach((pdf) => {
+        const pdfElement = document.createElement('div');
+        pdfElement.className = 'folder-item';
+        pdfElement.innerHTML = `
+            <div class="folder-item-icon pdf-icon"></div>
+            <span>${pdf.name}</span>
+        `;
+        pdfElement.addEventListener('dblclick', () => {
+            openPdf(pdf.key);
+        });
+
+        pdfElement.addEventListener('click', function(){
+            const parent = this.parentNode;
+            const children = parent.children;
+            for (let el of children)
+                el.classList.remove("clicked");
+            this.classList.add('clicked');
+        });
+
+        folderContent.appendChild(pdfElement);
+    });
+}
+
+            // Aggiungi i download PDF se presenti
+            if (folder.downloads) {
+                folder.downloads.forEach((download) => {
+                    const downloadElement = document.createElement('div');
+                    downloadElement.className = 'folder-item download-item';
+                    downloadElement.innerHTML = `
+                        <div class="folder-item-icon pdf-icon"></div>
+                        <span>${download.name}</span>
+                    `;
+                    downloadElement.addEventListener('dblclick', () => {
+                        downloadFile(download.key);
+                    });
+
+                    downloadElement.addEventListener('click', function(){
+                        const parent = this.parentNode;
+                        const children = parent.children;
+                        for (let el of children)
+                            el.classList.remove("clicked");
+                        this.classList.add('clicked');
+                    });
+
+                    folderContent.appendChild(downloadElement);
+                });
+            }
+
+            folderWindow.style.left = `${(window.innerWidth - 700) / 2 + Math.random() * 100 - 50}px`;
+            folderWindow.style.top = `${(window.innerHeight - 500) / 2 + Math.random() * 100 - 50}px`;
+            folderWindow.style.zIndex = ++windowZIndex;
+
+            folderWindow.classList.add('show');
+            addToTaskbar(folder.name, 'folder');
+        }
+
+        function openFileFromFolder(folderKey, fileIndex) {
+            const folder = folders[folderKey];
+            const file = folder.files[fileIndex];
+
+            const editorWindow = document.getElementById('editorWindow');
+            const editorTitle = document.getElementById('editorTitle');
+            const editorTextarea = document.getElementById('editorTextarea');
+            const currentFile = document.getElementById('currentFile');
+
+            editorTitle.textContent = `Editor - ${file.name}`;
+            currentFile.textContent = `${folder.name}/${file.name}`;
+            editorTextarea.value = file.content;
+
+            editorWindow.style.left = `${(window.innerWidth - 700) / 2 + Math.random() * 50 - 25}px`;
+            editorWindow.style.top = `${(window.innerHeight - 500) / 2 + Math.random() * 50 - 25}px`;
+            editorWindow.style.zIndex = ++windowZIndex;
+
+            editorWindow.classList.add('show');
+            updateLineCount();
+            addToTaskbar(`Editor - ${file.name}`, 'editor');
+        }
+
+        function closeEditor() {
+            document.getElementById('editorWindow').classList.remove('show');
+            removeFromTaskbar('editor');
+        }
+
+        function closeFolder() {
+            document.getElementById('folderWindow').classList.remove('show');
+            removeFromTaskbar('folder');
+        }
+
+        function goHome() {
+            closeFolder();
+        }
+
+        function updateLineCount() {
+            const textarea = document.getElementById('editorTextarea');
+            const lineCount = textarea.value.split('\n').length;
+            document.getElementById('lineCount').textContent = lineCount;
+        }
+
+        function addToTaskbar(title, type) {
+            const taskbarLeft = document.getElementById('taskbarLeft');
+            const taskbarItem = document.createElement('div');
+            taskbarItem.className = 'taskbar-item';
+            taskbarItem.textContent = title;
+            taskbarItem.dataset.type = type;
+            taskbarItem.addEventListener('click', () => {
+                if (type === 'editor') {
+                    document.getElementById('editorWindow').style.zIndex = ++windowZIndex;
+                } else if (type === 'folder') {
+                    document.getElementById('folderWindow').style.zIndex = ++windowZIndex;
+                } else if (type === 'video') {
+                    document.getElementById('videoWindow').style.zIndex = ++windowZIndex;
+                } else if (type === 'aquarium') {
+                    document.getElementById('aquariumWindow').style.zIndex = ++windowZIndex;
+                } else if (type === 'pdf') {
+                    document.getElementById('pdfWindow').style.zIndex = ++windowZIndex;
+                } else if (type === 'paint') {
+                    document.getElementById('paintWindow').style.zIndex = ++windowZIndex;
+                }
+            });
+            taskbarLeft.appendChild(taskbarItem);
+        }
+
+        function removeFromTaskbar(type) {
+            const taskbarLeft = document.getElementById('taskbarLeft');
+            const items = taskbarLeft.querySelectorAll(`.taskbar-item[data-type="${type}"]`);
+            items.forEach(item => item.remove());
+        }
+
+        function makeWindowDraggable(windowId) {
+            const windowEl = document.getElementById(windowId);
+            const header = windowEl.querySelector('.window-header');
+            let isDragging = false;
+            let currentX = 0;
+            let currentY = 0;
+            let initialX = 0;
+            let initialY = 0;
+
+            header.addEventListener('mousedown', dragStart);
+            document.addEventListener('mousemove', drag);
+            document.addEventListener('mouseup', dragEnd);
+
+            function dragStart(e) {
+                initialX = e.clientX - windowEl.offsetLeft;
+                initialY = e.clientY - windowEl.offsetTop;
+                isDragging = true;
+                windowEl.style.zIndex = ++windowZIndex;
+            }
+
+            function drag(e) {
+                if (isDragging) {
+                    e.preventDefault();
+                    currentX = e.clientX - initialX;
+                    currentY = e.clientY - initialY;
+
+                    windowEl.style.left = currentX + 'px';
+                    windowEl.style.top = currentY + 'px';
+                }
+            }
+
+            function dragEnd() {
+                isDragging = false;
+            }
+        }
+
+        // Gestione del click sulle finestre per portarle in primo piano
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('#editorWindow')) {
+                document.getElementById('editorWindow').style.zIndex = ++windowZIndex;
+            } else if (e.target.closest('#folderWindow')) {
+                document.getElementById('folderWindow').style.zIndex = ++windowZIndex;
+            } else if (e.target.closest('#videoWindow')) {
+                document.getElementById('videoWindow').style.zIndex = ++windowZIndex;
+            } else if (e.target.closest('#aquariumWindow')) {
+                document.getElementById('aquariumWindow').style.zIndex = ++windowZIndex;
+            } else if (e.target.closest('#pdfWindow')) {
+                document.getElementById('pdfWindow').style.zIndex = ++windowZIndex;
+            } else if (e.target.closest('#paintWindow')) {
+                document.getElementById('paintWindow').style.zIndex = ++windowZIndex;
+            }
+        });
     </script>
 </body>
 </html>
