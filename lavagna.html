@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lavagna</title>
+    <title>Lavagna Apple Style</title>
     <style>
         * {
             margin: 0;
@@ -308,6 +308,21 @@
         let isErasing = false;
         let points = 0;
         
+        // Cronologia undo
+        const undoStack = [];
+        const MAX_UNDO = 30;
+        
+        function saveSnapshot() {
+            undoStack.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
+            if (undoStack.length > MAX_UNDO) undoStack.shift();
+        }
+        
+        function undo() {
+            if (undoStack.length === 0) return;
+            const imageData = undoStack.pop();
+            ctx.putImageData(imageData, 0, 0);
+        }
+        
         // Configurazione contesto
         ctx.strokeStyle = '#ffffff';
         ctx.lineWidth = brushSize;
@@ -356,6 +371,7 @@
         // Inizio disegno
         function startDrawing(e) {
             e.preventDefault();
+            saveSnapshot();
             isDrawing = true;
             const coords = getCoordinates(e);
             lastX = coords.x;
@@ -409,6 +425,7 @@
         
         // Pulisci canvas
         function clearCanvas() {
+            saveSnapshot();
             ctx.fillStyle = '#000000';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             points = 0;
@@ -474,6 +491,9 @@
             } else if (e.key === 'e' || e.key === 'E') {
                 e.preventDefault();
                 eraserBtn.click();
+            } else if ((e.metaKey || e.ctrlKey) && e.key === 'z') {
+                e.preventDefault();
+                undo();
             } else if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
                 e.preventDefault();
                 clearCanvas();
