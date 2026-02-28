@@ -101,6 +101,11 @@
             background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%239C27B0"><path d="M18,4V3A1,1 0 0,0 17,2H5A1,1 0 0,0 4,3V7A1,1 0 0,0 5,8H17A1,1 0 0,0 18,7V6H19V10H9V21A1,1 0 0,0 10,22H12A1,1 0 0,0 13,21V12H21V4H18Z"/></svg>');
         }
 
+        .lavagna-icon .icon-image {
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23333"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>') !important;
+            background-size: contain;
+        }
+
         .link-icon .icon-image::after {
             content: '↗';
             position: absolute;
@@ -865,6 +870,12 @@
             <div class="icon-image"></div>
             <div class="icon-label">Mini Paint</div>
         </div>
+
+        <!-- Nuova icona Lavagna -->
+        <div class="paint-icon" data-app="lavagna" style="top: 380px; left: 1150px;">
+            <div class="icon-image" style="background-image: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"%23333\"><path d=\"M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z\"/></svg>') !important; background-size: contain;"></div>
+            <div class="icon-label">Lavagna</div>
+        </div>
     </div>
 
     <!-- Finestra Editor -->
@@ -1244,30 +1255,29 @@ Sentiti libero di contattarmi per:
         };
 
         // Nuovo oggetto per PDF
-    // Nuovo oggetto per PDF
-const pdfs = {
-    cv: {
-        name: "Curriculum Vitae",
-        url: "https://github.com/Perro2110/perro2110.github.io/raw/main/CvEu.pdf",
-        embedUrl: "https://docs.google.com/viewer?url=https://github.com/Perro2110/perro2110.github.io/raw/main/CvEu.pdf&embedded=true",
-        title: "Curriculum Vitae - Marco Perrotta",
-        description: "Il mio CV aggiornato in formato europeo"
-    },
-    thesis: {
-        name: "Tesi di Laurea",
-        url: "https://github.com/Perro2110/perro2110.github.io/raw/main/Tesi.pdf",
-        embedUrl: "https://docs.google.com/viewer?url=https://github.com/Perro2110/perro2110.github.io/raw/main/Tesi.pdf&embedded=true",
-        title: "Tesi di Laurea Triennale",
-        description: "Un framework sistematico logic-based per spiegare modelli simbolici di ensemble"
-    },
-    paper: {
-        name: "Workshop Paper",
-        url: "https://overlay.uniud.it/workshop/2024/papers/paper14.pdf",
-        embedUrl: "https://docs.google.com/viewer?url=https://overlay.uniud.it/workshop/2024/papers/paper14.pdf&embedded=true",
-        title: "Minimal Rules from Decision Forests",
-        description: "A Systematic Approach - Workshop Paper 2024"
-    }
-};
+        const pdfs = {
+            cv: {
+                name: "Curriculum Vitae",
+                url: "https://github.com/Perro2110/perro2110.github.io/raw/main/CvEu.pdf",
+                embedUrl: "https://docs.google.com/viewer?url=https://github.com/Perro2110/perro2110.github.io/raw/main/CvEu.pdf&embedded=true",
+                title: "Curriculum Vitae - Marco Perrotta",
+                description: "Il mio CV aggiornato in formato europeo"
+            },
+            thesis: {
+                name: "Tesi di Laurea",
+                url: "https://github.com/Perro2110/perro2110.github.io/raw/main/Tesi.pdf",
+                embedUrl: "https://docs.google.com/viewer?url=https://github.com/Perro2110/perro2110.github.io/raw/main/Tesi.pdf&embedded=true",
+                title: "Tesi di Laurea Triennale",
+                description: "Un framework sistematico logic-based per spiegare modelli simbolici di ensemble"
+            },
+            paper: {
+                name: "Workshop Paper",
+                url: "https://overlay.uniud.it/workshop/2024/papers/paper14.pdf",
+                embedUrl: "https://docs.google.com/viewer?url=https://overlay.uniud.it/workshop/2024/papers/paper14.pdf&embedded=true",
+                title: "Minimal Rules from Decision Forests",
+                description: "A Systematic Approach - Workshop Paper 2024"
+            }
+        };
 
         // Download diretti per PDF (mantenuti uguali)
         const downloads = {
@@ -1325,24 +1335,24 @@ Un framework per l'apprendimento automatico simbolico, trasparente e interpretab
                 ]
             },
             pubblicazioni: {
-    name: "Pubblicazioni",
-    files: [
-        { name: "tesi.txt", content: `- Tesi di Laurea Triennale • Università degli Studi di Ferrara
+                name: "Pubblicazioni",
+                files: [
+                    { name: "tesi.txt", content: `- Tesi di Laurea Triennale • Università degli Studi di Ferrara
                         • Informatica • 2024
   "Un framework sistematico logic-based per spiegare modelli simbolici di
    ensemble"
     La mia tesi di laurea triennale, che approfondisce gli aspetti teorici e
     pratici del framework LUMEN per spiegare modelli simbolici di ensemble` },
-        { name: "lista_paper.txt", content: `- Workshop Paper • 2024
+                    { name: "lista_paper.txt", content: `- Workshop Paper • 2024
   "Minimal Rules from Decision Forests: a Systematic Approach"
     Analisi, formalizzazione e approccio iniziale alla risoluzione del problema
     dell'estrazione di regole minime da foreste decisionali.` }
-    ],
-    pdfs: [
-        { name: "Tesi (PDF Viewer)", key: "thesis" },
-        { name: "Workshop Paper (PDF Viewer)", key: "paper" }
-    ]
-},
+                ],
+                pdfs: [
+                    { name: "Tesi (PDF Viewer)", key: "thesis" },
+                    { name: "Workshop Paper (PDF Viewer)", key: "paper" }
+                ]
+            },
             contatti: {
                 name: "Contatti",
                 files: [],
@@ -1448,6 +1458,20 @@ Un framework per l'apprendimento automatico simbolico, trasparente e interpretab
                 icon.addEventListener('dblclick', function() {
                     const paintKey = this.getAttribute('data-paint');
                     openPaint(paintKey);
+                });
+                icon.addEventListener('click', function(){
+                    const desktop = document.getElementById('desktop');
+                    const children = desktop.children;
+                    for (let el of children)
+                        el.classList.remove("clicked");
+                    this.classList.add('clicked');
+                });
+            });
+
+            // Aggiungi event listener per la lavagna
+            document.querySelectorAll('[data-app="lavagna"]').forEach(icon => {
+                icon.addEventListener('dblclick', function() {
+                    window.location.href = 'lavagna.html';
                 });
                 icon.addEventListener('click', function(){
                     const desktop = document.getElementById('desktop');
@@ -1949,29 +1973,29 @@ Un framework per l'apprendimento automatico simbolico, trasparente e interpretab
             }
 
             // Aggiungi i PDF viewer se presenti
-if (folder.pdfs) {
-    folder.pdfs.forEach((pdf) => {
-        const pdfElement = document.createElement('div');
-        pdfElement.className = 'folder-item';
-        pdfElement.innerHTML = `
-            <div class="folder-item-icon pdf-icon"></div>
-            <span>${pdf.name}</span>
-        `;
-        pdfElement.addEventListener('dblclick', () => {
-            openPdf(pdf.key);
-        });
+            if (folder.pdfs) {
+                folder.pdfs.forEach((pdf) => {
+                    const pdfElement = document.createElement('div');
+                    pdfElement.className = 'folder-item';
+                    pdfElement.innerHTML = `
+                        <div class="folder-item-icon pdf-icon"></div>
+                        <span>${pdf.name}</span>
+                    `;
+                    pdfElement.addEventListener('dblclick', () => {
+                        openPdf(pdf.key);
+                    });
 
-        pdfElement.addEventListener('click', function(){
-            const parent = this.parentNode;
-            const children = parent.children;
-            for (let el of children)
-                el.classList.remove("clicked");
-            this.classList.add('clicked');
-        });
+                    pdfElement.addEventListener('click', function(){
+                        const parent = this.parentNode;
+                        const children = parent.children;
+                        for (let el of children)
+                            el.classList.remove("clicked");
+                        this.classList.add('clicked');
+                    });
 
-        folderContent.appendChild(pdfElement);
-    });
-}
+                    folderContent.appendChild(pdfElement);
+                });
+            }
 
             // Aggiungi i download PDF se presenti
             if (folder.downloads) {
