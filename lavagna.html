@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lavagna Apple Style</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            height: 90vh;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
+        }
+
+        .toolbar {
+            padding: 15px 20px;
+            background: rgba(30, 30, 30, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 40px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .tool-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            padding: 0 15px;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .tool-group:last-child {
+            border-right: none;
+        }
+
+        .tool-btn {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 15px;
+            padding: 8px 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            opacity: 0.6;
+            font-weight: 500;
+            letter-spacing: -0.01em;
+        }
+
+        .tool-btn svg {
+            width: 18px;
+            height: 18px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+            transition: all 0.2s ease;
+        }
+
+        .tool-btn:hover {
+            opacity: 1;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .tool-btn.active {
+            opacity: 1;
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .tool-btn.active svg {
+            stroke: #ffffff;
+        }
+
+        .size-indicator {
+            color: white;
+            font-size: 14px;
+            opacity: 0.7;
+            min-width: 60px;
+            text-align: center;
+            font-feature-settings: "tnum";
+        }
+
+        .canvas-container {
+            background: black;
+            border-radius: 24px;
+            overflow: hidden;
+            height: calc(100% - 90px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+            background: black;
+            cursor: crosshair;
+            touch-action: none;
+        }
+
+        .slider-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .slider-container svg {
+            width: 18px;
+            height: 18px;
+            stroke: rgba(255, 255, 255, 0.7);
+            stroke-width: 2;
+            fill: none;
+        }
+
+        input[type="range"] {
+            width: 150px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            background: white;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            transition: all 0.1s ease;
+        }
+
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        .status-bar {
+            display: flex;
+            gap: 20px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 13px;
+            margin-left: auto;
+            padding: 0 15px;
+        }
+
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .status-item svg {
+            width: 14px;
+            height: 14px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                height: 95vh;
+                padding: 10px;
+            }
+            
+            .toolbar {
+                flex-wrap: wrap;
+                border-radius: 30px;
+                padding: 10px;
+            }
+            
+            .tool-group {
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                padding-bottom: 10px;
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .tool-group:last-child {
+                border-bottom: none;
+                padding-bottom: 0;
+            }
+            
+            input[type="range"] {
+                width: 100px;
+            }
+            
+            .tool-btn {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="toolbar">
+            <div class="tool-group">
+                <button class="tool-btn" id="penBtn" title="Penna (P)">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M3 21L12 12M15 6L18 9M12 3L3 12L6 15L15 6L12 3Z" stroke="currentColor" stroke-width="2" fill="none"/>
+                        <path d="M15 6L18 9L21 6L18 3L15 6Z" stroke="currentColor" stroke-width="2" fill="none"/>
+                    </svg>
+                    Penna
+                </button>
+                <button class="tool-btn" id="eraserBtn" title="Gomma (E)">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M16 3L21 8L11 18L6 18L3 15L13 5L16 3Z" stroke="currentColor" stroke-width="2" fill="none"/>
+                        <path d="M11 18L8 21H18L21 18" stroke="currentColor" stroke-width="2" fill="none"/>
+                    </svg>
+                    Gomma
+                </button>
+            </div>
+            
+            <div class="tool-group">
+                <div class="slider-container">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="2" fill="none"/>
+                        <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2" fill="none"/>
+                    </svg>
+                    <input type="range" id="brushSize" min="1" max="50" value="5">
+                    <span class="size-indicator" id="sizeValue">5px</span>
+                </div>
+            </div>
+            
+            <div class="tool-group">
+                <button class="tool-btn" id="clearBtn" title="Cancella tutto (⌘+K)">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M4 7H20M19 7L18 20H6L5 7H19Z" stroke="currentColor" stroke-width="2" fill="none"/>
+                        <path d="M10 11V16M14 11V16" stroke="currentColor" stroke-width="2"/>
+                        <path d="M8 4H16V7H8V4Z" stroke="currentColor" stroke-width="2" fill="none"/>
+                    </svg>
+                    Cancella
+                </button>
+                <button class="tool-btn" id="saveBtn" title="Salva (⌘+S)">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M5 5H19V19H5V5Z" stroke="currentColor" stroke-width="2" fill="none"/>
+                        <path d="M9 5V9H15V5" stroke="currentColor" stroke-width="2" fill="none"/>
+                        <path d="M9 13H15V19H9V13Z" stroke="currentColor" stroke-width="2" fill="none"/>
+                    </svg>
+                    Salva
+                </button>
+            </div>
+            
+            <div class="status-bar">
+                <div class="status-item" id="coordStatus">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2" fill="none"/>
+                        <path d="M12 5V3M12 21V19M19 12H21M3 12H5M17.7 6.3L19 5M5 19L6.3 17.7M6.3 6.3L5 5M19 19L17.7 17.7" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    <span id="mouseCoords">0, 0</span>
+                </div>
+                <div class="status-item">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="8" r="2" stroke="currentColor" stroke-width="2" fill="none"/>
+                        <circle cx="18" cy="16" r="2" stroke="currentColor" stroke-width="2" fill="none"/>
+                        <circle cx="6" cy="16" r="2" stroke="currentColor" stroke-width="2" fill="none"/>
+                        <path d="M12 10V16M18 14L14 12M6 14L10 12" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    <span id="pointCount">0 punti</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="canvas-container">
+            <canvas id="canvas"></canvas>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Stati iniziali
+        let isDrawing = false;
+        let lastX = 0;
+        let lastY = 0;
+        let brushSize = 5;
+        let isErasing = false;
+        let points = 0;
+        
+        // Configurazione contesto
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = brushSize;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        
+        // Funzione per ridimensionare il canvas
+        function resizeCanvas() {
+            const container = canvas.parentElement;
+            canvas.width = container.clientWidth;
+            canvas.height = container.clientHeight;
+            
+            // Reset del contesto dopo il resize
+            ctx.strokeStyle = isErasing ? '#000000' : '#ffffff';
+            ctx.lineWidth = brushSize;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            
+            // Sfondo nero
+            ctx.fillStyle = '#000000';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+        
+        // Ottieni coordinate corrette relative al canvas
+        function getCoordinates(e) {
+            const rect = canvas.getBoundingClientRect();
+            const scaleX = canvas.width / rect.width;
+            const scaleY = canvas.height / rect.height;
+            
+            let clientX, clientY;
+            
+            if (e.touches) {
+                clientX = e.touches[0].clientX;
+                clientY = e.touches[0].clientY;
+            } else {
+                clientX = e.clientX;
+                clientY = e.clientY;
+            }
+            
+            const x = (clientX - rect.left) * scaleX;
+            const y = (clientY - rect.top) * scaleY;
+            
+            return { x: Math.max(0, Math.min(x, canvas.width)), y: Math.max(0, Math.min(y, canvas.height)) };
+        }
+        
+        // Inizio disegno
+        function startDrawing(e) {
+            e.preventDefault();
+            isDrawing = true;
+            const coords = getCoordinates(e);
+            lastX = coords.x;
+            lastY = coords.y;
+            
+            // Disegna un punto singolo per il click
+            ctx.beginPath();
+            ctx.arc(lastX, lastY, brushSize / 2, 0, Math.PI * 2);
+            ctx.fillStyle = isErasing ? '#000000' : '#ffffff';
+            ctx.fill();
+            points++;
+            updatePointCount();
+        }
+        
+        // Disegno in corso
+        function draw(e) {
+            e.preventDefault();
+            if (!isDrawing) return;
+            
+            const coords = getCoordinates(e);
+            const currentX = coords.x;
+            const currentY = coords.y;
+            
+            ctx.beginPath();
+            ctx.moveTo(lastX, lastY);
+            ctx.lineTo(currentX, currentY);
+            ctx.strokeStyle = isErasing ? '#000000' : '#ffffff';
+            ctx.lineWidth = brushSize;
+            ctx.stroke();
+            
+            // Aggiorna coordinate mouse
+            document.getElementById('mouseCoords').textContent = 
+                `${Math.round(currentX)}, ${Math.round(currentY)}`;
+            
+            lastX = currentX;
+            lastY = currentY;
+            points++;
+            updatePointCount();
+        }
+        
+        // Fine disegno
+        function stopDrawing() {
+            isDrawing = false;
+            ctx.beginPath();
+        }
+        
+        // Aggiorna contatore punti
+        function updatePointCount() {
+            document.getElementById('pointCount').textContent = `${points} ${points === 1 ? 'punto' : 'punti'}`;
+        }
+        
+        // Pulisci canvas
+        function clearCanvas() {
+            ctx.fillStyle = '#000000';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            points = 0;
+            updatePointCount();
+        }
+        
+        // Salva immagine
+        function saveCanvas() {
+            const link = document.createElement('a');
+            link.download = `lavagna-${new Date().toISOString().slice(0,19).replace(/:/g, '-')}.png`;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+        
+        // Event listeners per mouse
+        canvas.addEventListener('mousedown', startDrawing);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', stopDrawing);
+        canvas.addEventListener('mouseleave', stopDrawing);
+        
+        // Event listeners per touch
+        canvas.addEventListener('touchstart', startDrawing, { passive: false });
+        canvas.addEventListener('touchmove', draw, { passive: false });
+        canvas.addEventListener('touchend', stopDrawing);
+        canvas.addEventListener('touchcancel', stopDrawing);
+        
+        // Controlli UI
+        const penBtn = document.getElementById('penBtn');
+        const eraserBtn = document.getElementById('eraserBtn');
+        const clearBtn = document.getElementById('clearBtn');
+        const saveBtn = document.getElementById('saveBtn');
+        const brushSizeInput = document.getElementById('brushSize');
+        const sizeValue = document.getElementById('sizeValue');
+        
+        penBtn.addEventListener('click', () => {
+            isErasing = false;
+            penBtn.classList.add('active');
+            eraserBtn.classList.remove('active');
+            ctx.strokeStyle = '#ffffff';
+        });
+        
+        eraserBtn.addEventListener('click', () => {
+            isErasing = true;
+            eraserBtn.classList.add('active');
+            penBtn.classList.remove('active');
+            ctx.strokeStyle = '#000000';
+        });
+        
+        brushSizeInput.addEventListener('input', (e) => {
+            brushSize = parseInt(e.target.value);
+            ctx.lineWidth = brushSize;
+            sizeValue.textContent = `${brushSize}px`;
+        });
+        
+        clearBtn.addEventListener('click', clearCanvas);
+        saveBtn.addEventListener('click', saveCanvas);
+        
+        // Shortcut da tastiera
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'p' || e.key === 'P') {
+                e.preventDefault();
+                penBtn.click();
+            } else if (e.key === 'e' || e.key === 'E') {
+                e.preventDefault();
+                eraserBtn.click();
+            } else if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+                e.preventDefault();
+                clearCanvas();
+            } else if ((e.metaKey || e.ctrlKey) && e.key === 's') {
+                e.preventDefault();
+                saveCanvas();
+            }
+        });
+        
+        // Gestione resize
+        window.addEventListener('resize', () => {
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            resizeCanvas();
+            ctx.putImageData(imageData, 0, 0);
+        });
+        
+        // Inizializzazione
+        resizeCanvas();
+        clearCanvas();
+        penBtn.classList.add('active');
+        
+        // Aggiornamento coordinate in tempo reale
+        canvas.addEventListener('mousemove', (e) => {
+            const coords = getCoordinates(e);
+            document.getElementById('mouseCoords').textContent = 
+                `${Math.round(coords.x)}, ${Math.round(coords.y)}`;
+        });
+    </script>
+</body>
+</html>
