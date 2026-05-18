@@ -803,7 +803,9 @@
         const pdfs = {
             cv:      { name: "Curriculum Vitae",  url: "https://github.com/Perro2110/perro2110.github.io/raw/main/CvEu.pdf", embedUrl: "https://docs.google.com/viewer?url=https://github.com/Perro2110/perro2110.github.io/raw/main/CvEu.pdf&embedded=true", title: "Curriculum Vitae - Marco Perrotta", description: "Il mio CV aggiornato in formato europeo" },
             thesis:  { name: "Tesi di Laurea",    url: "https://github.com/Perro2110/perro2110.github.io/raw/main/Tesi.pdf", embedUrl: "https://docs.google.com/viewer?url=https://github.com/Perro2110/perro2110.github.io/raw/main/Tesi.pdf&embedded=true", title: "Tesi di Laurea Triennale", description: "Un framework sistematico logic-based per spiegare modelli simbolici di ensemble" },
-            paper:   { name: "Workshop Paper",    url: "https://overlay.uniud.it/workshop/2024/papers/paper14.pdf", embedUrl: "https://docs.google.com/viewer?url=https://overlay.uniud.it/workshop/2024/papers/paper14.pdf&embedded=true", title: "Minimal Rules from Decision Forests", description: "A Systematic Approach - Workshop Paper 2024" }
+            paper:   { name: "Workshop Paper",    url: "https://overlay.uniud.it/workshop/2024/papers/paper14.pdf", embedUrl: "https://docs.google.com/viewer?url=https://overlay.uniud.it/workshop/2024/papers/paper14.pdf&embedded=true", title: "Minimal Rules from Decision Forests", description: "A Systematic Approach - Workshop Paper 2024" },
+            mdai2026: { name: "MDAI 2026 Paper", url: "", embedUrl: "", title: "Structural Compression of Ensemble Models via Evolutionary Algorithms", description: "Davide Guidoboni, Marco Perrotta, and Guido Sciavicco - MDAI Conference 2026" },
+            iwinac2026: { name: "IWINAC 2026 Paper", url: "", embedUrl: "", title: "Hybrid SAT-Based Decision Trees", description: "Marco Perrotta, Guido Sciavicco, and Simona Tenasini - IWINAC Conference 2026" }
         };
 
         const downloads = {
@@ -839,10 +841,18 @@
                 name: "Pubblicazioni",
                 files: [
                     { name: "tesi.txt",         content: `- Tesi di Laurea Triennale • Università degli Studi di Ferrara\n  • Informatica • 2024\n  "Un framework sistematico logic-based per spiegare modelli simbolici di ensemble"\n  La mia tesi di laurea triennale, che approfondisce gli aspetti teorici e pratici del framework LUMEN per spiegare modelli simbolici di ensemble` },
-                    { name: "lista_paper.txt",   content: `- Workshop Paper • 2024\n  "Minimal Rules from Decision Forests: a Systematic Approach"\n  Analisi, formalizzazione e approccio iniziale alla risoluzione del problema dell'estrazione di regole minime da foreste decisionali.` }
+                    { name: "lista_paper.txt",   content: `- Workshop Paper • 2024\n  "Minimal Rules from Decision Forests: a Systematic Approach"\n  Analisi, formalizzazione e approccio iniziale alla risoluzione del problema dell'estrazione di regole minime da foreste decisionali.\n\n- MDAI Conference 2026\n  "Structural Compression of Ensemble Models via Evolutionary Algorithms"\n  Davide Guidoboni, Marco Perrotta, and Guido Sciavicco\n\n- IWINAC Conference 2026\n  "Hybrid SAT-Based Decision Trees"\n  Marco Perrotta, Guido Sciavicco, and Simona Tenasini` }
                 ],
-                pdfs:      [ { name: "Tesi (PDF Viewer)", key: "thesis" }, { name: "Workshop Paper (PDF Viewer)", key: "paper" } ],
-                downloads: [ { name: "Scarica Tesi (PDF)", key: "thesis" }, { name: "Scarica Paper Workshop (PDF)", key: "paper" } ]
+                pdfs:      [
+                    { name: "Tesi (PDF Viewer)", key: "thesis" },
+                    { name: "Workshop Paper (PDF Viewer)", key: "paper" },
+                    { name: "MDAI 2026 — Structural Compression of Ensemble Models", key: "mdai2026" },
+                    { name: "IWINAC 2026 — Hybrid SAT-Based Decision Trees", key: "iwinac2026" }
+                ],
+                downloads: [
+                    { name: "Scarica Tesi (PDF)", key: "thesis" },
+                    { name: "Scarica Paper Workshop (PDF)", key: "paper" }
+                ]
             },
             contatti: {
                 name: "Contatti",
@@ -1025,6 +1035,19 @@
         function openPdf(pdfKey) {
             const pdf = pdfs[pdfKey];
             if (!pdf) return;
+            // For papers without a URL yet, show info in editor window instead
+            if (!pdf.url) {
+                const win = document.getElementById('editorWindow');
+                document.getElementById('editorTitle').textContent = `Editor - ${pdf.name}`;
+                document.getElementById('currentFile').textContent = pdf.name;
+                document.getElementById('editorTextarea').value = `📄 ${pdf.title}\n\n${pdf.description}\n\n⚠️ Il PDF di questo paper non è ancora disponibile online.\nContatta Marco per maggiori informazioni.`;
+                positionWindow(win, 700, 500);
+                win.style.zIndex = ++windowZIndex;
+                win.classList.add('show');
+                updateLineCount();
+                addToTaskbar(`Info - ${pdf.name}`, 'editor');
+                return;
+            }
             const win = document.getElementById('pdfWindow');
             document.getElementById('pdfTitle').textContent = `📄 ${pdf.name}`;
             document.getElementById('pdfViewer').src = pdf.embedUrl;
@@ -1122,6 +1145,7 @@
 
         function makeWindowDraggable(windowId) {
             const win    = document.getElementById(windowId);
+            if (!win) return;
             const header = win.querySelector('.window-header');
             let isDragging = false, initialX, initialY;
             header.addEventListener('mousedown', e => { initialX = e.clientX - win.offsetLeft; initialY = e.clientY - win.offsetTop; isDragging = true; win.style.zIndex = ++windowZIndex; });
