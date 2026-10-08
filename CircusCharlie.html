@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Circus Charlie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Patrick+Hand&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #e8d9bf;
+    --ink: #1b0d0d;
+    --blood: #a31f1f;
+    --wall: #2a1712;
+    --arrow-x: 27%;           /* posizione della freccia (trascinabile) */
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; min-height: 100%; }
+  body {
+    background:
+      radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,.75) 100%),
+      repeating-linear-gradient(45deg, rgba(255,255,255,.015) 0 6px, transparent 6px 12px),
+      var(--wall);
+    background-attachment: fixed;
+    color: var(--paper);
+    font-family: 'Patrick Hand', 'Comic Sans MS', cursive;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 14px 12px 24px;
+    min-height: 100vh;
+  }
+
+  h1 {
+    font-family: 'Permanent Marker', 'Comic Sans MS', cursive;
+    font-weight: normal;
+    font-size: clamp(26px, 4vw, 40px);
+    margin: 0 0 10px;
+    letter-spacing: 2px;
+    color: var(--paper);
+    text-shadow: 3px 3px 0 var(--blood), 5px 5px 0 #000;
+    transform: rotate(-1.5deg);
+  }
+
+  .stage {
+    position: relative;
+    width: min(100%, calc((100vh - 270px) * 4 / 3));
+    min-width: 300px;
+  }
+
+  .frame {
+    aspect-ratio: 4 / 3;
+    border: 6px solid #000;
+    border-radius: 10px 14px 9px 13px;
+    box-shadow: 0 0 0 3px var(--blood), 8px 10px 0 rgba(0,0,0,.7);
+    background: #000;
+    overflow: hidden;
+  }
+  iframe { width: 100%; height: 100%; border: 0; display: block; }
+
+  /* ---- freccia stile schizzo a pennarello ---- */
+  .hint {
+    position: absolute;
+    left: var(--arrow-x);
+    top: calc(100% - 6px);
+    width: 340px;
+    margin-left: -30px;
+    cursor: grab;
+    touch-action: none;
+    user-select: none;
+    z-index: 5;
+  }
+  .hint.dragging { cursor: grabbing; }
+  .hint svg { display: block; width: 70px; height: 80px; overflow: visible;
+              animation: bob 1.2s ease-in-out infinite; }
+  .hint .label {
+    margin: -4px 0 0 34px;
+    font-family: 'Permanent Marker', cursive;
+    font-size: 17px;
+    line-height: 1.15;
+    color: var(--paper);
+    text-shadow: 2px 2px 0 #000;
+    transform: rotate(-3deg);
+    white-space: nowrap;
+  }
+  .hint .label small {
+    display: block;
+    margin-top: 3px;
+    font-family: 'Patrick Hand', cursive;
+    font-size: 14px;
+    opacity: .7;
+  }
+  @keyframes bob { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-8px) } }
+
+  .stage { margin-bottom: 120px; }
+</style>
+</head>
+<body>
+  <h1>CIRCUS CHARLIE</h1>
+
+  <div class="stage" id="stage">
+    <div class="frame">
+      <iframe
+        src="https://www.retrogames.cc/embed/33287-circus-charlie-centuri.html"
+        frameborder="no"
+        allowfullscreen="true"
+        webkitallowfullscreen="true"
+        mozallowfullscreen="true"
+        scrolling="no"
+        allow="cross-origin-isolated"></iframe>
+    </div>
+
+    <div class="hint" id="hint" title="Trascinami sopra l'icona del joystick">
+      <svg viewBox="0 0 70 80" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <!-- bordo scuro -->
+        <path d="M44 76 C 14 66, 8 40, 30 14" stroke="#000" stroke-width="10"/>
+        <path d="M14 30 L30 8 L46 28" stroke="#000" stroke-width="10"/>
+        <!-- tratto rosso -->
+        <path d="M44 76 C 14 66, 8 40, 30 14" stroke="#a31f1f" stroke-width="5"/>
+        <path d="M14 30 L30 8 L46 28" stroke="#a31f1f" stroke-width="5"/>
+      </svg>
+      <div class="label">Clicca l'icona del joystick<br>per cambiare i comandi
+        <small>(trascina la freccia se non è allineata)</small>
+      </div>
+    </div>
+  </div>
+
+
+<script>
+  // Freccia trascinabile in orizzontale, posizione ricordata se il browser lo permette
+  (function () {
+    var stage = document.getElementById('stage');
+    var hint = document.getElementById('hint');
+    var KEY = 'cc_arrow_x_v3';
+    try {
+      var saved = localStorage.getItem(KEY);
+      if (saved) document.documentElement.style.setProperty('--arrow-x', saved);
+    } catch (e) {}
+
+    var dragging = false;
+    hint.addEventListener('pointerdown', function (e) {
+      dragging = true; hint.classList.add('dragging');
+      hint.setPointerCapture(e.pointerId);
+    });
+    hint.addEventListener('pointermove', function (e) {
+      if (!dragging) return;
+      var r = stage.getBoundingClientRect();
+      var pct = Math.max(2, Math.min(95, ((e.clientX - r.left) / r.width) * 100));
+      document.documentElement.style.setProperty('--arrow-x', pct.toFixed(1) + '%');
+    });
+    function stop() {
+      if (!dragging) return;
+      dragging = false; hint.classList.remove('dragging');
+      try {
+        localStorage.setItem(KEY, getComputedStyle(document.documentElement).getPropertyValue('--arrow-x').trim());
+      } catch (e) {}
+    }
+    hint.addEventListener('pointerup', stop);
+    hint.addEventListener('pointercancel', stop);
+  })();
+</script>
+</body>
+</html>
