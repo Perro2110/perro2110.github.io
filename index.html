@@ -5,24 +5,95 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Marco Perrotta — Curriculum Vitae</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 -4.5 20 20' shape-rendering='crispEdges'><rect fill='%238D8D9A' x='2' y='6' width='1' height='1'/><rect fill='%238D8D9A' x='3' y='7' width='1' height='1'/><rect fill='%238D8D9A' x='4' y='8' width='1' height='1'/><rect fill='%238D8D9A' x='5' y='9' width='1' height='1'/><rect fill='%238D8D9A' x='5' y='10' width='5' height='1'/><rect fill='%23D9473F' x='12' y='0' width='1' height='1'/><rect fill='%23D9473F' x='14' y='0' width='1' height='1'/><rect fill='%23D9473F' x='12' y='1' width='3' height='1'/><rect fill='%23E0A03A' x='11' y='2' width='5' height='3'/><rect fill='%23C2682C' x='10' y='3' width='1' height='1'/><rect fill='%23D9473F' x='10' y='4' width='1' height='1'/><rect fill='%23E0A03A' x='11' y='5' width='7' height='4'/><rect fill='%23E0A03A' x='18' y='4' width='1' height='3'/><rect fill='%23E0A03A' x='19' y='3' width='1' height='2'/><rect fill='%23E0A03A' x='12' y='9' width='1' height='2'/><rect fill='%23E0A03A' x='15' y='9' width='1' height='2'/><rect fill='%2315151A' x='12' y='3' width='1' height='1'/><rect fill='%23E0A03A' x='10' y='7' width='1' height='1'/></svg>">
+  <meta name="description" content="Marco Perrotta — symbolic AI, interpretable machine learning and computational logic. Research Assistant at ACLAI LAB, Ferrara.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
     rel="stylesheet">
   <style>
+    /* ============================================================
+       Tokens
+       Accent: a Haskell/Julia purple. Tag colours borrow the
+       Julia-style blue / green / red triad.
+       ============================================================ */
     :root {
-      --paper: #F6F5F1;
-      --ink: #1E1E1C;
-      --muted: #6B6A62;
-      --rule: #DEDCD2;
-      --accent: #24406B;
-      --accent-soft: rgba(36, 64, 107, 0.08);
-      --tag-talk: #24406B;
-      --tag-school: #8C5A18;
-      --tag-poster: #2B6B4C;
-      --sidebar-w: 300px;
-      --content-w: 700px;
+      --bg: #F6F6F3;
+      --surface: #FFFFFF;
+      --ink: #15151A;
+      --ink-2: #3A3A44;
+      --muted: #6E6E7A;
+      --rule: #E3E3E0;
+      --grid: rgba(21, 21, 26, 0.045);
+      --accent: #6E44C9;
+      --accent-soft: rgba(110, 68, 201, 0.09);
+      --blue: #3557C9;
+      --green: #2E8031;
+      --red: #B8372F;
+      --code-bg: #FBFBF9;
+      --chick: #D9952B;
+      --chick-beak: #B8622A;
+      --hl-k: #6E44C9;
+      --hl-t: #3557C9;
+      --hl-s: #2E8031;
+      --hl-n: #B8372F;
+      --hl-c: #8E8E98;
+      --sidebar-w: 320px;
+      --content-w: 720px;
+      --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+      --sans: 'Inter', system-ui, -apple-system, sans-serif;
+      color-scheme: light;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #0D0D11;
+        --surface: #15151B;
+        --ink: #ECECF1;
+        --ink-2: #C4C4CE;
+        --muted: #8D8D9A;
+        --rule: #25252E;
+        --grid: rgba(236, 236, 241, 0.035);
+        --accent: #B596F7;
+        --accent-soft: rgba(181, 150, 247, 0.12);
+        --blue: #7C9BF2;
+        --green: #6CC070;
+        --red: #EE7B72;
+        --code-bg: #111116;
+      --chick: #F0B24C;
+      --chick-beak: #E07B3C;
+        --hl-k: #B596F7;
+        --hl-t: #7C9BF2;
+        --hl-s: #6CC070;
+        --hl-n: #EE9A72;
+        --hl-c: #6A6A78;
+        color-scheme: dark;
+      }
+    }
+
+    :root[data-theme="dark"] {
+      --bg: #0D0D11;
+      --surface: #15151B;
+      --ink: #ECECF1;
+      --ink-2: #C4C4CE;
+      --muted: #8D8D9A;
+      --rule: #25252E;
+      --grid: rgba(236, 236, 241, 0.035);
+      --accent: #B596F7;
+      --accent-soft: rgba(181, 150, 247, 0.12);
+      --blue: #7C9BF2;
+      --green: #6CC070;
+      --red: #EE7B72;
+      --code-bg: #111116;
+      --chick: #F0B24C;
+      --chick-beak: #E07B3C;
+      --hl-k: #B596F7;
+      --hl-t: #7C9BF2;
+      --hl-s: #6CC070;
+      --hl-n: #EE9A72;
+      --hl-c: #6A6A78;
+      color-scheme: dark;
     }
 
     * {
@@ -35,12 +106,17 @@
 
     body {
       margin: 0;
-      background: var(--paper);
+      background-color: var(--bg);
+      background-image:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size: 24px 24px;
       color: var(--ink);
-      font-family: 'IBM Plex Sans', sans-serif;
-      font-size: 16px;
-      line-height: 1.6;
+      font-family: var(--sans);
+      font-size: 15.5px;
+      line-height: 1.65;
       -webkit-font-smoothing: antialiased;
+      font-feature-settings: "cv11", "ss01";
     }
 
     a {
@@ -57,20 +133,25 @@
     button:focus-visible {
       outline: 2px solid var(--accent);
       outline-offset: 3px;
+      border-radius: 2px;
     }
 
     h1,
     h2,
     h3 {
-      font-family: 'Source Serif 4', serif;
-      font-weight: 600;
-      color: var(--ink);
       margin: 0;
+      color: var(--ink);
+      letter-spacing: -0.015em;
+    }
+
+    code,
+    .mono {
+      font-family: var(--mono);
     }
 
     .layout {
       display: flex;
-      max-width: 1180px;
+      max-width: 1200px;
       margin: 0 auto;
       min-height: 100vh;
     }
@@ -79,120 +160,419 @@
     .sidebar {
       width: var(--sidebar-w);
       flex-shrink: 0;
-      padding: 64px 36px 40px 40px;
+      padding: 56px 32px 32px 40px;
       position: sticky;
       top: 0;
       align-self: flex-start;
       height: 100vh;
       overflow-y: auto;
+      display: flex;
+      flex-direction: column;
     }
 
+    /* ---------- Logo: flat pixel chicken typing on a tiny laptop ---------- */
+    .mark {
+      display: flex;
+      align-items: flex-end;
+      height: 23px;
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: 22px;
+    }
+
+    .mark svg {
+      display: block;
+      width: 40px;
+      height: 22px;
+      margin-left: 2px;
+      shape-rendering: crispEdges;
+      overflow: visible;
+    }
+
+    .mark .b { fill: var(--chick); }
+    .mark .r { fill: var(--red); }
+    .mark .o { fill: var(--chick-beak); }
+    .mark .e { fill: var(--ink); }
+    .mark .g { fill: var(--muted); }
+
+    .mark .tap1 { animation: tap 0.8s steps(1) infinite; }
+    .mark .tap2 { animation: tap 0.8s steps(1) infinite reverse; }
+    .mark .eye  { animation: blink 4s steps(1) infinite; }
+    .mark:hover .tap1,
+    .mark:hover .tap2 { animation-duration: 0.25s; }
+
+    @keyframes tap   { 50% { opacity: 0; } }
+    @keyframes blink { 94% { opacity: 0; } }
+
     .sidebar h1 {
-      font-size: 1.9rem;
+      font-size: 1.7rem;
+      font-weight: 700;
       line-height: 1.15;
-      letter-spacing: -0.01em;
+    }
+
+    .sidebar .handle {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 6px;
     }
 
     .sidebar .role {
-      margin-top: 10px;
-      color: var(--muted);
-      font-size: 0.98rem;
-      line-height: 1.5;
-      max-width: 23ch;
-    }
-
-    .sidebar .contact {
-      margin-top: 28px;
-      padding-top: 20px;
-      border-top: 1px solid var(--rule);
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
+      margin: 14px 0 0 0;
+      color: var(--ink-2);
       font-size: 0.92rem;
+      line-height: 1.55;
     }
 
-    .sidebar .contact a {
-      color: var(--ink);
+    .kv {
+      margin-top: 24px;
+      padding-top: 18px;
+      border-top: 1px solid var(--rule);
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 6px 12px;
+      font-size: 0.82rem;
     }
 
-    .sidebar .contact .loc {
+    .kv dt {
+      font-family: var(--mono);
       color: var(--muted);
+    }
+
+    .kv dd {
+      margin: 0;
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+
+    .kv dd a {
+      color: var(--ink);
+      text-decoration-color: var(--rule);
+    }
+
+    .kv dd a:hover {
+      color: var(--accent);
+      text-decoration-color: currentColor;
     }
 
     nav.sections {
-      margin-top: 32px;
-      padding-top: 20px;
+      margin-top: 24px;
+      padding-top: 18px;
       border-top: 1px solid var(--rule);
       display: flex;
       flex-direction: column;
-      gap: 2px;
+      gap: 1px;
+      font-family: var(--mono);
+      font-size: 0.82rem;
     }
 
     nav.sections a {
+      display: flex;
+      gap: 12px;
+      align-items: baseline;
       color: var(--muted);
       text-decoration: none;
-      font-size: 0.92rem;
-      padding: 7px 0;
-      border-left: 2px solid transparent;
-      padding-left: 12px;
-      margin-left: -14px;
-      transition: color .15s ease, border-color .15s ease;
+      padding: 5px 10px;
+      margin-left: -10px;
+      border-radius: 6px;
+      transition: color .15s ease, background-color .15s ease;
+    }
+
+    nav.sections a .addr {
+      opacity: 0.55;
+      font-size: 0.74rem;
+    }
+
+    nav.sections a:hover {
+      color: var(--ink);
     }
 
     nav.sections a.active {
+      color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    nav.sections a.active .addr {
+      opacity: 1;
+    }
+
+    .sidebar-foot {
+      margin-top: auto;
+      padding-top: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .theme-toggle {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--muted);
+      background: transparent;
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+
+    .theme-toggle:hover {
       color: var(--ink);
-      border-left-color: var(--accent);
-      font-weight: 500;
+      border-color: var(--muted);
+    }
+
+    .cv-link {
+      font-family: var(--mono);
+      font-size: 0.75rem;
     }
 
     /* ---------- Content ---------- */
     main {
       flex: 1;
       min-width: 0;
-      padding: 64px 40px 100px 48px;
+      padding: 56px 40px 96px 48px;
       border-left: 1px solid var(--rule);
-      max-width: calc(var(--content-w) + 48px + 40px);
     }
 
     section {
       max-width: var(--content-w);
-      margin-bottom: 64px;
+      margin-bottom: 72px;
       scroll-margin-top: 32px;
     }
 
-    section>h2 {
-      font-size: 1.5rem;
+    .sec-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 4px 14px;
       margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .sec-head .addr {
+      font-family: var(--mono);
+      font-size: 0.74rem;
+      color: var(--accent);
+    }
+
+    .sec-head h2 {
+      font-size: 1.35rem;
+      font-weight: 650;
+    }
+
+    .sec-head .sig {
+      margin-left: auto;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .sig .k {
+      color: var(--hl-k);
+    }
+
+    .sig .t {
+      color: var(--hl-t);
+    }
+
+    p {
+      margin: 0 0 14px 0;
     }
 
     .note {
       color: var(--muted);
-      font-size: 0.86rem;
-      font-style: italic;
-      margin: -8px 0 20px 0;
+      font-size: 0.84rem;
+      margin: -8px 0 18px 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .note::before {
+      content: "--";
+      font-family: var(--mono);
+      opacity: 0.7;
     }
 
     .note+.note {
-      margin-top: -14px;
+      margin-top: -12px;
     }
 
+    /* Stats strip */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border: 1px solid var(--rule);
+      border-radius: 10px;
+      background: var(--surface);
+      margin: 24px 0 22px 0;
+      overflow: hidden;
+    }
+
+    .stat {
+      padding: 14px 16px;
+      border-left: 1px solid var(--rule);
+    }
+
+    .stat:first-child {
+      border-left: none;
+    }
+
+    .stat .v {
+      font-family: var(--mono);
+      font-size: 1.35rem;
+      font-weight: 600;
+      line-height: 1.2;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .stat .l {
+      font-size: 0.74rem;
+      color: var(--muted);
+      font-family: var(--mono);
+    }
+
+    /* Code card */
+    .code-card {
+      border: 1px solid var(--rule);
+      border-radius: 10px;
+      background: var(--code-bg);
+      overflow: hidden;
+      margin-top: 8px;
+    }
+
+    .code-tabs {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      padding: 6px 8px;
+      border-bottom: 1px solid var(--rule);
+      background: var(--surface);
+      overflow-x: auto;
+    }
+
+    .code-tabs button {
+      font-family: var(--mono);
+      font-size: 0.76rem;
+      color: var(--muted);
+      background: transparent;
+      border: 0;
+      padding: 5px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      white-space: nowrap;
+    }
+
+    .code-tabs button .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: currentColor;
+      opacity: 0.5;
+    }
+
+    .code-tabs button[aria-selected="true"] {
+      color: var(--ink);
+      background: var(--accent-soft);
+    }
+
+    .code-tabs button[aria-selected="true"] .dot {
+      opacity: 1;
+    }
+
+    .code-tabs button[data-lang="hs"] .dot {
+      color: var(--accent);
+    }
+
+    .code-tabs button[data-lang="jl"] .dot {
+      color: var(--green);
+    }
+
+    .code-tabs button[data-lang="asm"] .dot {
+      color: var(--red);
+    }
+
+    .code-tabs .fname {
+      margin-left: auto;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--muted);
+      padding-right: 6px;
+      white-space: nowrap;
+    }
+
+    .code-card pre {
+      margin: 0;
+      padding: 16px 18px;
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      line-height: 1.7;
+      overflow-x: auto;
+      color: var(--ink-2);
+      counter-reset: ln;
+    }
+
+    .code-card pre[hidden] {
+      display: none;
+    }
+
+    .code-card pre .ln {
+      display: block;
+    }
+
+    .code-card pre .ln::before {
+      counter-increment: ln;
+      content: counter(ln);
+      display: inline-block;
+      width: 2ch;
+      margin-right: 16px;
+      text-align: right;
+      color: var(--hl-c);
+      opacity: 0.6;
+    }
+
+    pre .k {
+      color: var(--hl-k);
+    }
+
+    pre .t {
+      color: var(--hl-t);
+    }
+
+    pre .s {
+      color: var(--hl-s);
+    }
+
+    pre .n {
+      color: var(--hl-n);
+    }
+
+    pre .c {
+      color: var(--hl-c);
+      font-style: italic;
+    }
+
+    /* Inline icons */
     .star {
       display: inline-block;
       line-height: 1;
-      vertical-align: 0.15em;
-      margin-left: 2px;
+      vertical-align: 0.1em;
+      margin-left: 3px;
     }
 
     .star svg {
       width: 12px;
       height: 12px;
-      fill: var(--muted);
+      fill: var(--accent);
       display: block;
     }
 
     .star .slit {
       fill: none;
-      stroke: var(--paper);
+      stroke: var(--surface);
       stroke-width: 1.2;
       stroke-linecap: round;
     }
@@ -200,17 +580,16 @@
     .github-link {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
     }
 
     .github-link svg {
-      width: 15px;
-      height: 15px;
-      fill: var(--accent);
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
       flex-shrink: 0;
     }
 
-    /* Icona tazzina (stesso stile dell'icona GitHub) */
     .inline-icon {
       width: 16px;
       height: 16px;
@@ -219,40 +598,152 @@
       margin: 0 2px;
     }
 
-    /* Timeline entries (Esperienza / Istruzione) */
-    .entry {
-      display: grid;
-      grid-template-columns: 130px 1fr;
-      gap: 20px;
-      padding: 18px 0;
-      border-top: 1px solid var(--rule);
+    /* Bibliography (Publications / Talks) */
+    .biblio-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      counter-reset: ref;
     }
 
-    .entry:first-of-type {
+    .biblio {
+      display: grid;
+      grid-template-columns: 52px 1fr;
+      gap: 0 12px;
+      padding: 16px;
+      margin: 0 -16px;
+      border-radius: 10px;
+      transition: background-color .15s ease;
+    }
+
+    .biblio:hover {
+      background: var(--surface);
+    }
+
+    .biblio::before {
+      counter-increment: ref;
+      content: "[" counter(ref) "]";
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--muted);
+      padding-top: 2px;
+    }
+
+    .biblio .meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--mono);
+      font-size: 0.74rem;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .biblio .title {
+      font-weight: 600;
+      font-size: 1rem;
+      line-height: 1.4;
+      color: var(--ink);
+    }
+
+    .biblio .authors {
+      font-size: 0.88rem;
+      color: var(--ink-2);
+      margin-top: 4px;
+    }
+
+    .biblio .authors .me {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .biblio .venue {
+      font-size: 0.84rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      padding: 1px 8px;
+      border-radius: 999px;
+      border: 1px solid currentColor;
+      line-height: 1.6;
+    }
+
+    .pill::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .pill.talk {
+      color: var(--blue);
+    }
+
+    .pill.school {
+      color: var(--red);
+    }
+
+    .pill.poster {
+      color: var(--green);
+    }
+
+    .pill.venue {
+      color: var(--accent);
+    }
+
+    /* Timeline entries (Experience / Education) */
+    .timeline {
+      position: relative;
+    }
+
+    .entry {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 24px;
+      padding: 18px 0;
+      border-top: 1px dashed var(--rule);
+    }
+
+    .entry:first-child {
       border-top: none;
       padding-top: 0;
     }
 
     .entry .date {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.8rem;
+      font-family: var(--mono);
+      font-size: 0.76rem;
       color: var(--muted);
       padding-top: 3px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .entry .date .now {
+      color: var(--green);
     }
 
     .entry .body h3 {
-      font-size: 1.08rem;
+      font-size: 1rem;
       font-weight: 600;
+      line-height: 1.4;
     }
 
     .entry .org {
       color: var(--muted);
-      font-size: 0.92rem;
+      font-size: 0.88rem;
       margin-top: 2px;
     }
 
     .entry ul {
-      margin: 12px 0 0 0;
+      margin: 10px 0 0 0;
       padding-left: 18px;
     }
 
@@ -261,122 +752,118 @@
     }
 
     .entry li {
-      margin-bottom: 6px;
-      font-size: 0.95rem;
+      margin-bottom: 5px;
+      font-size: 0.92rem;
+      color: var(--ink-2);
     }
 
     .entry li::marker {
+      color: var(--accent);
+      content: "› ";
+      font-family: var(--mono);
+    }
+
+    .entry ul ul li::marker {
+      content: "· ";
       color: var(--muted);
     }
 
     .entry a.doclink {
-      font-size: 0.9rem;
+      display: inline-block;
+      margin-top: 4px;
+      font-family: var(--mono);
+      font-size: 0.78rem;
     }
 
     /* Skills */
-    .skill-row {
+    .skill-group {
       display: grid;
-      grid-template-columns: 130px 1fr;
-      gap: 20px;
-      padding: 10px 0;
+      grid-template-columns: 140px 1fr;
+      gap: 24px;
+      padding: 14px 0;
+      border-top: 1px dashed var(--rule);
     }
 
-    .skill-row .label {
+    .skill-group:first-of-type {
+      border-top: none;
+    }
+
+    .skill-group .label {
+      font-family: var(--mono);
+      font-size: 0.78rem;
       color: var(--muted);
-      font-size: 0.85rem;
-      font-family: 'IBM Plex Mono', monospace;
-      padding-top: 2px;
+      padding-top: 4px;
     }
 
-    .skill-row .value {
-      font-size: 0.95rem;
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .chip {
+      font-family: var(--mono);
+      font-size: 0.76rem;
+      padding: 3px 9px;
+      border-radius: 6px;
+      border: 1px solid var(--rule);
+      background: var(--surface);
+      color: var(--ink-2);
+    }
+
+    .chip.fav {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-soft);
+      font-weight: 500;
+    }
+
+    .chip.fav::before {
+      content: "★ ";
+      font-size: 0.7em;
     }
 
     .lang-row {
       display: flex;
       justify-content: space-between;
       gap: 20px;
-      padding: 8px 0;
-      border-bottom: 1px solid var(--rule);
-      font-size: 0.95rem;
-    }
-
-    .lang-row:last-child {
-      border-bottom: none;
+      font-size: 0.9rem;
+      padding: 3px 0;
     }
 
     .lang-row .lvl {
       color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.76rem;
       text-align: right;
     }
 
-    /* Bibliography-style (Pubblicazioni / Talk) */
-    .biblio {
-      padding: 16px 0;
-      border-top: 1px solid var(--rule);
-    }
-
-    .biblio:first-of-type {
-      border-top: none;
-      padding-top: 0;
-    }
-
-    .biblio .year {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-
-    .biblio .authors {
-      font-size: 0.95rem;
-      margin-top: 4px;
-    }
-
-    .biblio .title {
-      font-style: italic;
-    }
-
-    .biblio .venue {
-      font-size: 0.9rem;
-      color: var(--muted);
-      margin-top: 2px;
-    }
-
-    .tag {
-      display: inline-block;
+    .legend {
+      font-family: var(--mono);
       font-size: 0.72rem;
-      font-weight: 500;
-      padding: 2px 8px;
-      border-radius: 3px;
-      margin-right: 8px;
-      vertical-align: middle;
-    }
-
-    .tag.talk {
-      color: var(--tag-talk);
-      background: rgba(36, 64, 107, 0.1);
-    }
-
-    .tag.school {
-      color: var(--tag-school);
-      background: rgba(140, 90, 24, 0.12);
-    }
-
-    .tag.poster {
-      color: var(--tag-poster);
-      background: rgba(43, 107, 76, 0.12);
+      color: var(--muted);
+      margin-top: 10px;
     }
 
     footer {
       max-width: var(--content-w);
-      padding-top: 24px;
+      padding-top: 20px;
       border-top: 1px solid var(--rule);
       color: var(--muted);
-      font-size: 0.85rem;
+      font-family: var(--mono);
+      font-size: 0.76rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    footer .prompt {
+      color: var(--accent);
     }
 
     /* ---------- Mobile ---------- */
-    @media (max-width:860px) {
+    @media (max-width: 880px) {
       .layout {
         flex-direction: column;
       }
@@ -385,39 +872,58 @@
         width: 100%;
         position: relative;
         height: auto;
-        padding: 40px 24px 24px 24px;
+        padding: 36px 16px 0 16px;
+      }
+
+      .kv {
+        grid-template-columns: 70px 1fr;
       }
 
       nav.sections {
         flex-direction: row;
         overflow-x: auto;
-        gap: 16px;
-        padding-bottom: 4px;
+        gap: 4px;
+        padding-bottom: 12px;
         -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
       }
 
       nav.sections a {
         white-space: nowrap;
-        border-left: none;
-        border-bottom: 2px solid transparent;
-        padding-left: 0;
         margin-left: 0;
-        padding-bottom: 6px;
+        flex-shrink: 0;
       }
 
-      nav.sections a.active {
-        border-left-color: transparent;
-        border-bottom-color: var(--accent);
+      .sidebar-foot {
+        padding: 0 0 16px 0;
+        margin-top: 4px;
       }
 
       main {
         border-left: none;
         border-top: 1px solid var(--rule);
-        padding: 32px 24px 60px 24px;
+        padding: 32px 16px 56px 16px;
+      }
+
+      .sec-head .sig {
+        margin-left: 0;
+        width: 100%;
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .stat:nth-child(3) {
+        border-left: none;
+      }
+
+      .stat:nth-child(n+3) {
+        border-top: 1px solid var(--rule);
       }
 
       .entry,
-      .skill-row {
+      .skill-group {
         grid-template-columns: 1fr;
         gap: 6px;
       }
@@ -425,15 +931,51 @@
       .entry .date {
         padding-top: 0;
       }
+
+      .biblio {
+        grid-template-columns: 1fr;
+        margin: 0;
+        padding: 14px 0;
+      }
+
+      .biblio::before {
+        margin-bottom: 2px;
+      }
+
+      .biblio:hover {
+        background: transparent;
+      }
     }
 
-    @media (prefers-reduced-motion:reduce) {
+    @media (prefers-reduced-motion: reduce) {
       html {
         scroll-behavior: auto;
       }
 
-      nav.sections a {
+      nav.sections a,
+      .biblio {
         transition: none;
+      }
+
+      .mark * {
+        animation: none !important;
+      }
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+
+      .sidebar {
+        position: static;
+        height: auto;
+      }
+
+      nav.sections,
+      .sidebar-foot,
+      .code-card {
+        display: none;
       }
     }
   </style>
@@ -444,32 +986,71 @@
   <div class="layout">
 
     <aside class="sidebar">
+      <div class="mark" role="img" aria-label="Pixel chicken typing on a laptop" title="cluck.">
+        <svg viewBox="0 0 20 11" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect class="g" x="2" y="6" width="1" height="1"/>
+          <rect class="g" x="3" y="7" width="1" height="1"/>
+          <rect class="g" x="4" y="8" width="1" height="1"/>
+          <rect class="g" x="5" y="9" width="1" height="1"/>
+          <rect class="g" x="5" y="10" width="5" height="1"/>
+          <rect class="r" x="12" y="0" width="1" height="1"/>
+          <rect class="r" x="14" y="0" width="1" height="1"/>
+          <rect class="r" x="12" y="1" width="3" height="1"/>
+          <rect class="b" x="11" y="2" width="5" height="3"/>
+          <rect class="o" x="10" y="3" width="1" height="1"/>
+          <rect class="r" x="10" y="4" width="1" height="1"/>
+          <rect class="b" x="11" y="5" width="7" height="4"/>
+          <rect class="b" x="18" y="4" width="1" height="3"/>
+          <rect class="b" x="19" y="3" width="1" height="2"/>
+          <rect class="b" x="12" y="9" width="1" height="2"/>
+          <rect class="b" x="15" y="9" width="1" height="2"/>
+          <rect class="e eye" x="12" y="3" width="1" height="1"/>
+          <rect class="b tap1" x="10" y="7" width="1" height="1"/>
+          <rect class="b tap2" x="9" y="8" width="1" height="2"/>
+        </svg>
+      </div>
       <h1>Marco Perrotta</h1>
+      <div class="handle">@Perro2110</div>
       <p class="role">Symbolic artificial intelligence, interpretable machine learning and computational logic.</p>
 
-      <div class="contact">
-        <span class="loc">Ferrara, Italy</span>
-        <a href="mailto:perrottamarco2011@gmail.com">perrottamarco2011@gmail.com</a>
-        <a href="https://github.com/Perro2110" target="_blank" rel="noopener">perro2110.github.io</a>
-        <a href="https://www.linkedin.com/in/marco-perrotta-b159b6244/" target="_blank" rel="noopener">linkedin.com/in/marco-perrotta-b159b6244</a>
-        <a href="https://perro2110.github.io/my_desktop" target="_blank"
-          rel="noopener">perro2110.github.io/my_desktop</a>
-      </div>
+      <dl class="kv">
+        <dt>loc</dt>
+        <dd>Ferrara, Italy</dd>
+        <dt>mail</dt>
+        <dd><a href="mailto:perrottamarco2011@gmail.com">perrottamarco2011@gmail.com</a></dd>
+        <dt>git</dt>
+        <dd><a href="https://github.com/Perro2110" target="_blank" rel="noopener">github.com/Perro2110</a></dd>
+        <dt>in</dt>
+        <dd><a href="https://www.linkedin.com/in/marco-perrotta-b159b6244/" target="_blank"
+            rel="noopener">marco-perrotta-b159b6244</a></dd>
+        <dt>~</dt>
+        <dd><a href="https://perro2110.github.io/my_desktop" target="_blank" rel="noopener">my_desktop</a></dd>
+      </dl>
 
-      <nav class="sections">
-        <a href="#about">About</a>
-        <a href="#publications">Publications</a>
-        <a href="#experience">Experience</a>
-        <a href="#education">Education</a>
-        <a href="#skills">Skills</a>
-        <a href="#talks">Talks &amp; presentations</a>
+      <nav class="sections" aria-label="Sections">
+        <a href="#about"><span class="addr">0x00</span>about</a>
+        <a href="#publications"><span class="addr">0x04</span>publications</a>
+        <a href="#experience"><span class="addr">0x08</span>experience</a>
+        <a href="#education"><span class="addr">0x0C</span>education</a>
+        <a href="#skills"><span class="addr">0x10</span>skills</a>
+        <a href="#talks"><span class="addr">0x14</span>talks</a>
       </nav>
+
+      <div class="sidebar-foot">
+        <button class="theme-toggle" type="button" id="themeToggle" aria-label="Toggle colour theme">theme: auto</button>
+        <a class="cv-link" href="CvEu.pdf" target="_blank" rel="noopener">cv.pdf ↗</a>
+      </div>
     </aside>
 
     <main>
 
       <section id="about">
-        <h2>About</h2>
+        <header class="sec-head">
+          <span class="addr">0x00</span>
+          <h2>About</h2>
+          <code class="sig">about <span class="k">::</span> <span class="t">Text</span></code>
+        </header>
+
         <p>
           I'm a student and researcher in Artificial Intelligence based in Ferrara, with a particular interest in
           symbolic AI, interpretable machine learning and computational logic. I work as a Research Assistant at
@@ -480,8 +1061,8 @@
         <p>
           Outside of academic work I enjoy writing code for lighter, more personal projects: if you'd like a look
           at that more informal side, you can find it all on my
-          <a class="github-link" href="https://github.com/Perro2110" target="_blank" rel="noopener">
-            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <a class="github-link" href="https://github.com/Perro2110" target="_blank" rel="noopener"><svg
+              viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <path
                 d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
                 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13
@@ -491,270 +1072,421 @@
                 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15
                 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2
                 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
-            </svg>
-            GitHub
-          </a>.<br><br>
+            </svg>GitHub</a>.
           If you need a break
           <svg class="inline-icon" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <!-- vapore -->
             <rect x="4.25" y="1" width="1.5" height="3.2" rx=".75" />
             <rect x="7.25" y="1" width="1.5" height="3.2" rx=".75" />
-            <!-- tazza -->
             <path d="M2 6h9v4a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V6z" />
-            <!-- manico -->
             <path d="M11 7h1.5a2.5 2.5 0 0 1 0 5H10.7v-1.5H12.5a1 1 0 0 0 0-2H11z" />
-            <!-- piattino -->
             <rect x="1" y="14" width="11" height="1.25" rx=".6" />
           </svg>,
           you can also play a round of
           <a href="CircusCharlie.html">Circus Charlie</a>.
         </p>
+
+        <div class="stats" aria-label="At a glance">
+          <div class="stat"><div class="v" data-count="#publications .biblio">3</div><div class="l">papers</div></div>
+          <div class="stat"><div class="v" data-count="#talks .biblio">4</div><div class="l">talks</div></div>
+          <div class="stat"><div class="v" data-count="#experience .entry">5</div><div class="l">roles</div></div>
+          <div class="stat"><div class="v">110L</div><div class="l">BSc grade</div></div>
+        </div>
+
+        <div class="code-card">
+          <div class="code-tabs" role="tablist" aria-label="Same record, three languages">
+            <button type="button" role="tab" data-lang="hs" aria-selected="true" aria-controls="code-hs"
+              id="tab-hs"><span class="dot"></span>Haskell</button>
+            <button type="button" role="tab" data-lang="jl" aria-selected="false" aria-controls="code-jl"
+              id="tab-jl"><span class="dot"></span>Julia</button>
+            <button type="button" role="tab" data-lang="asm" aria-selected="false" aria-controls="code-asm"
+              id="tab-asm"><span class="dot"></span>MIPS</button>
+            <span class="fname" id="fname">Marco.hs</span>
+          </div>
+<pre id="code-hs" role="tabpanel" aria-labelledby="tab-hs"><span class="ln"><span class="k">data</span> <span class="t">Researcher</span> <span class="k">=</span> <span class="t">Researcher</span></span><span class="ln">  { name      <span class="k">::</span> <span class="t">String</span></span><span class="ln">  , base      <span class="k">::</span> <span class="t">City</span></span><span class="ln">  , interests <span class="k">::</span> [<span class="t">Topic</span>]</span><span class="ln">  }</span><span class="ln"></span><span class="ln">marco <span class="k">::</span> <span class="t">Researcher</span></span><span class="ln">marco <span class="k">=</span> <span class="t">Researcher</span> <span class="s">"Marco Perrotta"</span> <span class="t">Ferrara</span></span><span class="ln">  [ <span class="t">SymbolicAI</span>, <span class="t">InterpretableML</span>, <span class="t">ComputationalLogic</span> ]</span></pre>
+<pre id="code-jl" role="tabpanel" aria-labelledby="tab-jl" hidden><span class="ln"><span class="k">struct</span> <span class="t">Researcher</span></span><span class="ln">    name<span class="k">::</span><span class="t">String</span></span><span class="ln">    base<span class="k">::</span><span class="t">Symbol</span></span><span class="ln">    interests<span class="k">::</span><span class="t">Vector</span>{<span class="t">Symbol</span>}</span><span class="ln"><span class="k">end</span></span><span class="ln"></span><span class="ln"><span class="k">using</span> <span class="t">Sole</span>  <span class="c"># symbolic learning, made in Ferrara</span></span><span class="ln"></span><span class="ln">marco <span class="k">=</span> <span class="t">Researcher</span>(<span class="s">"Marco Perrotta"</span>, <span class="n">:Ferrara</span>,</span><span class="ln">    [<span class="n">:symbolic_ai</span>, <span class="n">:interpretable_ml</span>, <span class="n">:logic</span>])</span></pre>
+<pre id="code-asm" role="tabpanel" aria-labelledby="tab-asm" hidden><span class="ln">        <span class="k">.data</span></span><span class="ln">name:   <span class="k">.asciiz</span> <span class="s">"Marco Perrotta\n"</span></span><span class="ln"></span><span class="ln">        <span class="k">.text</span></span><span class="ln">main:   <span class="k">la</span>   <span class="t">$a0</span>, name</span><span class="ln">        <span class="k">li</span>   <span class="t">$v0</span>, <span class="n">4</span>          <span class="c"># print_string</span></span><span class="ln">        <span class="k">syscall</span></span><span class="ln">        <span class="k">li</span>   <span class="t">$v0</span>, <span class="n">10</span>         <span class="c"># exit</span></span><span class="ln">        <span class="k">syscall</span></span></pre>
+        </div>
       </section>
 
       <section id="publications">
-        <h2>Publications</h2>
+        <header class="sec-head">
+          <span class="addr">0x04</span>
+          <h2>Publications</h2>
+          <code class="sig">papers <span class="k">::</span> [<span class="t">Paper</span>]</code>
+        </header>
         <p class="note">Authors are listed in alphabetical order by last name, as is convention in the field.</p>
-        <p class="note"><span class="star" title="Presented in person"><svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g transform="rotate(30 8 8)"><ellipse cx="8" cy="8" rx="4.3" ry="6.6" /><path class="slit" d="M8 2.2c-2 2.2 2 3.9 0 5.8s2 3.6 0 5.8" /></g></svg></span> indicates that the paper was presented in person by the
-          author.</p>
+        <p class="note"><span class="star" title="Presented in person"><svg viewBox="0 0 16 16"
+              xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <g transform="rotate(30 8 8)">
+                <ellipse cx="8" cy="8" rx="4.3" ry="6.6" />
+                <path class="slit" d="M8 2.2c-2 2.2 2 3.9 0 5.8s2 3.6 0 5.8" />
+              </g>
+            </svg></span> indicates the paper was presented in person by the author.</p>
 
-        <div class="biblio">
-          <div class="year">2026</div>
-          <div class="authors">D. Guidoboni, M. Perrotta, G. Sciavicco <span class="star" title="Presented in person"><svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g transform="rotate(30 8 8)"><ellipse cx="8" cy="8" rx="4.3" ry="6.6" /><path class="slit" d="M8 2.2c-2 2.2 2 3.9 0 5.8s2 3.6 0 5.8" /></g></svg></span></div>
-          <div class="title">Structural Compression of Ensemble Models via Evolutionary Algorithms</div>
-          <div class="venue">MDAI 2026</div>
-        </div>
+        <ol class="biblio-list">
+          <li class="biblio">
+            <div>
+              <div class="meta"><span>2026</span><span class="pill venue">MDAI 2026</span></div>
+              <div class="title">Structural Compression of Ensemble Models via Evolutionary Algorithms</div>
+              <div class="authors">D. Guidoboni, <span class="me">M. Perrotta</span>, G. Sciavicco <span class="star"
+                  title="Presented in person"><svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true">
+                    <g transform="rotate(30 8 8)">
+                      <ellipse cx="8" cy="8" rx="4.3" ry="6.6" />
+                      <path class="slit" d="M8 2.2c-2 2.2 2 3.9 0 5.8s2 3.6 0 5.8" />
+                    </g>
+                  </svg></span></div>
+            </div>
+          </li>
 
-        <div class="biblio">
-          <div class="year">2026</div>
-          <div class="authors">M. Perrotta, G. Sciavicco, S. Tenasini <span class="star" title="Presented in person"><svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g transform="rotate(30 8 8)"><ellipse cx="8" cy="8" rx="4.3" ry="6.6" /><path class="slit" d="M8 2.2c-2 2.2 2 3.9 0 5.8s2 3.6 0 5.8" /></g></svg></span></div>
-          <div class="title">Hybrid SAT-Based Decision Trees</div>
-          <div class="venue">IWINAC 2026</div>
-        </div>
+          <li class="biblio">
+            <div>
+              <div class="meta"><span>2026</span><span class="pill venue">IWINAC 2026</span></div>
+              <div class="title">Hybrid SAT-Based Decision Trees</div>
+              <div class="authors"><span class="me">M. Perrotta</span>, G. Sciavicco, S. Tenasini <span class="star"
+                  title="Presented in person"><svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true">
+                    <g transform="rotate(30 8 8)">
+                      <ellipse cx="8" cy="8" rx="4.3" ry="6.6" />
+                      <path class="slit" d="M8 2.2c-2 2.2 2 3.9 0 5.8s2 3.6 0 5.8" />
+                    </g>
+                  </svg></span></div>
+            </div>
+          </li>
 
-        <div class="biblio">
-          <div class="year">2024</div>
-          <div class="authors">G. Pagliarini, A. Paradiso, M. Perrotta, G. Sciavicco <span class="star" title="Presented in person"><svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g transform="rotate(30 8 8)"><ellipse cx="8" cy="8" rx="4.3" ry="6.6" /><path class="slit" d="M8 2.2c-2 2.2 2 3.9 0 5.8s2 3.6 0 5.8" /></g></svg></span></div>
-          <div class="title">Minimal Rules from Decision Forests: a Systematic Approach</div>
-          <div class="venue">OVERLAY 2024 · <a href="https://overlay.uniud.it/workshop/2024/papers/paper14.pdf"
-              target="_blank" rel="noopener">PDF</a></div>
-        </div>
+          <li class="biblio">
+            <div>
+              <div class="meta"><span>2024</span><span class="pill venue">OVERLAY 2024</span></div>
+              <div class="title">Minimal Rules from Decision Forests: a Systematic Approach</div>
+              <div class="authors">G. Pagliarini, A. Paradiso, <span class="me">M. Perrotta</span>, G. Sciavicco <span
+                  class="star" title="Presented in person"><svg viewBox="0 0 16 16"
+                    xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <g transform="rotate(30 8 8)">
+                      <ellipse cx="8" cy="8" rx="4.3" ry="6.6" />
+                      <path class="slit" d="M8 2.2c-2 2.2 2 3.9 0 5.8s2 3.6 0 5.8" />
+                    </g>
+                  </svg></span></div>
+              <div class="venue"><a href="https://overlay.uniud.it/workshop/2024/papers/paper14.pdf" target="_blank"
+                  rel="noopener">PDF ↗</a></div>
+            </div>
+          </li>
+        </ol>
       </section>
 
       <section id="experience">
-        <h2>Work experience</h2>
+        <header class="sec-head">
+          <span class="addr">0x08</span>
+          <h2>Work experience</h2>
+          <code class="sig">roles <span class="k">::</span> [<span class="t">Role</span>]</code>
+        </header>
 
-        <div class="entry">
-          <div class="date">07/2024 — present</div>
-          <div class="body">
-            <h3>Research Assistant</h3>
-            <div class="org">ACLAI LAB, Ferrara</div>
-            <ul>
-              <li>Research and development in artificial intelligence and machine learning.</li>
-              <li>Contributing to the development of Sole.jl (an IML framework in Julia).</li>
-            </ul>
+        <div class="timeline">
+          <div class="entry">
+            <div class="date">07/2024 → <span class="now">now</span></div>
+            <div class="body">
+              <h3>Research Assistant</h3>
+              <div class="org">ACLAI LAB, Ferrara</div>
+              <ul>
+                <li>Research and development in artificial intelligence and machine learning.</li>
+                <li>Contributing to the development of Sole.jl (an IML framework in Julia).</li>
+              </ul>
+            </div>
           </div>
-        </div>
 
-        <div class="entry">
-          <div class="date">03/2026 — 06/2026</div>
-          <div class="body">
-            <h3>Teaching Assistant, Computer Architecture and Lab</h3>
-            <div class="org">University of Ferrara</div>
-            <ul>
-              <li>Designed and ran tutoring sessions for students of the Computer Architecture course.</li>
-              <li>Topics covered:
-                <ul>
-                  <li>Binary representation of information, Boolean algebra, combinational and sequential logic,
-                    synthesis with Karnaugh maps, standard arithmetic components and the ALU.</li>
-                  <li>Von Neumann model, ISA and MIPS Assembly programming (including lab sessions), procedure
-                    calls, alignment and endianness.</li>
-                  <li>Integer and floating-point arithmetic (IEEE 754), datapath and control unit design, pipelining,
-                    hazard handling with forwarding and branch prediction.</li>
-                  <li>In-order and out-of-order architectures (reorder buffer, register renaming, exception
-                    handling), memory hierarchy: cache (direct-mapped and associative) and virtual memory.</li>
-                </ul>
-              </li>
-            </ul>
+          <div class="entry">
+            <div class="date">03/2026 → 06/2026</div>
+            <div class="body">
+              <h3>Teaching Assistant, Computer Architecture and Lab</h3>
+              <div class="org">University of Ferrara</div>
+              <ul>
+                <li>Designed and ran tutoring sessions for students of the Computer Architecture course.</li>
+                <li>Topics covered:
+                  <ul>
+                    <li>Binary representation of information, Boolean algebra, combinational and sequential logic,
+                      synthesis with Karnaugh maps, standard arithmetic components and the ALU.</li>
+                    <li>Von Neumann model, ISA and MIPS Assembly programming (including lab sessions), procedure
+                      calls, alignment and endianness.</li>
+                    <li>Integer and floating-point arithmetic (IEEE 754), datapath and control unit design,
+                      pipelining, hazard handling with forwarding and branch prediction.</li>
+                    <li>In-order and out-of-order architectures (reorder buffer, register renaming, exception
+                      handling), memory hierarchy: cache (direct-mapped and associative) and virtual memory.</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
           </div>
-        </div>
 
-        <div class="entry">
-          <div class="date">09/2025 — 02/2026</div>
-          <div class="body">
-            <h3>Recipient of a post-graduate research and advanced training grant</h3>
-            <div class="org">University of Ferrara</div>
-            <ul>
-              <li>Designed, built and tested an intelligent warehouse management system for a chain of precious
-                metal trading stores.</li>
-            </ul>
+          <div class="entry">
+            <div class="date">09/2025 → 02/2026</div>
+            <div class="body">
+              <h3>Recipient of a post-graduate research and advanced training grant</h3>
+              <div class="org">University of Ferrara</div>
+              <ul>
+                <li>Designed, built and tested an intelligent warehouse management system for a chain of precious
+                  metal trading stores.</li>
+              </ul>
+            </div>
           </div>
-        </div>
 
-        <div class="entry">
-          <div class="date">07/2022 — 10/2022</div>
-          <div class="body">
-            <h3>IT and Telecommunications Technician</h3>
-            <div class="org">ITCARE S.R.L., Ferrara</div>
-            <ul>
-              <li>Managed and maintained network infrastructure.</li>
-              <li>Provided technical support and help desk services.</li>
-              <li>Designed and developed automations for business management.</li>
-              <li>Created IT training courses.</li>
-            </ul>
+          <div class="entry">
+            <div class="date">07/2022 → 10/2022</div>
+            <div class="body">
+              <h3>IT and Telecommunications Technician</h3>
+              <div class="org">ITCARE S.R.L., Ferrara</div>
+              <ul>
+                <li>Managed and maintained network infrastructure.</li>
+                <li>Provided technical support and help desk services.</li>
+                <li>Designed and developed automations for business management.</li>
+                <li>Created IT training courses.</li>
+              </ul>
+            </div>
           </div>
-        </div>
 
-        <div class="entry">
-          <div class="date">09/2021 — 10/2021</div>
-          <div class="body">
-            <h3>IT Intern</h3>
-            <div class="org">ITCARE S.R.L., Ferrara</div>
-            <ul>
-              <li>Multi-language programming for business management.</li>
-              <li>Database redesign with KeePass Password Safe.</li>
-              <li>Developed automations for business management.</li>
-              <li>Created teaching materials for IT courses.</li>
-            </ul>
+          <div class="entry">
+            <div class="date">09/2021 → 10/2021</div>
+            <div class="body">
+              <h3>IT Intern</h3>
+              <div class="org">ITCARE S.R.L., Ferrara</div>
+              <ul>
+                <li>Multi-language programming for business management.</li>
+                <li>Database redesign with KeePass Password Safe.</li>
+                <li>Developed automations for business management.</li>
+                <li>Created teaching materials for IT courses.</li>
+              </ul>
+            </div>
           </div>
         </div>
       </section>
 
       <section id="education">
-        <h2>Education</h2>
+        <header class="sec-head">
+          <span class="addr">0x0C</span>
+          <h2>Education</h2>
+          <code class="sig">education <span class="k">::</span> [<span class="t">Degree</span>]</code>
+        </header>
 
-        <div class="entry">
-          <div class="date">2026</div>
-          <div class="body">
-            <h3>ESSLLI 2026 — European Summer School in Logic, Language and Information</h3>
-            <div class="org">Prague, Czech Republic</div>
-            <ul>
-              <li>Algebraic Automata Theory: A Rosetta Stone for Computer Scientists</li>
-              <li>Formal Verification of Multi-Agent Systems. Why, What, and Especially: How?</li>
-              <li>Reasoning in graph games: A modal logic study</li>
-              <li>Tableaux-based decision methods for modal, temporal, and epistemic logics</li>
-            </ul>
+        <div class="timeline">
+          <div class="entry">
+            <div class="date">2026</div>
+            <div class="body">
+              <h3>ESSLLI 2026 — European Summer School in Logic, Language and Information</h3>
+              <div class="org">Prague, Czech Republic</div>
+              <ul>
+                <li>Algebraic Automata Theory: A Rosetta Stone for Computer Scientists</li>
+                <li>Formal Verification of Multi-Agent Systems. Why, What, and Especially: How?</li>
+                <li>Reasoning in graph games: A modal logic study</li>
+                <li>Tableaux-based decision methods for modal, temporal, and epistemic logics</li>
+              </ul>
+            </div>
           </div>
-        </div>
 
-        <div class="entry">
-          <div class="date">2025 — ongoing</div>
-          <div class="body">
-            <h3>Master's Degree in Artificial Intelligence, Data Science and Big Data</h3>
-            <div class="org">University of Ferrara (LM-18/LM-32)</div>
-            <a class="doclink" href="https://corsi.unife.it/lm-ia" target="_blank"
-              rel="noopener">corsi.unife.it/lm-ia</a>
+          <div class="entry">
+            <div class="date">2025 → <span class="now">now</span></div>
+            <div class="body">
+              <h3>Master's Degree in Artificial Intelligence, Data Science and Big Data</h3>
+              <div class="org">University of Ferrara (LM-18/LM-32)</div>
+              <a class="doclink" href="https://corsi.unife.it/lm-ia" target="_blank"
+                rel="noopener">corsi.unife.it/lm-ia ↗</a>
+            </div>
           </div>
-        </div>
 
-        <div class="entry">
-          <div class="date">2022 — 2025</div>
-          <div class="body">
-            <h3>Bachelor's Degree in Computer Science (L-31)</h3>
-            <div class="org">University of Ferrara · 110 cum laude</div>
-            <a class="doclink" href="https://corsi.unife.it/informatica" target="_blank"
-              rel="noopener">corsi.unife.it/informatica</a>
+          <div class="entry">
+            <div class="date">2022 → 2025</div>
+            <div class="body">
+              <h3>Bachelor's Degree in Computer Science (L-31)</h3>
+              <div class="org">University of Ferrara · 110 cum laude</div>
+              <a class="doclink" href="https://corsi.unife.it/informatica" target="_blank"
+                rel="noopener">corsi.unife.it/informatica ↗</a>
+            </div>
           </div>
-        </div>
 
-        <div class="entry">
-          <div class="date">2017 — 2022</div>
-          <div class="body">
-            <h3>High School Diploma</h3>
-            <div class="org">IIS N. Copernico A. Carpeggiani, Ferrara · 100 cum laude</div>
-            <a class="doclink" href="https://www.iiscopernico.edu.it/" target="_blank"
-              rel="noopener">iiscopernico.edu.it</a>
+          <div class="entry">
+            <div class="date">2017 → 2022</div>
+            <div class="body">
+              <h3>High School Diploma</h3>
+              <div class="org">IIS N. Copernico A. Carpeggiani, Ferrara · 100 cum laude</div>
+              <a class="doclink" href="https://www.iiscopernico.edu.it/" target="_blank"
+                rel="noopener">iiscopernico.edu.it ↗</a>
+            </div>
           </div>
         </div>
       </section>
 
       <section id="skills">
-        <h2>Skills</h2>
+        <header class="sec-head">
+          <span class="addr">0x10</span>
+          <h2>Skills</h2>
+          <code class="sig">skills <span class="k">::</span> <span class="t">Map</span> <span class="t">Category</span> [<span class="t">Skill</span>]</code>
+        </header>
 
-        <div style="margin-bottom:28px;">
-          <div class="lang-row"><span>Italian</span><span class="lvl">Native</span></div>
-          <div class="lang-row"><span>English</span><span class="lvl">B1 listening, speaking, writing · B2
-              reading</span></div>
+        <div class="skill-group">
+          <div class="label">languages</div>
+          <div>
+            <div class="lang-row"><span>Italian</span><span class="lvl">native</span></div>
+            <div class="lang-row"><span>English</span><span class="lvl">B1 listening · speaking · writing / B2
+                reading</span></div>
+          </div>
         </div>
 
-        <div class="skill-row">
-          <div class="label">prog. languages</div>
-          <div class="value">Julia, Haskell, MIPS Assembly, PHP, MySQL, HTML, CSS, JavaScript, LaTeX, C, C++, Java,
-            Python, MATLAB</div>
+        <div class="skill-group">
+          <div class="label">programming</div>
+          <div>
+            <div class="chips">
+              <span class="chip fav">Julia</span>
+              <span class="chip fav">Haskell</span>
+              <span class="chip fav">MIPS Assembly</span>
+              <span class="chip">C</span>
+              <span class="chip">C++</span>
+              <span class="chip">Java</span>
+              <span class="chip">Python</span>
+              <span class="chip">MATLAB</span>
+              <span class="chip">PHP</span>
+              <span class="chip">MySQL</span>
+              <span class="chip">JavaScript</span>
+              <span class="chip">HTML</span>
+              <span class="chip">CSS</span>
+              <span class="chip">LaTeX</span>
+            </div>
+            <div class="legend">★ favourites</div>
+          </div>
         </div>
-        <div class="skill-row">
+
+        <div class="skill-group">
           <div class="label">frameworks</div>
-          <div class="value">Laravel, Angular</div>
+          <div class="chips">
+            <span class="chip">Laravel</span>
+            <span class="chip">Angular</span>
+          </div>
         </div>
-        <div class="skill-row">
+
+        <div class="skill-group">
           <div class="label">other</div>
-          <div class="value">Machine Learning, Interpretable ML, Symbolic Learning, Database Design, Network Management
+          <div class="chips">
+            <span class="chip">Machine Learning</span>
+            <span class="chip">Interpretable ML</span>
+            <span class="chip">Symbolic Learning</span>
+            <span class="chip">Database Design</span>
+            <span class="chip">Network Management</span>
           </div>
         </div>
       </section>
 
       <section id="talks">
-        <h2>Talks &amp; presentations</h2>
+        <header class="sec-head">
+          <span class="addr">0x14</span>
+          <h2>Talks &amp; presentations</h2>
+          <code class="sig">talks <span class="k">::</span> [<span class="t">Talk</span>]</code>
+        </header>
 
-        <div class="biblio">
-          <span class="tag talk">Talk / Conference</span>
-          <div class="year" style="margin-top:8px;">2026</div>
-          <div class="authors">M. Perrotta</div>
-          <div class="title">Symbolic post-hoc analysis with SolePostHoc.jl</div>
-          <div class="venue">JuliaCon Global — Johannes Gutenberg University Mainz, Germany · <a
-              href="https://www.youtube.com/watch?v=0X4CCRRdN0I&list=PLPHnI5tK4C10&index=3" target="_blank"
-              rel="noopener">video</a></div>
-        </div>
+        <ol class="biblio-list">
+          <li class="biblio">
+            <div>
+              <div class="meta"><span>2026</span><span class="pill talk">talk</span></div>
+              <div class="title">Symbolic post-hoc analysis with SolePostHoc.jl</div>
+              <div class="authors"><span class="me">M. Perrotta</span></div>
+              <div class="venue">JuliaCon Global — Johannes Gutenberg University Mainz, Germany · <a
+                  href="https://www.youtube.com/watch?v=0X4CCRRdN0I&list=PLPHnI5tK4C10&index=3" target="_blank"
+                  rel="noopener">video ↗</a></div>
+            </div>
+          </li>
 
-        <div class="biblio">
-          <span class="tag poster">Poster</span>
-          <div class="year" style="margin-top:8px;">2026</div>
-          <div class="authors">A. Paparella, M. Perrotta, R. Pasini</div>
-          <div class="title">Learning with SOLE</div>
-          <div class="venue">JuliaCon Global — Johannes Gutenberg University Mainz, Germany </div>
-        </div>
+          <li class="biblio">
+            <div>
+              <div class="meta"><span>2026</span><span class="pill poster">poster</span></div>
+              <div class="title">Learning with SOLE</div>
+              <div class="authors">A. Paparella, <span class="me">M. Perrotta</span>, R. Pasini</div>
+              <div class="venue">JuliaCon Global — Johannes Gutenberg University Mainz, Germany</div>
+            </div>
+          </li>
 
-        <div class="biblio">
-          <span class="tag school">School / Lecture</span>
-          <div class="year" style="margin-top:8px;">2026</div>
-          <div class="authors">M. Milella, M. Perrotta, G. Sciavicco</div>
-          <div class="title">Modern IA in Investigación Psicología Clínica, Salud y Estrés</div>
-          <div class="venue">Facultad de Medicina, Universidad Católica de Murcia (UCAM)</div>
-        </div>
+          <li class="biblio">
+            <div>
+              <div class="meta"><span>2026</span><span class="pill school">school / lecture</span></div>
+              <div class="title">Modern IA in Investigación Psicología Clínica, Salud y Estrés</div>
+              <div class="authors">M. Milella, <span class="me">M. Perrotta</span>, G. Sciavicco</div>
+              <div class="venue">Facultad de Medicina, Universidad Católica de Murcia (UCAM)</div>
+            </div>
+          </li>
 
-        <div class="biblio">
-          <span class="tag talk">Talk / Conference</span>
-          <div class="year" style="margin-top:8px;">2025</div>
-          <div class="authors">A. Paparella, M. Milella, M. Perrotta, R. Pasini</div>
-          <div class="title">Symbolic Learning and Rule Extraction with Sole.jl</div>
-          <div class="venue">JuliaCon Local Paris · <a href="https://www.youtube.com/watch?v=JVHeIdVPK8Y"
-              target="_blank" rel="noopener">video</a></div>
-        </div>
-
+          <li class="biblio">
+            <div>
+              <div class="meta"><span>2025</span><span class="pill talk">talk</span></div>
+              <div class="title">Symbolic Learning and Rule Extraction with Sole.jl</div>
+              <div class="authors">A. Paparella, M. Milella, <span class="me">M. Perrotta</span>, R. Pasini</div>
+              <div class="venue">JuliaCon Local Paris · <a href="https://www.youtube.com/watch?v=JVHeIdVPK8Y"
+                  target="_blank" rel="noopener">video ↗</a></div>
+            </div>
+          </li>
+        </ol>
       </section>
 
       <footer>
-        Ferrara, Italy — last updated 2026
+        <span><span class="prompt">λ&gt;</span> :quit -- Ferrara, Italy</span>
+        <span>last updated 2026</span>
       </footer>
 
     </main>
   </div>
 
   <script>
+    // ---- Active section in nav ----
     const links = document.querySelectorAll('nav.sections a');
     const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href')));
-
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        const id = '#' + entry.target.id;
-        const link = document.querySelector(`nav.sections a[href="${id}"]`);
-        if (entry.isIntersecting) {
-          links.forEach(l => l.classList.remove('active'));
-          if (link) link.classList.add('active');
-        }
+        if (!entry.isIntersecting) return;
+        const link = document.querySelector(`nav.sections a[href="#${entry.target.id}"]`);
+        links.forEach(l => l.classList.remove('active'));
+        if (link) link.classList.add('active');
       });
     }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
-
     sections.forEach(s => { if (s) observer.observe(s); });
+
+    // ---- Stats: count straight from the DOM so they never drift ----
+    document.querySelectorAll('[data-count]').forEach(el => {
+      el.textContent = document.querySelectorAll(el.dataset.count).length;
+    });
+
+    // ---- Code tabs ----
+    const files = { hs: 'Marco.hs', jl: 'marco.jl', asm: 'marco.asm' };
+    const tabs = document.querySelectorAll('.code-tabs [role="tab"]');
+    function selectTab(tab) {
+      tabs.forEach(t => {
+        const on = t === tab;
+        t.setAttribute('aria-selected', on);
+        t.tabIndex = on ? 0 : -1;
+        document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+      });
+      document.getElementById('fname').textContent = files[tab.dataset.lang];
+    }
+    tabs.forEach((t, i) => {
+      t.tabIndex = i === 0 ? 0 : -1;
+      t.addEventListener('click', () => selectTab(t));
+      t.addEventListener('keydown', e => {
+        if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+        const next = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
+        selectTab(next);
+        next.focus();
+      });
+    });
+
+    // ---- Theme toggle: auto → light → dark ----
+    const root = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    const order = ['auto', 'light', 'dark'];
+    function applyTheme(mode) {
+      if (mode === 'auto') root.removeAttribute('data-theme');
+      else root.setAttribute('data-theme', mode);
+      btn.textContent = 'theme: ' + mode;
+    }
+    let mode = 'auto';
+    try { mode = localStorage.getItem('theme') || 'auto'; } catch (e) { }
+    applyTheme(mode);
+    btn.addEventListener('click', () => {
+      mode = order[(order.indexOf(mode) + 1) % order.length];
+      applyTheme(mode);
+      try { localStorage.setItem('theme', mode); } catch (e) { }
+    });
   </script>
 
 </body>
