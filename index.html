@@ -850,6 +850,8 @@
       margin-top: 10px;
     }
 
+    footer .uptime { font-variant-numeric: tabular-nums; }
+
     footer {
       max-width: var(--content-w);
       padding-top: 20px;
@@ -1099,16 +1101,16 @@
 
         <div class="code-card">
           <div class="code-tabs" role="tablist" aria-label="Same record, three languages">
-            <button type="button" role="tab" data-lang="hs" aria-selected="true" aria-controls="code-hs"
+            <button type="button" role="tab" data-lang="hs" aria-selected="false" aria-controls="code-hs"
               id="tab-hs"><span class="dot"></span>Haskell</button>
-            <button type="button" role="tab" data-lang="jl" aria-selected="false" aria-controls="code-jl"
+            <button type="button" role="tab" data-lang="jl" aria-selected="true" aria-controls="code-jl"
               id="tab-jl"><span class="dot"></span>Julia</button>
             <button type="button" role="tab" data-lang="asm" aria-selected="false" aria-controls="code-asm"
               id="tab-asm"><span class="dot"></span>MIPS</button>
-            <span class="fname" id="fname">Marco.hs</span>
+            <span class="fname" id="fname">marco.jl</span>
           </div>
-<pre id="code-hs" role="tabpanel" aria-labelledby="tab-hs"><span class="ln"><span class="k">data</span> <span class="t">Researcher</span> <span class="k">=</span> <span class="t">Researcher</span></span><span class="ln">  { name      <span class="k">::</span> <span class="t">String</span></span><span class="ln">  , base      <span class="k">::</span> <span class="t">City</span></span><span class="ln">  , interests <span class="k">::</span> [<span class="t">Topic</span>]</span><span class="ln">  }</span><span class="ln"></span><span class="ln">marco <span class="k">::</span> <span class="t">Researcher</span></span><span class="ln">marco <span class="k">=</span> <span class="t">Researcher</span> <span class="s">"Marco Perrotta"</span> <span class="t">Ferrara</span></span><span class="ln">  [ <span class="t">SymbolicAI</span>, <span class="t">InterpretableML</span>, <span class="t">ComputationalLogic</span> ]</span></pre>
-<pre id="code-jl" role="tabpanel" aria-labelledby="tab-jl" hidden><span class="ln"><span class="k">struct</span> <span class="t">Researcher</span></span><span class="ln">    name<span class="k">::</span><span class="t">String</span></span><span class="ln">    base<span class="k">::</span><span class="t">Symbol</span></span><span class="ln">    interests<span class="k">::</span><span class="t">Vector</span>{<span class="t">Symbol</span>}</span><span class="ln"><span class="k">end</span></span><span class="ln"></span><span class="ln"><span class="k">using</span> <span class="t">Sole</span>  <span class="c"># symbolic learning, made in Ferrara</span></span><span class="ln"></span><span class="ln">marco <span class="k">=</span> <span class="t">Researcher</span>(<span class="s">"Marco Perrotta"</span>, <span class="n">:Ferrara</span>,</span><span class="ln">    [<span class="n">:symbolic_ai</span>, <span class="n">:interpretable_ml</span>, <span class="n">:logic</span>])</span></pre>
+<pre id="code-hs" role="tabpanel" aria-labelledby="tab-hs" hidden><span class="ln"><span class="k">data</span> <span class="t">Researcher</span> <span class="k">=</span> <span class="t">Researcher</span></span><span class="ln">  { name      <span class="k">::</span> <span class="t">String</span></span><span class="ln">  , base      <span class="k">::</span> <span class="t">City</span></span><span class="ln">  , interests <span class="k">::</span> [<span class="t">Topic</span>]</span><span class="ln">  }</span><span class="ln"></span><span class="ln">marco <span class="k">::</span> <span class="t">Researcher</span></span><span class="ln">marco <span class="k">=</span> <span class="t">Researcher</span> <span class="s">"Marco Perrotta"</span> <span class="t">Ferrara</span></span><span class="ln">  [ <span class="t">SymbolicAI</span>, <span class="t">InterpretableML</span>, <span class="t">ComputationalLogic</span> ]</span></pre>
+<pre id="code-jl" role="tabpanel" aria-labelledby="tab-jl"><span class="ln"><span class="k">struct</span> <span class="t">Researcher</span></span><span class="ln">    name<span class="k">::</span><span class="t">String</span></span><span class="ln">    base<span class="k">::</span><span class="t">Symbol</span></span><span class="ln">    interests<span class="k">::</span><span class="t">Vector</span>{<span class="t">Symbol</span>}</span><span class="ln"><span class="k">end</span></span><span class="ln"></span><span class="ln"><span class="k">using</span> <span class="t">Sole</span>  <span class="c"># symbolic learning, made in Ferrara</span></span><span class="ln"></span><span class="ln">marco <span class="k">=</span> <span class="t">Researcher</span>(<span class="s">"Marco Perrotta"</span>, <span class="n">:Ferrara</span>,</span><span class="ln">    [<span class="n">:symbolic_ai</span>, <span class="n">:interpretable_ml</span>, <span class="n">:logic</span>])</span></pre>
 <pre id="code-asm" role="tabpanel" aria-labelledby="tab-asm" hidden><span class="ln">        <span class="k">.data</span></span><span class="ln">name:   <span class="k">.asciiz</span> <span class="s">"Marco Perrotta\n"</span></span><span class="ln"></span><span class="ln">        <span class="k">.text</span></span><span class="ln">main:   <span class="k">la</span>   <span class="t">$a0</span>, name</span><span class="ln">        <span class="k">li</span>   <span class="t">$v0</span>, <span class="n">4</span>          <span class="c"># print_string</span></span><span class="ln">        <span class="k">syscall</span></span><span class="ln">        <span class="k">li</span>   <span class="t">$v0</span>, <span class="n">10</span>         <span class="c"># exit</span></span><span class="ln">        <span class="k">syscall</span></span></pre>
         </div>
       </section>
@@ -1195,6 +1197,19 @@
         </header>
 
         <div class="timeline">
+          <div class="entry">
+            <div class="date"><span class="now">upcoming</span> · 3 months</div>
+            <div class="body">
+              <h3>Recipient of a post-graduate research and advanced training grant</h3>
+              <div class="org">Department of Mathematics and Computer Science, University of Ferrara</div>
+              <ul>
+                <li>Study of innovative systems for symbolic machine learning applied to conversational automation.
+                </li>
+                <li>Design of information systems based on symbolic machine learning, developed in Julia.</li>
+              </ul>
+            </div>
+          </div>
+
           <div class="entry">
             <div class="date">07/2024 → <span class="now">now</span></div>
             <div class="body">
@@ -1436,7 +1451,8 @@
 
       <footer>
         <span><span class="prompt">λ&gt;</span> :quit -- Ferrara, Italy</span>
-        <span>last updated 2026</span>
+        <span class="uptime" title="Online since 9 December 2024"><span class="prompt">$</span> uptime
+          <span id="uptime">up since 2024-12-09</span></span>
       </footer>
 
     </main>
@@ -1474,7 +1490,7 @@
       document.getElementById('fname').textContent = files[tab.dataset.lang];
     }
     tabs.forEach((t, i) => {
-      t.tabIndex = i === 0 ? 0 : -1;
+      t.tabIndex = t.getAttribute('aria-selected') === 'true' ? 0 : -1;
       t.addEventListener('click', () => selectTab(t));
       t.addEventListener('keydown', e => {
         if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
@@ -1483,6 +1499,20 @@
         next.focus();
       });
     });
+
+    // ---- Footer uptime: time since the site's first commit ----
+    const born = Date.UTC(2024, 11, 9, 11, 17, 46); // 2024-12-09 12:17:46 +01:00
+    const upEl = document.getElementById('uptime');
+    const pad = n => String(n).padStart(2, '0');
+    function renderUptime() {
+      let s = Math.max(0, Math.floor((Date.now() - born) / 1000));
+      const y = Math.floor(s / 31557600); s -= y * 31557600;
+      const d = Math.floor(s / 86400); s -= d * 86400;
+      const h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60);
+      upEl.textContent = `up ${y}y ${d}d ${pad(h)}:${pad(m)}:${pad(s % 60)}, 1 user`;
+    }
+    renderUptime();
+    setInterval(renderUptime, 1000);
 
     // ---- Theme toggle: auto → light → dark ----
     const root = document.documentElement;
